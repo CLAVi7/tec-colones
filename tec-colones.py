@@ -26,7 +26,7 @@ entry_descripcion = tk.Entry(ventana, width=40)
 entry_descripcion.place(x=40, y=220)
 
 boton_añadir = tk.Button(ventana, text="añadir material")
-boton_añadir.place(x=350, y=160)
+boton_añadir.place(x=300, y=160)
 
 class Switch:
     def __init__(self, master, on_text="activo", off_text="inactivo", **kwargs):
@@ -49,5 +49,11 @@ class Switch:
             print("material inactivo")
 
 switch = Switch(ventana, width=10, height=2)
-
+label4=tk.Label(ventana, text="materiales creados")
+label4.place(x=500, y=80)
+listbox = tk.Listbox()
+listbox.insert(0)
+listbox.place(x=500, y=100)
+cambiar_estado_boton=tk.Button(ventana, text="cambiar estado")
+cambiar_estado_boton.place(x=500, y=300)
 ventana.mainloop()
