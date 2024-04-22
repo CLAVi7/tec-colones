@@ -1,8 +1,5 @@
 import random
 from datetime import datetime
-import json
-
-
 
 
 class Material:
@@ -15,7 +12,8 @@ class Material:
         self.fecha_creacion = datetime.now()
         self.descripcion = descripcion
 
-    def generar_id_unico(self):
+    @staticmethod
+    def generar_id_unico():
         caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
         id_aleatorio = ''.join(random.choice(caracteres) for _ in range(12))
         return f"M-{id_aleatorio}"
@@ -40,21 +38,5 @@ class Material:
             "descripcion": self.descripcion if self.descripcion else "N/A"
         }
 
-    def cambioEstado (self):
+    def cambioEstado(self):
         self.estado = not self.estado
-
-
-########################################################################################################################
-def guardar_materiales(materiales, archivo):
-    with open(archivo, 'w') as f:
-        json.dump([material.to_dict() for material in materiales], f, ensure_ascii=False, indent=4)
-
-lista_materiales = [Material("plastico", "kg", 500, True, "plastico:D")]
-
-
-# Guardar la lista de materiales en un archivo JSON
-guardar_materiales(lista_materiales, 'materiales.json')
-
-
-
-
