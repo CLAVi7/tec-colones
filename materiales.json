@@ -1,1 +1,74 @@
-
+[
+    {
+        "id": "M-xHGJPz5R11OX",
+        "nombre": "prueba",
+        "unidad": "kg",
+        "valor_unitario": "125",
+        "estado": "Activo",
+        "fecha_creacion": "2024-04-22 15:31:06",
+        "descripcion": "N/A"
+    },
+    {
+        "id": "M-CFmOdjJ82A5Q",
+        "nombre": "plasticc",
+        "unidad": "kg",
+        "valor_unitario": "1254",
+        "estado": "Inactivo",
+        "fecha_creacion": "2024-04-22 15:33:45",
+        "descripcion": "N/A"
+    },
+    {
+        "id": "M-jQ09DSOeJ6dT",
+        "nombre": "pasldsf",
+        "unidad": "kg",
+        "valor_unitario": "1254",
+        "estado": "Activo",
+        "fecha_creacion": "2024-04-22 15:34:11",
+        "descripcion": "N/A"
+    },
+    {
+        "id": "M-LYRkpE0iGPDE",
+        "nombre": "ewfedfsf",
+        "unidad": "ggsdkgsk",
+        "valor_unitario": "1254",
+        "estado": "Inactivo",
+        "fecha_creacion": "2024-04-22 15:34:21",
+        "descripcion": "N/A"
+    },
+    {
+        "id": "M-S5lnH5uNZlhI",
+        "nombre": "apscaspksf",
+        "unidad": "dfsjdf",
+        "valor_unitario": "1254",
+        "estado": "Activo",
+        "fecha_creacion": "2024-04-22 15:35:22",
+        "descripcion": "N/A"
+    },
+    {
+        "id": "M-quvCTrlXrCmR",
+        "nombre": "kjasbjfsas",
+        "unidad": "aksnfaf",
+        "valor_unitario": "1254",
+        "estado": "Inactivo",
+        "fecha_creacion": "2024-04-22 15:35:32",
+        "descripcion": "N/A"
+    },
+    {
+        "id": "M-eJLTUsVbUnKm",
+        "nombre": "uwehfwjebf",
+        "unidad": "dlfs",
+        "valor_unitario": "125",
+        "estado": "Activo",
+        "fecha_creacion": "2024-04-22 15:37:28",
+        "descripcion": "N/A"
+    },
+    {
+        "id": "M-Rz4m1lE0EjAR",
+        "nombre": "asjdajsfkjsf",
+        "unidad": "1kf",
+        "valor_unitario": "12545",
+        "estado": "Activo",
+        "fecha_creacion": "2024-04-22 15:38:14",
+        "descripcion": "pappapsppss"
+    }
+]

@@ -36,27 +36,7 @@ label3.place(x=40, y=200)
 entry_descripcion = tk.Entry(ventana, width=40)
 entry_descripcion.place(x=40, y=220)
 
-class Switch:
-    def __init__(self, master, on_text="Inactivo", off_text="Activo", **kwargs):
-        self.var = tk.BooleanVar()
-        self.var.set(True)  # Inicialmente apagado
 
-        self.on_text = on_text
-        self.off_text = off_text
-
-        self.button = tk.Button(master, text=self.off_text, command=self.toggle, **kwargs)
-        self.button.place(x=120, y=240)
-
-    def toggle(self):
-        self.var.set(not self.var.get())
-        if not self.var.get():
-            self.button.config(text=self.on_text)
-            print("material inactivo")
-        else:
-            self.button.config(text=self.off_text)
-            print("material activo")
-
-switch = Switch(ventana, width=10, height=2)
 
 label4 = tk.Label(ventana, text="Materiales Creados")
 label4.place(x=500, y=80)
@@ -100,7 +80,7 @@ def Modificar_materiales():
         comprobaciones()
         nuevo_material = Material(nombre=entry_nombre.get(), unidad=entry_unidades.get(),
                                   valor_unitario=entry_valor.get(),
-                                  estado=switch.var.get(), descripcion=entry_descripcion.get())
+                                  estado=checkbox_var.get(), descripcion=entry_descripcion.get())
 
         lista_materiales = cargar_materiales('materiales.json')
         if nuevo_material not in lista_materiales:
@@ -113,8 +93,8 @@ def Modificar_materiales():
             entry_unidades.delete(0, tk.END)
             entry_valor.delete(0, tk.END)
             entry_descripcion.delete(0, tk.END)
-            if not switch.var.get():
-                switch.toggle()
+            if not checkbox_var.get():
+                checkbox_var.set(True)
 
         else:
             messagebox.showwarning("Duplicado", "El material ya existe en la lista.")
@@ -161,6 +141,10 @@ boton_mostrar.place(x=500, y=270)
 cambiar_estado_boton = tk.Button(ventana, text="cambiar estado", command=cambiar_estdo_listbox)
 cambiar_estado_boton.place(x=500, y=300)
 
+checkbox_var = tk.BooleanVar()
+checkbox_var.set(True)
 
+checkbox = tk.Checkbutton(ventana, text="Activo", variable=checkbox_var)
+checkbox.place(x=40, y=240)
 
 ventana.mainloop()
