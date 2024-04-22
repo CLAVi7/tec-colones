@@ -49,32 +49,12 @@ def guardar_materiales(materiales, archivo):
     with open(archivo, 'w') as f:
         json.dump([material.to_dict() for material in materiales], f, ensure_ascii=False, indent=4)
 
-
-def cargar_materiales(archivo):
-    with open(archivo, 'r') as f:
-        data = json.load(f)
-        for item in data:
-            material = Material(
-                id=item['id'],
-                nombre=item['nombre'],
-                unidad=item['unidad'],
-                valor_unitario=item['valor_unitario'],
-                estado=item['estado'],
-                fecha_creacion=iten['fecha_creacion'],
-                descripcion=item['descripcion'] if 'descripcion' in item else None
-            )
-            lista_materiales.append(material)
+lista_materiales = [Material("plastico", "kg", 500, True, "plastico:D")]
 
 
-def modificar_materiales (nombre, unidad, valor_unitario, estado, descripcion=None):
-    lista_materiales = []
-    cargar_materiales('materiales.json')
-    lista_materiales.append(Material(nombre=nombre, unidad=unidad, valor_unitario=valor_unitario, estado=estado, descripcion=descripcion))
-    guardar_materiales(lista_materiales,'materiales.json')
-
-
-
-
-crear_material("plastic", "kg", 100, True, "plastico")
 # Guardar la lista de materiales en un archivo JSON
 guardar_materiales(lista_materiales, 'materiales.json')
+
+
+
+
