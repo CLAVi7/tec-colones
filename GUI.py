@@ -1,8 +1,8 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
-from Funciones_json import modificar_materiales
-
+from Funciones_json import *
+import Materiales
 
 ventana = Tk()
 ventana.title("añadir materiales")
@@ -37,11 +37,10 @@ label3.place(x=40, y=200)
 entry_descripcion = tk.Entry(ventana, width=40)
 entry_descripcion.place(x=40, y=220)
 
-
 class Switch:
-    def __init__(self, master, on_text="inactivo", off_text=" activo", **kwargs):
+    def __init__(self, master, on_text="activo", off_text="inactivo", **kwargs):
         self.var = tk.BooleanVar()
-        self.var.set(True)  # Inicialmente encendido
+        self.var.set(False)  # Inicialmente apagado
 
         self.on_text = on_text
         self.off_text = off_text
@@ -58,19 +57,34 @@ class Switch:
             self.button.config(text=self.off_text)
             print("material inactivo")
 
-
 switch = Switch(ventana, width=10, height=2)
 
 label4 = tk.Label(ventana, text="Materiales Creados")
 label4.place(x=500, y=80)
 
-listbox = tk.Listbox()
-listbox.insert(0)
-listbox.place(x=500, y=100)
-
 cambiar_estado_boton = tk.Button(ventana, text="cambiar estado")
 cambiar_estado_boton.place(x=500, y=300)
 
+
+
+
+listbox_materiales = None  # Declara la variable fuera de la función
+
+def cargar_y_mostrar_materiales():
+    global listbox_materiales  # Accede a la variable global
+
+    if listbox_materiales is None:  # Verifica si la Listbox ya existe
+        listbox_materiales = tk.Listbox(ventana, height=10, width=70)
+        listbox_materiales.place(x=400, y=100)
+    else:
+        listbox_materiales.delete(0, tk.END)  # Limpia la Listbox antes de actualizar
+
+    lista_materiales = cargar_materiales('materiales.json')
+    for material in lista_materiales:
+        texto = f"Nombre: {material.nombre} - Unidad: {material.unidad} - Valor Unitario: {material.valor_unitario} - Estado: {'Activo' if material.estado else 'Inactivo'}"
+        listbox_materiales.insert(tk.END, texto)
+
+cargar_y_mostrar_materiales()
 
 def comprobaciones():
     if not (5 <= len(entry_nombre.get()) <= 30):
@@ -91,24 +105,37 @@ def comprobaciones():
 def Modificar_materiales():
     try:
         comprobaciones()
-        modificar_materiales(entry_nombre.get(), entry_unidades.get(), entry_valor.get(), switch.var,
-                             entry_descripcion.get())
-        limpiar_entrys()
+        nuevo_material = Material(nombre=entry_nombre.get(), unidad=entry_unidades.get(),
+                                  valor_unitario=entry_valor.get(),
+                                  estado=switch.var.get(), descripcion=entry_descripcion.get())
+
+        lista_materiales = cargar_materiales('materiales.json')
+        if nuevo_material not in lista_materiales:
+            lista_materiales.append(nuevo_material)
+            guardar_materiales(lista_materiales, 'materiales.json')
+            cargar_y_mostrar_materiales()
+
+            # Limpiar campos de entrada después de agregar el material
+            entry_nombre.delete(0, tk.END)
+            entry_unidades.delete(0, tk.END)
+            entry_valor.delete(0, tk.END)
+            entry_descripcion.delete(0, tk.END)
+            switch.var.set(False)  # Restablecer el botón a su estado inicial
+
+        else:
+            messagebox.showwarning("Duplicado", "El material ya existe en la lista.")
+
     except ValueError as error:
         messagebox.showerror("Error de Comprobación", str(error))
     except TypeError as error:
         messagebox.showerror("Error de Tipo", str(error))
 
-
-def limpiar_entrys():
-    entry_nombre.delete(0, tk.END)
-    entry_unidades.delete(0, tk.END)
-    entry_valor.delete(0, tk.END)
-    switch.var.set(True)
-    entry_descripcion.delete(0, tk.END)
-
-
 boton_anadir = tk.Button(ventana, text="añadir material", command=Modificar_materiales)
 boton_anadir.place(x=300, y=160)
 
+boton_actualizar = tk.Button(ventana, text="actualizar", command=cargar_y_mostrar_materiales)
+boton_actualizar.place(x=500, y=270)
+
+
 ventana.mainloop()
+
