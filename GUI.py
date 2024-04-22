@@ -112,3 +112,4 @@ boton_anadir = tk.Button(ventana, text="añadir material", command=Modificar_mat
 boton_anadir.place(x=300, y=160)
 
 ventana.mainloop()
+
