@@ -38,4 +38,3 @@ def modificar_materiales(nombre, unidad, valor_unitario, estado, descripcion=Non
         lista_materiales.append(Material(nombre=nombre, unidad=unidad, valor_unitario=valor_unitario, estado=estado,
                                          descripcion=descripcion))
         guardar_materiales(lista_materiales, 'materiales.json')
-

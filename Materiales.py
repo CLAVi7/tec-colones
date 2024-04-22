@@ -40,4 +40,3 @@ class Material:
 
     def cambioEstado(self):
         self.estado = not self.estado
-
