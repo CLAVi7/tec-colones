@@ -2,7 +2,6 @@ import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
 from Funciones_json import *
-import Materiales
 
 ventana = Tk()
 ventana.title("añadir materiales")
@@ -38,9 +37,9 @@ entry_descripcion = tk.Entry(ventana, width=40)
 entry_descripcion.place(x=40, y=220)
 
 class Switch:
-    def __init__(self, master, on_text="activo", off_text="inactivo", **kwargs):
+    def __init__(self, master, on_text="Inactivo", off_text="Activo", **kwargs):
         self.var = tk.BooleanVar()
-        self.var.set(False)  # Inicialmente apagado
+        self.var.set(True)  # Inicialmente apagado
 
         self.on_text = on_text
         self.off_text = off_text
@@ -50,27 +49,21 @@ class Switch:
 
     def toggle(self):
         self.var.set(not self.var.get())
-        if self.var.get():
+        if not self.var.get():
             self.button.config(text=self.on_text)
-            print("material activo")
+            print("material inactivo")
         else:
             self.button.config(text=self.off_text)
-            print("material inactivo")
+            print("material activo")
 
 switch = Switch(ventana, width=10, height=2)
 
 label4 = tk.Label(ventana, text="Materiales Creados")
 label4.place(x=500, y=80)
 
-cambiar_estado_boton = tk.Button(ventana, text="cambiar estado")
-cambiar_estado_boton.place(x=500, y=300)
-
-
-
-
 listbox_materiales = None  # Declara la variable fuera de la función
 
-def cargar_y_mostrar_materiales():
+def cargar_y_mostrar_materiales_listbox():
     global listbox_materiales  # Accede a la variable global
 
     if listbox_materiales is None:  # Verifica si la Listbox ya existe
@@ -84,7 +77,7 @@ def cargar_y_mostrar_materiales():
         texto = f"Nombre: {material.nombre} - Unidad: {material.unidad} - Valor Unitario: {material.valor_unitario} - Estado: {'Activo' if material.estado else 'Inactivo'}"
         listbox_materiales.insert(tk.END, texto)
 
-cargar_y_mostrar_materiales()
+cargar_y_mostrar_materiales_listbox()
 
 def comprobaciones():
     if not (5 <= len(entry_nombre.get()) <= 30):
@@ -113,14 +106,15 @@ def Modificar_materiales():
         if nuevo_material not in lista_materiales:
             lista_materiales.append(nuevo_material)
             guardar_materiales(lista_materiales, 'materiales.json')
-            cargar_y_mostrar_materiales()
+            cargar_y_mostrar_materiales_listbox()
 
             # Limpiar campos de entrada después de agregar el material
             entry_nombre.delete(0, tk.END)
             entry_unidades.delete(0, tk.END)
             entry_valor.delete(0, tk.END)
             entry_descripcion.delete(0, tk.END)
-            switch.var.set(False)  # Restablecer el botón a su estado inicial
+            if not switch.var.get():
+                switch.toggle()
 
         else:
             messagebox.showwarning("Duplicado", "El material ya existe en la lista.")
@@ -130,12 +124,43 @@ def Modificar_materiales():
     except TypeError as error:
         messagebox.showerror("Error de Tipo", str(error))
 
+
+def mostrar_datos_seleccionados():
+    seleccion = listbox_materiales.curselection()
+    if len(seleccion) == 0:
+        messagebox.showinfo("Error", "Por favor, seleccione un elemento de la lista.")
+        return
+
+    indice = seleccion[0]
+    lista_materiales = cargar_materiales('materiales.json')
+    Material = lista_materiales[indice]
+    mensaje = f"{Material.__str__()}"
+    messagebox.showinfo("Material", mensaje)
+
+
+def cambiar_estdo_listbox():
+    seleccion = listbox_materiales.curselection()
+    if len(seleccion) == 0:
+        messagebox.showinfo("Error", "Por favor, seleccione un elemento de la lista.")
+        return
+
+    indice = seleccion[0]
+    lista_materiales = cargar_materiales('materiales.json')
+    lista_materiales[indice].estado = not lista_materiales[indice].estado
+    guardar_materiales(lista_materiales, 'materiales.json')
+    cargar_y_mostrar_materiales_listbox()
+
+
+
 boton_anadir = tk.Button(ventana, text="añadir material", command=Modificar_materiales)
 boton_anadir.place(x=300, y=160)
 
-boton_actualizar = tk.Button(ventana, text="actualizar", command=cargar_y_mostrar_materiales)
-boton_actualizar.place(x=500, y=270)
+boton_mostrar = tk.Button(ventana, text="Mostrar informacion del material", command=mostrar_datos_seleccionados)
+boton_mostrar.place(x=500, y=270)
+
+cambiar_estado_boton = tk.Button(ventana, text="cambiar estado", command=cambiar_estdo_listbox)
+cambiar_estado_boton.place(x=500, y=300)
+
 
 
 ventana.mainloop()
-

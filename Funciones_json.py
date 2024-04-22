@@ -1,7 +1,7 @@
 from Materiales import *
 import json
 
-lista_materiales = []
+
 def guardar_materiales(materiales, archivo):
     with open(archivo, 'w') as f:
         json.dump([material.to_dict() for material in materiales], f, ensure_ascii=False, indent=4)
