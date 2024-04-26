@@ -1,71 +1,81 @@
 import tkinter as tk
-from tkinter import *
 from tkinter import messagebox
 from Funciones_json import *
 
-ventana = Tk()
-ventana.title("añadir materiales")
-ventana.geometry("800x400")
+ventana = tk.Tk()
+ventana.title("Añadir materiales")
+ventana.geometry("850x450")
 ventana["bg"] = "#C3CDC0"
 
-etiqueta = tk.Label(ventana, text="añadir material de reciclaje",  font=("Helvetica", 20), bg="#8DC67E")
-etiqueta.config(width=50, height=2)
+etiqueta = tk.Label(ventana, text="Añadir material de reciclaje",  font=("Helvetica", 20), bg="#8DC67E")
+etiqueta.config(width=60, height=2)
 etiqueta.pack()
 
-entry_nombre = tk.Entry(ventana, width=40)
-entry_nombre.place(x=40, y=100)
+# Posición inicial y espaciado
+pos_y = 120
+spacing_y = 25
 
-label = tk.Label(ventana, text="nombre del material")
-label.place(x=40, y=80)
+entry_nombre = tk.Entry(ventana, width=40)
+entry_nombre.place(x=40, y=pos_y)
+
+label = tk.Label(ventana, text="Nombre del material")
+label.place(x=40, y=pos_y - spacing_y)
 
 label1 = tk.Label(ventana, text="Unidades")
-label1.place(x=40, y=120)
+label1.place(x=40, y=pos_y + spacing_y)
 
-entry_unidades = tk.Entry(ventana, width=40)
-entry_unidades.place(x=40, y=140)
+options = ["Kilogramo", "Unidad", "Litro"]
+variable = tk.StringVar(ventana)
+variable.set(options[0])
+dropdown_menu = tk.OptionMenu(ventana, variable, *options)
+dropdown_menu.place(x=40, y=pos_y + 2*spacing_y)
 
-label2 = tk.Label(ventana, text="valor de tec-colones")
-label2.place(x=40, y=160)
+label2 = tk.Label(ventana, text="Valor de tec-colones")
+label2.place(x=40, y=pos_y + 3*spacing_y + 20)
 
 entry_valor = tk.Entry(ventana, width=40)
-entry_valor.place(x=40, y=180)
+entry_valor.place(x=40, y=pos_y + 4*spacing_y + 20)
 
-label3 = tk.Label(ventana, text="descripción (opcional)")
-label3.place(x=40, y=200)
+label3 = tk.Label(ventana, text="Descripción (opcional)")
+label3.place(x=40, y=pos_y + 5*spacing_y + 20)
 
-entry_descripcion = tk.Entry(ventana, width=40)
-entry_descripcion.place(x=40, y=220)
-
-
+text_descripcion = tk.Text(ventana, height=5, width=40)
+text_descripcion.place(x=40, y=pos_y + 6 * spacing_y + 20)
 
 label4 = tk.Label(ventana, text="Materiales Creados")
-label4.place(x=500, y=80)
+label4.place(x=400, y=pos_y - spacing_y)
 
-listbox_materiales = None  # Declara la variable fuera de la función
+listbox_materiales = None
+
 
 def cargar_y_mostrar_materiales_listbox():
-    global listbox_materiales  # Accede a la variable global
+    global listbox_materiales
 
-    if listbox_materiales is None:  # Verifica si la Listbox ya existe
-        listbox_materiales = tk.Listbox(ventana, height=10, width=70)
-        listbox_materiales.place(x=400, y=100)
+    if listbox_materiales is None:
+        listbox_materiales = tk.Listbox(ventana, height=11, width=70)
+        listbox_materiales.place(x=400, y=pos_y)
     else:
-        listbox_materiales.delete(0, tk.END)  # Limpia la Listbox antes de actualizar
+        listbox_materiales.delete(0, tk.END)
 
     lista_materiales = cargar_materiales('materiales.json')
     for material in lista_materiales:
-        texto = f"Nombre: {material.nombre} - Unidad: {material.unidad} - Valor Unitario: {material.valor_unitario} - Estado: {'Activo' if material.estado else 'Inactivo'}"
+        texto = (f"Nombre: {material.nombre} - Unidad: {material.unidad} - Valor Unitario: {material.valor_unitario}"
+                 f" - Estado: {'Activo' if material.estado else 'Inactivo'}")
         listbox_materiales.insert(tk.END, texto)
 
+
 cargar_y_mostrar_materiales_listbox()
+
 
 def comprobaciones():
     if not (5 <= len(entry_nombre.get()) <= 30):
         raise ValueError("El nombre debe tener entre 5 y 30 caracteres.")
-    if entry_descripcion.get() and len(entry_descripcion.get()) > 1000:
+    if not (1 <= len(variable.get())):
+        raise ValueError("Debe ingresar un valor para las unidades.")
+    if text_descripcion.get("1.0", "end-1c") and len(text_descripcion.get("1.0", "end-1c")) > 1000:
         raise ValueError("La descripción no puede tener más de 1000 caracteres.")
-    if not isinstance(entry_nombre.get(), str) or not isinstance(entry_unidades.get(), str) or not isinstance(
-            entry_descripcion.get(), str):
+    if (not isinstance(entry_nombre.get(), str) or not isinstance(variable.get(), str) or
+            not isinstance(text_descripcion.get("1.0", "end-1c"), str)):
         raise TypeError("El nombre, la unidad y la descripción deben ser cadenas de texto.")
     try:
         valor_numerico = float(entry_valor.get())
@@ -78,9 +88,11 @@ def comprobaciones():
 def Modificar_materiales():
     try:
         comprobaciones()
-        nuevo_material = Material(nombre=entry_nombre.get(), unidad=entry_unidades.get(),
+        nuevo_material = Material(nombre=entry_nombre.get(),
+                                  unidad=variable.get(),
                                   valor_unitario=entry_valor.get(),
-                                  estado=checkbox_var.get(), descripcion=entry_descripcion.get())
+                                  estado=checkbox_var.get(),
+                                  descripcion=text_descripcion.get("1.0", "end-1c"))
 
         lista_materiales = cargar_materiales('materiales.json')
         if nuevo_material not in lista_materiales:
@@ -88,11 +100,10 @@ def Modificar_materiales():
             guardar_materiales(lista_materiales, 'materiales.json')
             cargar_y_mostrar_materiales_listbox()
 
-            # Limpiar campos de entrada después de agregar el material
             entry_nombre.delete(0, tk.END)
-            entry_unidades.delete(0, tk.END)
+            variable.set(options[0])
             entry_valor.delete(0, tk.END)
-            entry_descripcion.delete(0, tk.END)
+            text_descripcion.delete("1.0", tk.END)
             if not checkbox_var.get():
                 checkbox_var.set(True)
 
@@ -131,20 +142,19 @@ def cambiar_estdo_listbox():
     cargar_y_mostrar_materiales_listbox()
 
 
+boton_anadir = tk.Button(ventana, text="Añadir material", command=Modificar_materiales)
+boton_anadir.place(x=192, y=pos_y + 7*spacing_y + 90)
 
-boton_anadir = tk.Button(ventana, text="añadir material", command=Modificar_materiales)
-boton_anadir.place(x=300, y=160)
+boton_mostrar = tk.Button(ventana, text="Detalles", command=mostrar_datos_seleccionados)
+boton_mostrar.place(x=400, y=pos_y + 7*spacing_y + 20)
 
-boton_mostrar = tk.Button(ventana, text="Mostrar informacion del material", command=mostrar_datos_seleccionados)
-boton_mostrar.place(x=500, y=270)
-
-cambiar_estado_boton = tk.Button(ventana, text="cambiar estado", command=cambiar_estdo_listbox)
-cambiar_estado_boton.place(x=500, y=300)
+cambiar_estado_boton = tk.Button(ventana, text="Cambiar estado", command=cambiar_estdo_listbox)
+cambiar_estado_boton.place(x=465, y=pos_y + 7*spacing_y + 20)
 
 checkbox_var = tk.BooleanVar()
 checkbox_var.set(True)
 
 checkbox = tk.Checkbutton(ventana, text="Activo", variable=checkbox_var)
-checkbox.place(x=40, y=240)
+checkbox.place(x=40, y=pos_y + 7*spacing_y + 90)
 
 ventana.mainloop()
