@@ -7,5 +7,59 @@
         "estado": "Activo",
         "fecha_creacion": "2024-04-25 20:01:32",
         "descripcion": "Limpio y seco "
+    },
+    {
+        "id": "M-Ez3pyHhffIpB",
+        "nombre": "hola!@@#$",
+        "unidad": "Kilogramo",
+        "valor_unitario": "1.1",
+        "estado": "Activo",
+        "fecha_creacion": "2024-04-28 18:04:10",
+        "descripcion": "N/A"
+    },
+    {
+        "id": "M-maoOxW6i4lmn",
+        "nombre": "@#%%^^&*(",
+        "unidad": "Litro",
+        "valor_unitario": "1111.1111",
+        "estado": "Activo",
+        "fecha_creacion": "2024-04-28 18:05:05",
+        "descripcion": "aaaaa"
+    },
+    {
+        "id": "M-GUpbah0xF1wd",
+        "nombre": "12351245",
+        "unidad": "Litro",
+        "valor_unitario": "12313.123123",
+        "estado": "Activo",
+        "fecha_creacion": "2024-04-28 18:09:01",
+        "descripcion": "N/A"
+    },
+    {
+        "id": "M-J64sdpYSZImR",
+        "nombre": "papel",
+        "unidad": "Unidad",
+        "valor_unitario": "12312",
+        "estado": "Inactivo",
+        "fecha_creacion": "2024-04-28 18:10:50",
+        "descripcion": "asdasd"
+    },
+    {
+        "id": "M-V60NcUoCHU0o",
+        "nombre": "12312",
+        "unidad": "Kilogramo",
+        "valor_unitario": "123",
+        "estado": "Inactivo",
+        "fecha_creacion": "2024-04-28 18:13:24",
+        "descripcion": "123123"
+    },
+    {
+        "id": "M-NjlfsMy48mfC",
+        "nombre": "1232131232",
+        "unidad": "Kilogramo",
+        "valor_unitario": "1232",
+        "estado": "Activo",
+        "fecha_creacion": "2024-04-28 18:20:32",
+        "descripcion": "N/A"
     }
 ]
