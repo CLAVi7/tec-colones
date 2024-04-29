@@ -1,12 +1,13 @@
 from Materiales import *
 import json
 
-
+#Función que guarda una lista de objetos de material en un archivo JSON.
 def guardar_materiales(materiales, archivo):
     with open(archivo, 'w') as f:
         json.dump([material.to_dict() for material in materiales], f, ensure_ascii=False, indent=4)
 
 
+#Carga la mediante una lista los materiales guardados desde el archivo JSON.
 def cargar_materiales(archivo):
     lista_materiales = []
     try:
@@ -30,6 +31,7 @@ def cargar_materiales(archivo):
     return lista_materiales
 
 
+#Modifica o añade un nuevo material con los parametros dados, en la lista de materiales.
 def modificar_materiales(nombre, unidad, valor_unitario, estado, descripcion=None):
     lista_materiales = []
     try:
