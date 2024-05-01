@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from Funciones_json import *
+from carga_descarga_materiales import *
 
 # Crear ventana principal
 ventana = tk.Tk()
