@@ -1,0 +1,29 @@
+[
+    {
+        "id": "M-UWkOmnuH8yn9",
+        "nombre": "Sprint 1",
+        "unidad": "Litro",
+        "valor_unitario": "100",
+        "estado": "Activo",
+        "fecha_creacion": "2024-04-30 19:51:47",
+        "descripcion": "Ejemplo "
+    },
+    {
+        "id": "M-ohGhPHx7mwru",
+        "nombre": "Material 2",
+        "unidad": "Kilogramo",
+        "valor_unitario": "1",
+        "estado": "Inactivo",
+        "fecha_creacion": "2024-04-30 19:52:50",
+        "descripcion": "N/A"
+    },
+    {
+        "id": "M-VxQCcfy9nk3W",
+        "nombre": "gssdgsdgsdg",
+        "unidad": "Unidad",
+        "valor_unitario": "3425",
+        "estado": "Activo",
+        "fecha_creacion": "2024-05-06 21:20:36",
+        "descripcion": "dssg"
+    }
+]
