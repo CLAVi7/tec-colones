@@ -1,6 +1,7 @@
 from Materiales import *
 import json
 
+
 #Función que guarda una lista de objetos de material en un archivo JSON.
 def guardar_materiales(materiales, archivo):
     with open(archivo, 'w') as f:

@@ -1,6 +1,6 @@
 import tkinter as tk
 from tkinter import messagebox
-from Funciones_json import *
+from carga_descarga_materiales import *
 
 # Crear ventana principal
 ventana = tk.Tk()
@@ -52,9 +52,9 @@ listbox_materiales = None
 
 # Función para cargar y mostrar materiales en la listbox
 def cargar_y_mostrar_materiales_listbox():
-    
+
     # Carga los materiales desde el archivo JSON y los muestra en la Listbox.
-    
+
     global listbox_materiales
 
     if listbox_materiales is None:
@@ -63,7 +63,7 @@ def cargar_y_mostrar_materiales_listbox():
     else:
         listbox_materiales.delete(0, tk.END)
 
-    lista_materiales = cargar_materiales('materiales.json')
+    lista_materiales = cargar_materiales('crear_nuevo_material/materiales.json')
     for material in lista_materiales:
         texto = (f"Nombre: {material.nombre} - Unidad: {material.unidad} - Valor Unitario: {material.valor_unitario}"
                  f" - Estado: {'Activo' if material.estado else 'Inactivo'}")
@@ -106,10 +106,10 @@ def Modificar_materiales():
                                   estado=checkbox_var.get(),
                                   descripcion=text_descripcion.get("1.0", "end-1c"))
 
-        lista_materiales = cargar_materiales('materiales.json')
+        lista_materiales = cargar_materiales('crear_nuevo_material/materiales.json')
         if nuevo_material not in lista_materiales:
             lista_materiales.append(nuevo_material)
-            guardar_materiales(lista_materiales, 'materiales.json')
+            guardar_materiales(lista_materiales, 'crear_nuevo_material/materiales.json')
             cargar_y_mostrar_materiales_listbox()
 
             entry_nombre.delete(0, tk.END)
@@ -138,7 +138,7 @@ def mostrar_datos_seleccionados():
         return
 
     indice = seleccion[0]
-    lista_materiales = cargar_materiales('materiales.json')
+    lista_materiales = cargar_materiales('crear_nuevo_material/materiales.json')
     Material = lista_materiales[indice]
     mensaje = f"{Material.__str__()}"
     messagebox.showinfo("Material", mensaje)
@@ -154,9 +154,9 @@ def cambiar_estdo_listbox():
         return
 
     indice = seleccion[0]
-    lista_materiales = cargar_materiales('materiales.json')
+    lista_materiales = cargar_materiales('crear_nuevo_material/materiales.json')
     lista_materiales[indice].estado = not lista_materiales[indice].estado
-    guardar_materiales(lista_materiales, 'materiales.json')
+    guardar_materiales(lista_materiales, 'crear_nuevo_material/materiales.json')
     cargar_y_mostrar_materiales_listbox()
 
 # Botón para añadir material
