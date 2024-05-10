@@ -60,7 +60,7 @@ def comprobaciones():
         raise ValueError("El nombre debe tener entre 5 y 30 caracteres.")
     if not (1 <= len(entry_ubicacion.get()) <= 100):
         raise ValueError("El nombre debe tener máximo 100 caracteres.")
-    if not (1 <= len(entry_contacto.get()) <= 8):
+    if not (1 <= len(entry_contacto.get()) < 8):
         raise ValueError("El nombre debe tener máximo 8 caracteres.")
     if not (1 <= len(variable.get())):
         raise ValueError("Debe ingresar un valor para las sedes.")

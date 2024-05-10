@@ -1,26 +1,17 @@
-import random
 from datetime import datetime
+from generador_id import generar_id_unico
 
 
 class Material:
     #Función que crea un nuevo material con los parámetros de la clase
     def __init__(self, nombre, unidad, valor_unitario, estado, descripcion=None):
-        self.id = self.generar_id_unico()
+        self.id = generar_id_unico("M")
         self.nombre = nombre
         self.unidad = unidad
         self.valor_unitario = valor_unitario
         self.estado = estado
         self.fecha_creacion = datetime.now()
         self.descripcion = descripcion
-
-
-
-    #Función que crea un ID único compuesto por 12 caracteres despues de M-
-    def generar_id_unico(self):
-        caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-        id_aleatorio = ''.join(random.choice(caracteres) for _ in range(12))
-        return f"M-{id_aleatorio}"
-
 
 
     #Retorna una representación en forma de cadena del material
