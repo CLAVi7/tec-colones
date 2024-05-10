@@ -1,4 +1,5 @@
 import tkinter as tk
+import json_sedes
 
 ventana = tk.Tk()
 ventana.title("sedes")
@@ -40,9 +41,7 @@ label3 = tk.Label(ventana, text="sedes creadas")
 label3.place(x=350, y=80)
 
 listbox_sedes = None
-
-
-def cargar_y_mostrar_sedes_listbox():
+def cargar_y_mostrar_centros_listbox():
     global listbox_sedes
 
     if listbox_sedes is None:
@@ -50,6 +49,15 @@ def cargar_y_mostrar_sedes_listbox():
         listbox_sedes.place(x=350, y=105)
     else:
         listbox_sedes.delete(0, tk.END)
+
+    lista_centros = cargar_sedes("Sedes_y_centros_de_acopio/sedes.json")
+
+    for sede in lista_sede:
+        texto = (f"Nombre: {sede.nombre}"
+                 f" - Ubicacion: {sede.provincia}
+                 f" - numero_contacto: {sede.numero_contacto}"
+                 f" - estado: {'Activo' if sede.estado else 'Inactivo'}")
+        listbox_sedes.insert(tk.END, texto)
 
 
 cargar_y_mostrar_sedes_listbox()
