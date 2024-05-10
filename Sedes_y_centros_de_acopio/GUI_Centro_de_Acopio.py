@@ -43,6 +43,7 @@ label4.place(x=350, y=80)
 
 listbox_centros = None
 
+
 def cargar_y_mostrar_centros_listbox():
     
     global listbox_centros
@@ -66,6 +67,7 @@ def cargar_y_mostrar_centros_listbox():
 
 cargar_y_mostrar_centros_listbox()
 
+
 def comprobaciones():
     
     if not (5 <= len(entry_nombre.get()) <= 30):
@@ -76,7 +78,6 @@ def comprobaciones():
         raise ValueError("El numero debe tener máximo 8 caracteres.")
     if not (1 <= len(variable.get())):
         raise ValueError("Debe ingresar un valor para las sedes.")
-
 
 
 def Modificar_centros():
