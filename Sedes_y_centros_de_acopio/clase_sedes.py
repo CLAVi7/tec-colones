@@ -1,11 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
 import json
-#from generador_id import generar_id_unico
+from generador_id import generar_id_unico
 
 class sedes:
     def __init__(self, nombre, provincia, numero_contacto, estado):
-        #self.id = generar_id_unico("S")
+        self.id = generar_id_unico("S")
         self.nombre = nombre
         self.provincia = provincia
         self.numero_contacto = numero_contacto
@@ -24,15 +24,14 @@ class sedes:
                 f"Estado: {'Activo' if self.estado == 'Activo' else 'Inactivo'}\n")
 
     # #Convierte los atributos de los objetos en un diccionario
-    # def to_dict(self):
-    #     return {
-    #         "id": self.id,
-    #         "nombre": self.nombre,
-    #         "ubicacion": self.ubicacion,
-    #         "sede": self.sede,
-    #         "estado": "Activo" if self.estado else "Inactivo",
-    #         "numero_de_contacto": self.numero_de_contacto,
-    #     }
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "nombre": self.nombre,
+            "provincia": self.provincia,
+            "numero_contacto": self.numero_contacto,
+            "estado": "Activo" if self.estado else "Inactivo",
+        }
 
     @classmethod
     def cargar_sedes_desde_json(cls, ruta_json):
@@ -47,17 +46,17 @@ class sedes:
             option_menu['menu'].add_command(label=sede["nombre"], 
                                              command=lambda value=sede["nombre"]: option_menu.config(text=value))
 
-# Ejemplo de uso
-import tkinter as tk
+# # Ejemplo de uso
+# import tkinter as tk
 
-ruta_json = "Sedes_y_centros_de_acopio/sedes.json"  # Ruta al archivo JSON
-root = tk.Tk()
-opcion_variable = tk.StringVar(root)
-opcion_variable.set("Seleccione una sede")
+# ruta_json = "Sedes_y_centros_de_acopio/sedes.json"  # Ruta al archivo JSON
+# root = tk.Tk()
+# opcion_variable = tk.StringVar(root)
+# opcion_variable.set("Seleccione una sede")
 
-option_menu = tk.OptionMenu(root, opcion_variable, "Seleccione una sede")
-option_menu.pack()
+# option_menu = tk.OptionMenu(root, opcion_variable, "Seleccione una sede")
+# option_menu.pack()
 
-sedes.cargar_sedes_en_optionmenu(option_menu, ruta_json)
+# sedes.cargar_sedes_en_optionmenu(option_menu, ruta_json)
 
-root.mainloop()
+# root.mainloop()
