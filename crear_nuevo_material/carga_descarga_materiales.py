@@ -32,12 +32,3 @@ def cargar_materiales(archivo):
     return lista_materiales
 
 
-#Modifica o añade un nuevo material con los parametros dados, en la lista de materiales.
-def modificar_materiales(nombre, unidad, valor_unitario, estado, descripcion=None):
-    lista_materiales = []
-    try:
-        lista_materiales = cargar_materiales('materiales.json')
-    finally:
-        lista_materiales.append(Material(nombre=nombre, unidad=unidad, valor_unitario=valor_unitario, estado=estado,
-                                         descripcion=descripcion))
-        guardar_materiales(lista_materiales, 'materiales.json')

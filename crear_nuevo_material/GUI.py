@@ -69,6 +69,7 @@ def cargar_y_mostrar_materiales_listbox():
                  f" - Estado: {'Activo' if material.estado else 'Inactivo'}")
         listbox_materiales.insert(tk.END, texto)
 
+
 # Llamar a la función para cargar y mostrar los materiales
 cargar_y_mostrar_materiales_listbox()
 
@@ -132,7 +133,7 @@ def mostrar_datos_seleccionados():
     
     # Muestra los detalles del material seleccionado en la Listbox.
     
-    seleccion = listbox_materiales.curselection()
+    seleccion = listbox_centros.curselection()
     if len(seleccion) == 0:
         messagebox.showinfo("Error", "Por favor, seleccione un elemento de la lista.")
         return
@@ -148,7 +149,7 @@ def cambiar_estdo_listbox():
     
     # Cambia el estado del material seleccionado en la Listbox.
     
-    seleccion = listbox_materiales.curselection()
+    seleccion = listbox_centros.curselection()
     if len(seleccion) == 0:
         messagebox.showinfo("Error", "Por favor, seleccione un elemento de la lista.")
         return
