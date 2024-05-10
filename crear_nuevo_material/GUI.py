@@ -133,7 +133,7 @@ def mostrar_datos_seleccionados():
     
     # Muestra los detalles del material seleccionado en la Listbox.
     
-    seleccion = listbox_centros.curselection()
+    seleccion = listbox_materiales.curselection()
     if len(seleccion) == 0:
         messagebox.showinfo("Error", "Por favor, seleccione un elemento de la lista.")
         return
@@ -149,7 +149,7 @@ def cambiar_estdo_listbox():
     
     # Cambia el estado del material seleccionado en la Listbox.
     
-    seleccion = listbox_centros.curselection()
+    seleccion = listbox_materiales.curselection()
     if len(seleccion) == 0:
         messagebox.showinfo("Error", "Por favor, seleccione un elemento de la lista.")
         return

@@ -1,0 +1,26 @@
+[
+    {
+        "id": "C-idQCnO9ZM39N",
+        "nombre": "qweqwe",
+        "ubicacion": "wqeqweqew",
+        "sede": "Seleccionar2",
+        "estado": "Inactivo",
+        "numero_de_contacto": "12341234"
+    },
+    {
+        "id": "C-S05HZJqzpW0a",
+        "nombre": "qweqweq",
+        "ubicacion": "213",
+        "sede": "Seleccionar1",
+        "estado": "Inactivo",
+        "numero_de_contacto": "45845845"
+    },
+    {
+        "id": "C-VDK2A4b7URvx",
+        "nombre": "asdads",
+        "ubicacion": "qwe",
+        "sede": "Seleccionar2",
+        "estado": "Activo",
+        "numero_de_contacto": "12312312"
+    }
+]
