@@ -12,8 +12,8 @@ class sedes:
         self.estado = estado
 
     # Función que cambia el estado de la sede
-    def cambioEstado(self):
-        self.estado = not self.estado
+    # def cambioEstado(self):
+    #     self.estado = not self.estado
 
     # Retorna una representación en forma de cadena de la sede
     def __str__(self):
@@ -21,7 +21,7 @@ class sedes:
                 f"Nombre de sede: {self.nombre}\n"
                 f"Provincia: {self.provincia}\n"
                 f"Numero de contacto: {self.numero_contacto}\n"
-                f"Estado: {'Activo' if self.estado == 'Activo' else 'Inactivo'}\n")
+                f"Estado: {'Activo' if self.estado else 'Inactivo'}\n")
 
     # #Convierte los atributos de los objetos en un diccionario
     def to_dict(self):

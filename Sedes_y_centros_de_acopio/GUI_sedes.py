@@ -44,14 +44,18 @@ cargar_y_mostrar_sedes_listbox(ventana)
 def llamar_modificar_sedes():
     Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, options, ventana)
 
+def llamar_detalles():
+    mostrar_datos_seleccionados()
+
+def llamar_cambiar_estado():
+    cambiar_estdo_listbox(ventana)
+
 boton_anadir = tk.Button(ventana, text="Añadir sede", command=llamar_modificar_sedes)
-#boton_anadir = tk.Button(ventana, text="Añadir sede")
 boton_anadir.place(x=213, y=280)
 
-boton_detalles = tk.Button(ventana, text="detalles")
-#boton_detalles = tk.Button(ventana, text="detalles", command=mostrar_datos_seleccionados(listbox_sedes))
+boton_detalles = tk.Button(ventana, text="detalles", command=llamar_detalles)
 boton_detalles.place(x=350, y=320)
 
-boton_detalles = tk.Button(ventana, text="cambiar estado")
+boton_detalles = tk.Button(ventana, text="cambiar estado", command=llamar_cambiar_estado)
 boton_detalles.place(x=420, y=320)
 ventana.mainloop()

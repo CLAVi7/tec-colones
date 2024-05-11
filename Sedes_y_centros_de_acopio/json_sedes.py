@@ -1,5 +1,6 @@
 from clase_sedes import *
 import json
+import tkinter as tk
 from tkinter import messagebox
 
 def guardar_sedes(sedes, archivo):
@@ -13,18 +14,23 @@ def cargar_sedes(archivo):
         with open(archivo, 'r') as f:
             data = json.load(f)
             for item in data:
+                estado = item['estado']  # Guardar el estado leído del JSON
+                if estado == 'Activo':
+                    estado = True
+                else:
+                    estado = False
                 sede = sedes(
                     nombre=item['nombre'],
                     provincia=item['provincia'],
                     numero_contacto=item['numero_contacto'],
-                    estado=item['estado'] == 'Activo'
+                    estado=estado
                 )
                 sede.id = item['id']
                 lista_sedes.append(sede)
     except FileNotFoundError:
-        return lista_sedes
+        print("El archivo no fue encontrado.")
     except json.JSONDecodeError:
-        return lista_sedes
+        print("Error al decodificar el archivo JSON.")
     return lista_sedes
 
 listbox_sedes = None
@@ -38,11 +44,11 @@ def cargar_y_mostrar_sedes_listbox(ventana):
         listbox_sedes.delete(0, tk.END)
 
     lista_sede = cargar_sedes("Sedes_y_centros_de_acopio/sedes.json")
+    #print("La lista es: ", lista_sede[0])
 
     for sede in lista_sede:
         texto = (f"Nombre: {sede.nombre}"
                  f" - Ubicacion: {sede.provincia}"
-                 f" - numero_contacto: {sede.numero_contacto}"
                  f" - estado: {'Activo' if sede.estado else 'Inactivo'}")
         listbox_sedes.insert(tk.END, texto)
 
@@ -52,19 +58,25 @@ def comprobaciones(entry_nombre, variable, entry_contacto):
         raise ValueError("El nombre debe tener entre 5 y 30 caracteres.")
     if not (1 <= len(variable.get())):
         raise ValueError("Debe seleccionar una provincia para las sedes.")
-    # Verificamos si la longitud del número limpio es igual a la longitud esperada
-    if not (len(entry_contacto.get()) == 8):
-        raise ValueError("El número de contacto debe tener 8 dígitos.")
+    
+    contacto = entry_contacto.get()
+    
+    if not contacto.isdigit():
+        raise ValueError("El número de contacto debe ser un número entero.")
+
+    if len(contacto) != 8:
+        raise ValueError("El número de contacto debe tener exactamente 8 dígitos.")
+
 
 
 def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, options, ventana):
     try:
         comprobaciones(entry_nombre, variable, entry_contacto)
-        print("Pasa por aqui")
+        #print("Pasa por aqui")
         nuevo_sede = sedes(nombre=entry_nombre.get(),
                                   provincia=variable.get(),
                                   numero_contacto=entry_contacto.get(),
-                                  estado=checkbox_var.get(),)
+                                  estado=checkbox_var.get())
 
         lista_sedes = cargar_sedes("Sedes_y_centros_de_acopio/sedes.json")
         if nuevo_sede not in lista_sedes:
@@ -88,7 +100,7 @@ def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, option
 
 
 # Función para mostrar detalles del material seleccionado
-def mostrar_datos_seleccionados(listbox_sedes):
+def mostrar_datos_seleccionados():
     
     # Muestra los detalles del material seleccionado en la Listbox.
     
@@ -99,22 +111,25 @@ def mostrar_datos_seleccionados(listbox_sedes):
 
     indice = seleccion[0]
     lista_sedes = cargar_sedes("Sedes_y_centros_de_acopio/sedes.json")
+    #print("lista_sedes:", lista_sedes[indice])
     sedes = lista_sedes[indice]
+    #print("sedes: ", sedes)
     mensaje = f"{sedes.__str__()}"
-    messagebox.showinfo("Material", mensaje)
-
+    messagebox.showinfo("Sedes", mensaje)
 
 
 def cambiar_estdo_listbox(ventana):
     # Cambia el estado del material seleccionado en la Listbox.
-
     seleccion = listbox_sedes.curselection()
     if len(seleccion) == 0:
         messagebox.showinfo("Error", "Por favor, seleccione un elemento de la lista.")
         return
 
     indice = seleccion[0]
-    lista_sedes = cargar_sedes("Sedes_y_centros_de_acopio/centros.json")
+    lista_sedes = cargar_sedes("Sedes_y_centros_de_acopio/sedes.json")
+    #print("lista_sedes:", lista_sedes[indice])
     lista_sedes[indice].estado = not lista_sedes[indice].estado
-    guardar_sedes(lista_sedes, "Sedes_y_centros_de_acopio/centros.json")
+    #lista_sedes[indice].estado = sedes.cambioEstado(lista_sedes)
+    #print("estado cambiado: ", lista_sedes[indice].estado)
+    guardar_sedes(lista_sedes, "Sedes_y_centros_de_acopio/sedes.json")
     cargar_y_mostrar_sedes_listbox(ventana)
