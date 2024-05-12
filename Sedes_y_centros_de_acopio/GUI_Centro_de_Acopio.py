@@ -77,6 +77,7 @@ def llamar_detalles():
     """
     Muestra los detalles del centro de acopio seleccionado desde 'listbox_centros'.
     """
+    global listbox_centros
     mostrar_datos_seleccionados(listbox_centros)
 
 

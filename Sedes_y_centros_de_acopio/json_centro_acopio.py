@@ -26,7 +26,6 @@ def cargar_centros(archivo):
     Retorna:
     list: Lista de objetos CentroDeAcopio cargados.
     """
-    lista_
     lista_centros = []
     try:
         with open(archivo, 'r') as f:
@@ -65,7 +64,7 @@ def cargar_y_mostrar_centros_listbox(ventana, listbox_centros):
     else:
         listbox_centros.delete(0, tk.END)
 
-    lista_centros = cargar_centros("centros.json")
+    lista_centros = cargar_centros("Sedes_y_centros_de_acopio/centros.json")
     if not lista_centros:
         print("No se cargaron centros. Verifique el archivo JSON.")
 
@@ -128,10 +127,10 @@ def Modificar_centros(entry_nombre, entry_ubicacion, variable, entry_contacto, c
                                   estado=checkbox_var.get(),
                                   id=entry_id.get())
 
-        lista_centros = cargar_centros("centros.json")
+        lista_centros = cargar_centros("Sedes_y_centros_de_acopio/centros.json")
         if nuevo_centro not in lista_centros:
             lista_centros.append(nuevo_centro)
-            guardar_centros(lista_centros, "centros.json")
+            guardar_centros(lista_centros, "Sedes_y_centros_de_acopio/centros.json")
             cargar_y_mostrar_centros_listbox(ventana, listbox_centros)
 
             entry_nombre.delete(0, tk.END)
@@ -158,7 +157,6 @@ def mostrar_datos_seleccionados(listbox_centros):
     Parámetros:
     listbox_centros (Listbox): Listbox de donde se selecciona el centro.
     """
-    # Muestra los detalles del material seleccionado en la Listbox.
 
     seleccion = listbox_centros.curselection()
     if len(seleccion) == 0:
@@ -166,7 +164,7 @@ def mostrar_datos_seleccionados(listbox_centros):
         return
 
     indice = seleccion[0]
-    lista_centros = cargar_centros("centros.json")
+    lista_centros = cargar_centros("Sedes_y_centros_de_acopio/centros.json")
     centro = lista_centros[indice]
     mensaje = f"{centro.__str__()}"
     messagebox.showinfo("Centro", mensaje)
@@ -187,9 +185,9 @@ def cambiar_estdo_listbox(ventana, listbox_centros):
         return
 
     indice = seleccion[0]
-    lista_centros = cargar_centros("centros.json")
+    lista_centros = cargar_centros("Sedes_y_centros_de_acopio/centros.json")
     lista_centros[indice].estado = not lista_centros[indice].estado
-    guardar_centros(lista_centros, "centros.json")
+    guardar_centros(lista_centros, "Sedes_y_centros_de_acopio/centros.json")
     cargar_y_mostrar_centros_listbox(ventana, listbox_centros)
 
 
@@ -200,7 +198,7 @@ def conseguir_sedes():
     Retorna:
     list: Lista de nombres de las sedes disponibles.
     """
-    lista_sedes = cargar_sedes("sedes.json")
+    lista_sedes = cargar_sedes("Sedes_y_centros_de_acopio/sedes.json")
     options = []
     for sede in lista_sedes:
         options.append(sede.nombre)
