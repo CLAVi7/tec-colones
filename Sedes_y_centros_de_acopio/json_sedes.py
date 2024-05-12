@@ -33,9 +33,8 @@ def cargar_sedes(archivo):
         print("Error al decodificar el archivo JSON.")
     return lista_sedes
 
-listbox_sedes = None
-def cargar_y_mostrar_sedes_listbox(ventana):
-    global listbox_sedes
+
+def cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes):
 
     if listbox_sedes is None:
         listbox_sedes = tk.Listbox(ventana, height=12, width=70)
@@ -43,7 +42,7 @@ def cargar_y_mostrar_sedes_listbox(ventana):
     else:
         listbox_sedes.delete(0, tk.END)
 
-    lista_sede = cargar_sedes("sedes.json")#Sedes_y_centros_de_acopio/sedes.json")
+    lista_sede = cargar_sedes("sedes.json")
     #print("La lista es: ", lista_sede[0])
 
     for sede in lista_sede:
@@ -51,6 +50,8 @@ def cargar_y_mostrar_sedes_listbox(ventana):
                  f" - Ubicacion: {sede.provincia}"
                  f" - estado: {'Activo' if sede.estado else 'Inactivo'}")
         listbox_sedes.insert(tk.END, texto)
+
+    return listbox_sedes
 
 
 def comprobaciones(entry_nombre, variable, entry_contacto):
@@ -68,8 +69,7 @@ def comprobaciones(entry_nombre, variable, entry_contacto):
         raise ValueError("El número de contacto debe tener exactamente 8 dígitos.")
 
 
-
-def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, options, ventana):
+def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, options, ventana, listbox_sedes):
     try:
         comprobaciones(entry_nombre, variable, entry_contacto)
         #print("Pasa por aqui")
@@ -78,11 +78,11 @@ def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, option
                                   numero_contacto=entry_contacto.get(),
                                   estado=checkbox_var.get())
 
-        lista_sedes = cargar_sedes("sedes.json")#Sedes_y_centros_de_acopio/sedes.json")
+        lista_sedes = cargar_sedes("sedes.json")
         if nuevo_sede not in lista_sedes:
             lista_sedes.append(nuevo_sede)
-            guardar_sedes(lista_sedes, "sedes.json")#Sedes_y_centros_de_acopio/sedes.json")
-            cargar_y_mostrar_sedes_listbox(ventana)
+            guardar_sedes(lista_sedes, "sedes.json")
+            listbox_sedes = cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes)
 
             entry_nombre.delete(0, tk.END)
             variable.set(options[0])
@@ -98,9 +98,11 @@ def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, option
     except TypeError as error:
         messagebox.showerror("Error de Tipo", str(error))
 
+    return listbox_sedes
+
 
 # Función para mostrar detalles del material seleccionado
-def mostrar_datos_seleccionados():
+def mostrar_datos_seleccionados(listbox_sedes):
     
     # Muestra los detalles del material seleccionado en la Listbox.
     
@@ -110,7 +112,7 @@ def mostrar_datos_seleccionados():
         return
 
     indice = seleccion[0]
-    lista_sedes = cargar_sedes("sedes.json")#Sedes_y_centros_de_acopio/sedes.json")
+    lista_sedes = cargar_sedes("sedes.json")
     #print("lista_sedes:", lista_sedes[indice])
     sedes = lista_sedes[indice]
     #print("sedes: ", sedes)
@@ -118,7 +120,7 @@ def mostrar_datos_seleccionados():
     messagebox.showinfo("Sedes", mensaje)
 
 
-def cambiar_estdo_listbox(ventana):
+def cambiar_estdo_listbox(ventana, listbox_sedes):
     # Cambia el estado del material seleccionado en la Listbox.
     seleccion = listbox_sedes.curselection()
     if len(seleccion) == 0:
@@ -126,10 +128,7 @@ def cambiar_estdo_listbox(ventana):
         return
 
     indice = seleccion[0]
-    lista_sedes = cargar_sedes("sedes.json")#Sedes_y_centros_de_acopio/sedes.json")
-    #print("lista_sedes:", lista_sedes[indice])
+    lista_sedes = cargar_sedes("sedes.json")
     lista_sedes[indice].estado = not lista_sedes[indice].estado
-    #lista_sedes[indice].estado = sedes.cambioEstado(lista_sedes)
-    #print("estado cambiado: ", lista_sedes[indice].estado)
-    guardar_sedes(lista_sedes, "sedes.json")#Sedes_y_centros_de_acopio/sedes.json")
-    cargar_y_mostrar_sedes_listbox(ventana)
+    guardar_sedes(lista_sedes, "sedes.json")
+    cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes)

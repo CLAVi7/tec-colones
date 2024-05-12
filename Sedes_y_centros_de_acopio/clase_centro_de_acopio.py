@@ -1,8 +1,7 @@
-from generador_id import generar_id_unico
 
 class centro_de_acopio:
-    def __init__(self, nombre, ubicacion, sede, numero_de_contacto, estado):
-        self.id = generar_id_unico("C")
+    def __init__(self, nombre, ubicacion, sede, numero_de_contacto, estado, id):
+        self.id = id
         self.nombre = nombre
         self.ubicacion = ubicacion
         self.sede = sede

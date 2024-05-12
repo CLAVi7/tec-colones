@@ -39,16 +39,29 @@ checkbox.place(x=40, y=240)
 label3 = tk.Label(ventana, text="sedes creadas")
 label3.place(x=350, y=80)
 
-cargar_y_mostrar_sedes_listbox(ventana)
+listbox_sedes = None
+
+
+def llamar_cargar_listbox():
+    global listbox_sedes
+    listbox_sedes = cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes)
+
+
+llamar_cargar_listbox()
+
 
 def llamar_modificar_sedes():
-    Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, options, ventana)
+    global listbox_sedes
+    listbox_sedes = Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, options, ventana, listbox_sedes)
+
 
 def llamar_detalles():
-    mostrar_datos_seleccionados()
+    mostrar_datos_seleccionados(listbox_sedes)
+
 
 def llamar_cambiar_estado():
-    cambiar_estdo_listbox(ventana)
+    cambiar_estdo_listbox(ventana, listbox_sedes)
+
 
 boton_anadir = tk.Button(ventana, text="Añadir sede", command=llamar_modificar_sedes)
 boton_anadir.place(x=213, y=280)

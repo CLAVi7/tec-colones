@@ -49,8 +49,26 @@
         "nombre": "shasohb",
         "unidad": "Unidad",
         "valor_unitario": "33",
-        "estado": "Activo",
+        "estado": "Inactivo",
         "fecha_creacion": "2024-05-09 22:05:16",
         "descripcion": "N/A"
+    },
+    {
+        "id": "M-YD9PHBKnlX1l",
+        "nombre": "qweqwe",
+        "unidad": "Kilogramo",
+        "valor_unitario": 213.0,
+        "estado": "Activo",
+        "fecha_creacion": "2024-05-12 08:56:19",
+        "descripcion": "\n"
+    },
+    {
+        "id": "M-gqFbrtqOcERw",
+        "nombre": "asdasd",
+        "unidad": "Kilogramo",
+        "valor_unitario": "12",
+        "estado": "Activo",
+        "fecha_creacion": "2024-05-12 08:57:03",
+        "descripcion": "\n"
     }
 ]
