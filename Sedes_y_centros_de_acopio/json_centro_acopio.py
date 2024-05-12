@@ -5,11 +5,28 @@ from tkinter import messagebox
 from json_sedes import cargar_sedes
 
 def guardar_centros(centros, archivo):
+    """
+    Guarda una lista de centros de acopio en un archivo JSON.
+
+    Parámetros:
+    centros (list): Lista de objetos CentroDeAcopio.
+    archivo (str): Ruta del archivo donde se guardarán los centros.
+    """
     with open(archivo, 'w') as f:
         json.dump([centro.to_dict() for centro in centros], f, ensure_ascii=False, indent=4)
 
 
 def cargar_centros(archivo):
+    """
+    Carga centros de acopio desde un archivo JSON.
+
+    Parámetros:
+    archivo (str): Ruta del archivo JSON de donde se cargarán los centros.
+
+    Retorna:
+    list: Lista de objetos CentroDeAcopio cargados.
+    """
+    lista_
     lista_centros = []
     try:
         with open(archivo, 'r') as f:
@@ -32,6 +49,16 @@ def cargar_centros(archivo):
 
 
 def cargar_y_mostrar_centros_listbox(ventana, listbox_centros):
+    """
+    Carga centros de acopio desde un archivo y los muestra en un Listbox.
+
+    Parámetros:
+    ventana (Tk): Ventana de la aplicación.
+    listbox_centros (Listbox): Listbox donde se mostrarán los centros.
+
+    Retorna:
+    Listbox: Listbox actualizado con los centros cargados.
+    """
     if listbox_centros is None:
         listbox_centros = tk.Listbox(ventana, height=12, width=70)
         listbox_centros.place(x=350, y=105)
@@ -53,11 +80,22 @@ def cargar_y_mostrar_centros_listbox(ventana, listbox_centros):
 
 
 def comprobaciones(entry_nombre, entry_ubicacion, entry_contacto, variable, entry_id):
+    """
+     Realiza comprobaciones de validación para los datos de entrada de un centro de acopio.
+
+     Parámetros:
+     entry_nombre, entry_ubicacion, entry_contacto (Entry): Entradas de texto con los datos del centro.
+     variable (Variable): Variable de Tkinter que contiene la sede seleccionada.
+     entry_id (Entry): Entrada de texto con el ID del centro.
+
+     Excepciones:
+     ValueError: Se lanza si alguna comprobación falla.
+     """
     if not (5 <= len(entry_nombre.get()) <= 30):
         raise ValueError("El nombre debe tener entre 5 y 30 caracteres.")
     if not (1 <= len(entry_ubicacion.get()) <= 100):
         raise ValueError("El nombre debe tener máximo 100 caracteres.")
-    if not (1 <= len(entry_contacto.get()) <= 8):
+    if not (1 <= len(entry_contacto.get()) == 8):
         raise ValueError("El numero debe tener máximo 8 caracteres.")
     if not (1 <= len(variable.get())):
         raise ValueError("Debe ingresar un valor para las sedes.")
@@ -67,6 +105,20 @@ def comprobaciones(entry_nombre, entry_ubicacion, entry_contacto, variable, entr
 
 
 def Modificar_centros(entry_nombre, entry_ubicacion, variable, entry_contacto, checkbox_var, ventana, listbox_centros, options, entry_id):
+    """
+    Modifica la lista de centros de acopio o agrega un nuevo centro si no existe en la lista.
+
+    Parámetros:
+    entry_nombre, entry_ubicacion, entry_contacto, entry_id (Entry): Entradas de texto con los datos del centro.
+    variable (Variable): Variable de Tkinter que contiene la sede seleccionada.
+    checkbox_var (BooleanVar): Variable de Tkinter que indica el estado del centro.
+    ventana (Tk): Ventana de la aplicación.
+    listbox_centros (Listbox): Listbox donde se mostrarán los centros.
+    options (list): Lista de opciones para el dropdown de sedes.
+
+    Excepciones:
+    ValueError, TypeError: Se lanza si las comprobaciones de datos o tipos fallan.
+    """
     try:
         comprobaciones(entry_nombre, entry_ubicacion, entry_contacto, variable, entry_id)
         nuevo_centro = centro_de_acopio(nombre=entry_nombre.get(),
@@ -100,6 +152,12 @@ def Modificar_centros(entry_nombre, entry_ubicacion, variable, entry_contacto, c
 
 
 def mostrar_datos_seleccionados(listbox_centros):
+    """
+    Muestra los detalles de un centro de acopio seleccionado de un Listbox en un mensaje de información.
+
+    Parámetros:
+    listbox_centros (Listbox): Listbox de donde se selecciona el centro.
+    """
     # Muestra los detalles del material seleccionado en la Listbox.
 
     seleccion = listbox_centros.curselection()
@@ -115,6 +173,13 @@ def mostrar_datos_seleccionados(listbox_centros):
 
 
 def cambiar_estdo_listbox(ventana, listbox_centros):
+    """
+    Cambia el estado de un centro de acopio seleccionado en el Listbox.
+
+    Parámetros:
+    ventana (Tk): Ventana de la aplicación.
+    listbox_centros (Listbox): Listbox donde se muestran los centros.
+    """
     # Cambia el estado del material seleccionado en la Listbox.
     seleccion = listbox_centros.curselection()
     if len(seleccion) == 0:
@@ -129,6 +194,12 @@ def cambiar_estdo_listbox(ventana, listbox_centros):
 
 
 def conseguir_sedes():
+    """
+    Carga las sedes desde un archivo JSON y las retorna como una lista de nombres de sedes.
+
+    Retorna:
+    list: Lista de nombres de las sedes disponibles.
+    """
     lista_sedes = cargar_sedes("sedes.json")
     options = []
     for sede in lista_sedes:
