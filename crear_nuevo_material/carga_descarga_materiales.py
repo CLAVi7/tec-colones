@@ -6,12 +6,28 @@ from tkinter import messagebox
 
 #Función que guarda una lista de objetos de material en un archivo JSON.
 def guardar_materiales(materiales, archivo):
+    """
+    Guarda una lista de objetos de material en un archivo JSON.
+
+    Parámetros:
+    materiales (list): Lista de objetos Material para ser guardados.
+    archivo (str): Ruta del archivo donde se guardarán los datos.
+    """
     with open(archivo, 'w') as f:
         json.dump([material.to_dict() for material in materiales], f, ensure_ascii=False, indent=4)
 
 
 #Carga la mediante una lista los materiales guardados desde el archivo JSON.
 def cargar_materiales(archivo):
+    """
+    Carga materiales desde un archivo JSON y los retorna en una lista.
+
+    Parámetros:
+    archivo (str): Ruta del archivo JSON de donde se cargarán los materiales.
+
+    Retorna:
+    list: Lista de objetos Material cargados desde el archivo.
+    """
     lista_materiales = []
     try:
         with open(archivo, 'r') as f:
@@ -36,6 +52,16 @@ def cargar_materiales(archivo):
 
 # Mostrar materiales en un Listbox
 def cargar_y_mostrar_materiales_listbox(ventana, listbox_materiales):
+    """
+    Carga materiales desde un archivo y los muestra en un Listbox.
+
+    Parámetros:
+    ventana (Tk): Ventana de la aplicación.
+    listbox_materiales (Listbox): Listbox donde se mostrarán los materiales.
+
+    Retorna:
+    Listbox: Listbox actualizado con los materiales cargados.
+    """
     if listbox_materiales is None:
         listbox_materiales = tk.Listbox(ventana, height=12, width=70)
         listbox_materiales.place(x=400, y=115)
@@ -51,6 +77,17 @@ def cargar_y_mostrar_materiales_listbox(ventana, listbox_materiales):
 
 # Validación de entradas
 def comprobaciones(entry_nombre, variable, entry_valor):
+    """
+    Realiza comprobaciones de validación para los datos de entrada de un material.
+
+    Parámetros:
+    entry_nombre (Entry): Entrada de texto con el nombre del material.
+    variable (Variable): Variable de Tkinter que contiene la unidad seleccionada.
+    entry_valor (Entry): Entrada de texto con el valor unitario del material.
+
+    Excepciones:
+    ValueError: Se lanza si alguna comprobación falla.
+    """
     if not (5 <= len(entry_nombre.get()) <= 30):
         raise ValueError("El nombre debe tener entre 5 y 30 caracteres.")
     if not variable.get():
@@ -65,6 +102,21 @@ def comprobaciones(entry_nombre, variable, entry_valor):
 
 # Función para modificar materiales
 def modificar_materiales(entry_nombre, variable, entry_valor, checkbox_var, text_descripcion, ventana, options, listbox_materiales):
+    """
+    Modifica la lista de materiales o agrega un nuevo material si no existe en la lista.
+
+    Parámetros:
+    entry_nombre, entry_valor (Entry): Entradas de texto con los datos del material.
+    variable (Variable): Variable de Tkinter que contiene la unidad seleccionada.
+    checkbox_var (BooleanVar): Variable de Tkinter que indica el estado del material.
+    text_descripcion (Text): Campo de texto con la descripción del material.
+    ventana (Tk): Ventana de la aplicación.
+    options (list): Lista de opciones para el dropdown de unidades.
+    listbox_materiales (Listbox): Listbox donde se mostrarán los materiales.
+
+    Excepciones:
+    ValueError: Se lanza si las comprobaciones de datos fallan.
+    """
     try:
         comprobaciones(entry_nombre, variable, entry_valor)
         nuevo_material = Material(
@@ -98,7 +150,12 @@ def modificar_materiales(entry_nombre, variable, entry_valor, checkbox_var, text
 
 # Función para mostrar detalles del material seleccionado
 def mostrar_datos_seleccionados(listbox_materiales):
-    # Muestra los detalles del material seleccionado en la Listbox.
+    """
+    Muestra los detalles de un material seleccionado de un Listbox en un mensaje de información.
+
+    Parámetros:
+    listbox_materiales (Listbox): Listbox de donde se selecciona el material.
+    """
 
     seleccion = listbox_materiales.curselection()
     if len(seleccion) == 0:
@@ -113,6 +170,13 @@ def mostrar_datos_seleccionados(listbox_materiales):
 
 
 def cambiar_estado_listbox(ventana, listbox_materiales):
+    """
+    Cambia el estado de un material seleccionado en el Listbox.
+
+    Parámetros:
+    ventana (Tk): Ventana de la aplicación.
+    listbox_materiales (Listbox): Listbox donde se muestran los materiales.
+    """
     seleccion = listbox_materiales.curselection()
     if len(seleccion) == 0:
         messagebox.showinfo("Error", "Por favor, seleccione un elemento de la lista.")

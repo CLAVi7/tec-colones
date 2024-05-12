@@ -4,11 +4,27 @@ import tkinter as tk
 from tkinter import messagebox
 
 def guardar_sedes(sedes, archivo):
+    """
+    Guarda una lista de sedes en un archivo JSON.
+
+    Parámetros:
+    sedes (list): Lista de objetos sedes para ser guardados.
+    archivo (str): Ruta del archivo donde se guardarán los datos.
+    """
     with open(archivo, 'w') as f:
         json.dump([sedes.to_dict() for sedes in sedes], f, ensure_ascii=False, indent=4)
 
 
 def cargar_sedes(archivo):
+    """
+    Carga sedes desde un archivo JSON y las retorna en una lista.
+
+    Parámetros:
+    archivo (str): Ruta del archivo JSON de donde se cargarán las sedes.
+
+    Retorna:
+    list: Lista de objetos sedes cargados desde el archivo.
+    """
     lista_sedes = []
     try:
         with open(archivo, 'r') as f:
@@ -35,7 +51,16 @@ def cargar_sedes(archivo):
 
 
 def cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes):
+    """
+    Carga sedes desde un archivo y las muestra en un Listbox.
 
+    Parámetros:
+    ventana (Tk): Ventana de la aplicación.
+    listbox_sedes (Listbox): Listbox donde se mostrarán las sedes.
+
+    Retorna:
+    Listbox: Listbox actualizado con las sedes cargadas.
+    """
     if listbox_sedes is None:
         listbox_sedes = tk.Listbox(ventana, height=12, width=70)
         listbox_sedes.place(x=350, y=105)
@@ -55,6 +80,17 @@ def cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes):
 
 
 def comprobaciones(entry_nombre, variable, entry_contacto):
+    """
+    Realiza comprobaciones de validación para los datos de entrada de una sede.
+
+    Parámetros:
+    entry_nombre (Entry): Entrada de texto con el nombre de la sede.
+    variable (Variable): Variable de Tkinter que contiene la provincia seleccionada.
+    entry_contacto (Entry): Entrada de texto con el número de contacto.
+
+    Excepciones:
+    ValueError: Se lanza si alguna comprobación falla.
+    """
     if not (5 <= len(entry_nombre.get()) <= 30):
         raise ValueError("El nombre debe tener entre 5 y 30 caracteres.")
     if not (1 <= len(variable.get())):
@@ -70,6 +106,20 @@ def comprobaciones(entry_nombre, variable, entry_contacto):
 
 
 def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, options, ventana, listbox_sedes):
+    """
+    Modifica la lista de sedes o agrega una nueva sede si no existe en la lista.
+
+    Parámetros:
+    entry_nombre, entry_contacto (Entry): Entradas de texto con los datos de la sede.
+    variable (Variable): Variable de Tkinter que contiene la provincia seleccionada.
+    checkbox_var (BooleanVar): Variable de Tkinter que indica el estado de la sede.
+    options (list): Lista de opciones para el dropdown de provincias.
+    ventana (Tk): Ventana de la aplicación.
+    listbox_sedes (Listbox): Listbox donde se mostrarán las sedes.
+
+    Excepciones:
+    ValueError, TypeError: Se lanzan si las comprobaciones de datos o tipos fallan.
+    """
     try:
         comprobaciones(entry_nombre, variable, entry_contacto)
         #print("Pasa por aqui")
@@ -103,9 +153,12 @@ def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, option
 
 # Función para mostrar detalles del material seleccionado
 def mostrar_datos_seleccionados(listbox_sedes):
-    
-    # Muestra los detalles del material seleccionado en la Listbox.
-    
+    """
+    Muestra los detalles de una sede seleccionada de un Listbox en un mensaje de información.
+
+    Parámetros:
+    listbox_sedes (Listbox): Listbox de donde se selecciona la sede.
+    """
     seleccion = listbox_sedes.curselection()
     if len(seleccion) == 0:
         messagebox.showinfo("Error", "Por favor, seleccione un elemento de la lista.")
@@ -121,7 +174,13 @@ def mostrar_datos_seleccionados(listbox_sedes):
 
 
 def cambiar_estdo_listbox(ventana, listbox_sedes):
-    # Cambia el estado del material seleccionado en la Listbox.
+    """
+    Cambia el estado de una sede seleccionada en el Listbox.
+
+    Parámetros:
+    ventana (Tk): Ventana de la aplicación.
+    listbox_sedes (Listbox): Listbox donde se muestran las sedes.
+    """
     seleccion = listbox_sedes.curselection()
     if len(seleccion) == 0:
         messagebox.showinfo("Error", "Por favor, seleccione un elemento de la lista.")

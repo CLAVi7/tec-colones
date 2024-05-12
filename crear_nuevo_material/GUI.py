@@ -52,6 +52,9 @@ listbox_materiales = None
 
 
 def llamar_cargar_listbox():
+    """
+    Carga y muestra los materiales en un Listbox. Utiliza la variable global 'listbox_materiales' para mantener y actualizar el Listbox.
+    """
     global listbox_materiales
     listbox_materiales = cargar_y_mostrar_materiales_listbox(ventana, listbox_materiales)
 
@@ -62,16 +65,25 @@ llamar_cargar_listbox()
 
 
 def llamar_modificar_materiales():
+    """
+    Llama a la función 'modificar_materiales' para actualizar o añadir materiales en la lista, utilizando variables globales y actualizando el 'listbox_materiales'.
+    """
     global listbox_materiales
     listbox_materiales = modificar_materiales(entry_nombre, variable, entry_valor, checkbox_var, text_descripcion, ventana, options,
                          listbox_materiales)
 
 
 def llamar_detalles():
+    """
+    Muestra los detalles del material seleccionado desde 'listbox_materiales'.
+    """
     mostrar_datos_seleccionados(listbox_materiales)
 
 
 def llamar_cambiar_estado():
+    """
+    Cambia el estado del material seleccionado en el Listbox 'listbox_materiales', y actualiza el Listbox para reflejar los cambios.
+    """
     cambiar_estado_listbox(ventana, listbox_materiales)
 
 

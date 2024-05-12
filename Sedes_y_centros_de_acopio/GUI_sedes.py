@@ -43,6 +43,9 @@ listbox_sedes = None
 
 
 def llamar_cargar_listbox():
+    """
+    Carga y muestra las sedes en un Listbox. Utiliza la variable global 'listbox_sedes' para mantener y actualizar el Listbox.
+    """
     global listbox_sedes
     listbox_sedes = cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes)
 
@@ -51,15 +54,24 @@ llamar_cargar_listbox()
 
 
 def llamar_modificar_sedes():
+    """
+    Llama a la función 'Modificar_sedes' para actualizar o añadir sedes en la lista, utilizando variables globales y actualizando el 'listbox_sedes'.
+    """
     global listbox_sedes
     listbox_sedes = Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, options, ventana, listbox_sedes)
 
 
 def llamar_detalles():
+    """
+    Muestra los detalles de la sede seleccionada desde 'listbox_sedes'.
+    """
     mostrar_datos_seleccionados(listbox_sedes)
 
 
 def llamar_cambiar_estado():
+    """
+    Cambia el estado de la sede seleccionada en el Listbox 'listbox_sedes', y actualiza el Listbox para reflejar los cambios.
+    """
     cambiar_estdo_listbox(ventana, listbox_sedes)
 
 

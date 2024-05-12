@@ -55,6 +55,9 @@ listbox_centros = None
 
 
 def llamar_cargar_listbox():
+    """
+    Carga y muestra los centros de acopio en un Listbox. Utiliza la variable global 'listbox_centros' para mantener y actualizar el Listbox.
+    """
     global listbox_centros
     listbox_centros = cargar_y_mostrar_centros_listbox(ventana, listbox_centros)
 
@@ -63,15 +66,24 @@ llamar_cargar_listbox()
 
 
 def llamar_modificar_centros():
+    """
+    Llama a la función 'Modificar_centros' para actualizar o añadir centros de acopio en la lista, utilizando variables globales y actualizando el 'listbox_centros'.
+    """
     global listbox_centros
     listbox_centros = Modificar_centros(entry_nombre, entry_ubicacion, variable, entry_contacto, checkbox_var, ventana, listbox_centros, options, entry_id)
 
 
 def llamar_detalles():
+    """
+    Muestra los detalles del centro de acopio seleccionado desde 'listbox_centros'.
+    """
     mostrar_datos_seleccionados(listbox_centros)
 
 
 def llamar_cambiar_estado():
+    """
+    Cambia el estado del centro de acopio seleccionado en el Listbox 'listbox_centros', y actualiza el Listbox para reflejar los cambios.
+    """
     cambiar_estdo_listbox(ventana, listbox_centros)
 
 
