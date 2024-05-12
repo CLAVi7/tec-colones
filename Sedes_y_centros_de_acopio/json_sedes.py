@@ -43,7 +43,7 @@ def cargar_y_mostrar_sedes_listbox(ventana):
     else:
         listbox_sedes.delete(0, tk.END)
 
-    lista_sede = cargar_sedes("Sedes_y_centros_de_acopio/sedes.json")
+    lista_sede = cargar_sedes("sedes.json")#Sedes_y_centros_de_acopio/sedes.json")
     #print("La lista es: ", lista_sede[0])
 
     for sede in lista_sede:
@@ -78,10 +78,10 @@ def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, option
                                   numero_contacto=entry_contacto.get(),
                                   estado=checkbox_var.get())
 
-        lista_sedes = cargar_sedes("Sedes_y_centros_de_acopio/sedes.json")
+        lista_sedes = cargar_sedes("sedes.json")#Sedes_y_centros_de_acopio/sedes.json")
         if nuevo_sede not in lista_sedes:
             lista_sedes.append(nuevo_sede)
-            guardar_sedes(lista_sedes, "Sedes_y_centros_de_acopio/sedes.json")
+            guardar_sedes(lista_sedes, "sedes.json")#Sedes_y_centros_de_acopio/sedes.json")
             cargar_y_mostrar_sedes_listbox(ventana)
 
             entry_nombre.delete(0, tk.END)
@@ -110,7 +110,7 @@ def mostrar_datos_seleccionados():
         return
 
     indice = seleccion[0]
-    lista_sedes = cargar_sedes("Sedes_y_centros_de_acopio/sedes.json")
+    lista_sedes = cargar_sedes("sedes.json")#Sedes_y_centros_de_acopio/sedes.json")
     #print("lista_sedes:", lista_sedes[indice])
     sedes = lista_sedes[indice]
     #print("sedes: ", sedes)
@@ -126,10 +126,10 @@ def cambiar_estdo_listbox(ventana):
         return
 
     indice = seleccion[0]
-    lista_sedes = cargar_sedes("Sedes_y_centros_de_acopio/sedes.json")
+    lista_sedes = cargar_sedes("sedes.json")#Sedes_y_centros_de_acopio/sedes.json")
     #print("lista_sedes:", lista_sedes[indice])
     lista_sedes[indice].estado = not lista_sedes[indice].estado
     #lista_sedes[indice].estado = sedes.cambioEstado(lista_sedes)
     #print("estado cambiado: ", lista_sedes[indice].estado)
-    guardar_sedes(lista_sedes, "Sedes_y_centros_de_acopio/sedes.json")
+    guardar_sedes(lista_sedes, "sedes.json")#Sedes_y_centros_de_acopio/sedes.json")
     cargar_y_mostrar_sedes_listbox(ventana)

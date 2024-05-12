@@ -54,7 +54,7 @@ def cargar_y_mostrar_centros_listbox():
     else:
         listbox_centros.delete(0, tk.END)
 
-    lista_centros = cargar_centros("Sedes_y_centros_de_acopio/centros.json")
+    lista_centros = cargar_centros("Sedes_y_centros_de_acopio/centros.json")#centros.json
 
     for centro in lista_centros:
         texto = (f"Nombre: {centro.nombre}"
@@ -91,10 +91,10 @@ def Modificar_centros():
                                   numero_de_contacto=entry_contacto.get(),
                                   estado=checkbox_var.get(),)
 
-        lista_centros = cargar_centros("Sedes_y_centros_de_acopio/centros.json")
+        lista_centros = cargar_centros("Sedes_y_centros_de_acopio/centros.json")#centros.json
         if nuevo_centro not in lista_centros:
             lista_centros.append(nuevo_centro)
-            guardar_centros(lista_centros, "Sedes_y_centros_de_acopio/centros.json")
+            guardar_centros(lista_centros, "Sedes_y_centros_de_acopio/centros.json")#centros.json
             cargar_y_mostrar_centros_listbox()
 
             entry_nombre.delete(0, tk.END)
@@ -122,7 +122,7 @@ def mostrar_datos_seleccionados():
         return
 
     indice = seleccion[0]
-    lista_centros = cargar_centros("Sedes_y_centros_de_acopio/centros.json")
+    lista_centros = cargar_centros("Sedes_y_centros_de_acopio/centros.json")#centros.json
     centro = lista_centros[indice]
     mensaje = f"{centro.__str__()}"
     messagebox.showinfo("Centro", mensaje)
