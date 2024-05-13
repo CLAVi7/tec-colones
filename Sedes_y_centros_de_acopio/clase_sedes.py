@@ -30,11 +30,6 @@ class sedes:
         self.numero_contacto = numero_contacto
         self.estado = estado
 
-    # Función que cambia el estado de la sede
-    # def cambioEstado(self):
-    #     self.estado = not self.estado
-
-    # Retorna una representación en forma de cadena de la sede
     def __str__(self):
         """
         Devuelve una representación en forma de cadena de la información de la sede.
@@ -92,18 +87,3 @@ class sedes:
         for sede in sedes:
             option_menu['menu'].add_command(label=sede["nombre"], 
                                              command=lambda value=sede["nombre"]: option_menu.config(text=value))
-
-# # Ejemplo de uso
-# import tkinter as tk
-
-# ruta_json = "Sedes_y_centros_de_acopio/sedes.json"  # Ruta al archivo JSON
-# root = tk.Tk()
-# opcion_variable = tk.StringVar(root)
-# opcion_variable.set("Seleccione una sede")
-
-# option_menu = tk.OptionMenu(root, opcion_variable, "Seleccione una sede")
-# option_menu.pack()
-
-# sedes.cargar_sedes_en_optionmenu(option_menu, ruta_json)
-
-# root.mainloop()
