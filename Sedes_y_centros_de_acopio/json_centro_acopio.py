@@ -64,7 +64,7 @@ def cargar_y_mostrar_centros_listbox(ventana, listbox_centros):
     else:
         listbox_centros.delete(0, tk.END)
 
-    lista_centros = cargar_centros("Sedes_y_centros_de_acopio/centros.json")
+    lista_centros = cargar_centros("centros.json")
     if not lista_centros:
         print("No se cargaron centros. Verifique el archivo JSON.")
 
@@ -93,9 +93,9 @@ def comprobaciones(entry_nombre, entry_ubicacion, entry_contacto, variable, entr
     if not (5 <= len(entry_nombre.get()) <= 30):
         raise ValueError("El nombre debe tener entre 5 y 30 caracteres.")
     if not (1 <= len(entry_ubicacion.get()) <= 100):
-        raise ValueError("El nombre debe tener máximo 100 caracteres.")
-    if not (1 <= len(entry_contacto.get()) == 8):
-        raise ValueError("El numero debe tener máximo 8 caracteres.")
+        raise ValueError("El ubicacion debe tener máximo 100 caracteres.")
+    if not (len(entry_contacto.get()) == 8):
+        raise ValueError("El numero debe ser de 8 caracteres.")
     if not (1 <= len(variable.get())):
         raise ValueError("Debe ingresar un valor para las sedes.")
     if not (len(entry_id.get()) == 12):
@@ -127,10 +127,10 @@ def Modificar_centros(entry_nombre, entry_ubicacion, variable, entry_contacto, c
                                   estado=checkbox_var.get(),
                                   id=entry_id.get())
 
-        lista_centros = cargar_centros("Sedes_y_centros_de_acopio/centros.json")
+        lista_centros = cargar_centros("centros.json")
         if nuevo_centro not in lista_centros:
             lista_centros.append(nuevo_centro)
-            guardar_centros(lista_centros, "Sedes_y_centros_de_acopio/centros.json")
+            guardar_centros(lista_centros, "centros.json")
             cargar_y_mostrar_centros_listbox(ventana, listbox_centros)
 
             entry_nombre.delete(0, tk.END)
@@ -164,7 +164,7 @@ def mostrar_datos_seleccionados(listbox_centros):
         return
 
     indice = seleccion[0]
-    lista_centros = cargar_centros("Sedes_y_centros_de_acopio/centros.json")
+    lista_centros = cargar_centros("centros.json")
     centro = lista_centros[indice]
     mensaje = f"{centro.__str__()}"
     messagebox.showinfo("Centro", mensaje)
@@ -185,9 +185,9 @@ def cambiar_estdo_listbox(ventana, listbox_centros):
         return
 
     indice = seleccion[0]
-    lista_centros = cargar_centros("Sedes_y_centros_de_acopio/centros.json")
+    lista_centros = cargar_centros("centros.json")
     lista_centros[indice].estado = not lista_centros[indice].estado
-    guardar_centros(lista_centros, "Sedes_y_centros_de_acopio/centros.json")
+    guardar_centros(lista_centros, "centros.json")
     cargar_y_mostrar_centros_listbox(ventana, listbox_centros)
 
 
@@ -198,7 +198,7 @@ def conseguir_sedes():
     Retorna:
     list: Lista de nombres de las sedes disponibles.
     """
-    lista_sedes = cargar_sedes("Sedes_y_centros_de_acopio/sedes.json")
+    lista_sedes = cargar_sedes("sedes.json")
     options = []
     for sede in lista_sedes:
         options.append(sede.nombre)
