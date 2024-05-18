@@ -68,5 +68,19 @@
         "provincia": "Alajuela",
         "numero_contacto": "12589648",
         "estado": "Inactivo"
+    },
+    {
+        "id": "S-4ox4Z98gRugu",
+        "nombre": "sdjhasjfhasj",
+        "provincia": "Guanacaste",
+        "numero_contacto": "12345678",
+        "estado": "Activo"
+    },
+    {
+        "id": "S-6MdkSu8eBw23",
+        "nombre": "afasfjaskf",
+        "provincia": "Guanacaste",
+        "numero_contacto": "12345678",
+        "estado": "Activo"
     }
 ]

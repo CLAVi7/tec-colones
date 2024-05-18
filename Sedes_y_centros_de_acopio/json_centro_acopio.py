@@ -3,6 +3,8 @@ import json
 import tkinter as tk
 from tkinter import messagebox
 from json_sedes import cargar_sedes
+from cargar import cargar_json
+
 
 def guardar_centros(centros, archivo):
     """
@@ -26,24 +28,18 @@ def cargar_centros(archivo):
     Retorna:
     list: Lista de objetos CentroDeAcopio cargados.
     """
+    data = cargar_json(archivo)
     lista_centros = []
-    try:
-        with open(archivo, 'r') as f:
-            data = json.load(f)
-            for item in data:
-                centro = centro_de_acopio(
-                    nombre=item['nombre'],
-                    ubicacion=item['ubicacion'],
-                    sede=item['sede'],
-                    numero_de_contacto=item['numero_de_contacto'],
-                    estado=item['estado'] == 'Activo',
-                    id=item["id"]
-                )
-                lista_centros.append(centro)
-    except FileNotFoundError:
-        return lista_centros
-    except json.JSONDecodeError:
-        return lista_centros
+    for item in data:
+        centro = centro_de_acopio(
+            nombre=item['nombre'],
+            ubicacion=item['ubicacion'],
+            sede=item['sede'],
+            numero_de_contacto=item['numero_de_contacto'],
+            estado=item['estado'] == 'Activo',
+            id=item['id']
+        )
+        lista_centros.append(centro)
     return lista_centros
 
 

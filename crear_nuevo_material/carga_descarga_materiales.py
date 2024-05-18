@@ -2,6 +2,7 @@ from Materiales import *
 import json
 import tkinter as tk
 from tkinter import messagebox
+from cargar import cargar_json
 
 
 #Función que guarda una lista de objetos de material en un archivo JSON.
@@ -28,27 +29,20 @@ def cargar_materiales(archivo):
     Retorna:
     list: Lista de objetos Material cargados desde el archivo.
     """
+    data = cargar_json(archivo)
     lista_materiales = []
-    try:
-        with open(archivo, 'r') as f:
-            data = json.load(f)
-            for item in data:
-                material = Material(
-                    nombre=item['nombre'],
-                    unidad=item['unidad'],
-                    valor_unitario=item['valor_unitario'],
-                    estado=item['estado'] == 'Activo',  # Convertir 'Activo'/'Inactivo' a booleano
-                    descripcion=item['descripcion'] if 'descripcion' in item else None
-                )
-                material.fecha_creacion = datetime.strptime(item['fecha_creacion'], '%Y-%m-%d %H:%M:%S')
-                material.id = item['id']
-                lista_materiales.append(material)
-    except FileNotFoundError:
-        return
-    except json.JSONDecodeError:
-        print()
+    for item in data:
+        material = Material(
+            nombre=item['nombre'],
+            unidad=item['unidad'],
+            valor_unitario=item['valor_unitario'],
+            estado=item['estado'] == 'Activo',  # Convertir 'Activo'/'Inactivo' a booleano
+            descripcion=item.get('descripcion', None)  # Usar get para manejar claves opcionales
+        )
+        material.fecha_creacion = datetime.strptime(item['fecha_creacion'], '%Y-%m-%d %H:%M:%S')
+        material.id = item['id']
+        lista_materiales.append(material)
     return lista_materiales
-
 
 # Mostrar materiales en un Listbox
 def cargar_y_mostrar_materiales_listbox(ventana, listbox_materiales):

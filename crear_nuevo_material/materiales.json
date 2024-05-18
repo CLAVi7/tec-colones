@@ -70,5 +70,14 @@
         "estado": "Activo",
         "fecha_creacion": "2024-05-12 08:57:03",
         "descripcion": "\n"
+    },
+    {
+        "id": "M-9hxkHJ7PEbzP",
+        "nombre": "fsdfhajskdf",
+        "unidad": "Unidad",
+        "valor_unitario": "1264",
+        "estado": "Activo",
+        "fecha_creacion": "2024-05-17 18:04:45",
+        "descripcion": "\n"
     }
 ]

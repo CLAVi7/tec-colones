@@ -2,6 +2,7 @@ from clase_sedes import *
 import json
 import tkinter as tk
 from tkinter import messagebox
+from cargar import cargar_json
 
 def guardar_sedes(sedes, archivo):
     """
@@ -25,28 +26,19 @@ def cargar_sedes(archivo):
     Retorna:
     list: Lista de objetos sedes cargados desde el archivo.
     """
+    data = cargar_json(archivo)
     lista_sedes = []
-    try:
-        with open(archivo, 'r') as f:
-            data = json.load(f)
-            for item in data:
-                estado = item['estado']  # Guardar el estado leído del JSON
-                if estado == 'Activo':
-                    estado = True
-                else:
-                    estado = False
-                sede = sedes(
-                    nombre=item['nombre'],
-                    provincia=item['provincia'],
-                    numero_contacto=item['numero_contacto'],
-                    estado=estado
-                )
-                sede.id = item['id']
-                lista_sedes.append(sede)
-    except FileNotFoundError:
-        print("El archivo no fue encontrado.")
-    except json.JSONDecodeError:
-        print("Error al decodificar el archivo JSON.")
+    for item in data:
+        estado = item['estado']  # Guardar el estado leído del JSON
+        estado = estado == 'Activo'  # Simplificado
+        sede = sedes(
+            nombre=item['nombre'],
+            provincia=item['provincia'],
+            numero_contacto=item['numero_contacto'],
+            estado=estado
+        )
+        sede.id = item['id']
+        lista_sedes.append(sede)
     return lista_sedes
 
 

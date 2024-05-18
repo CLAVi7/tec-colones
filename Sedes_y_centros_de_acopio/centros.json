@@ -22,5 +22,13 @@
         "sede": "Alajuela",
         "estado": "Activo",
         "numero_de_contacto": "12345678"
+    },
+    {
+        "id": "123456123456",
+        "nombre": "adsfsdfdfsd",
+        "ubicacion": "fdsfsfds",
+        "sede": "defsdfsdfsdf",
+        "estado": "Activo",
+        "numero_de_contacto": "12345678"
     }
 ]
