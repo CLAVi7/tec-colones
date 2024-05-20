@@ -72,28 +72,32 @@ def cargar_y_mostrar_materiales_listbox(ventana, listbox_materiales):
 # Validación de entradas
 def comprobaciones(entry_nombre, variable, entry_valor):
     """
-    Realiza comprobaciones de validación para los datos de entrada de un material.
+    Realiza comprobaciones de validación para los datos de entrada de una sede.
 
     Parámetros:
-    entry_nombre (Entry): Entrada de texto con el nombre del material.
+    entry_nombre (Entry): Entrada de texto con el nombre de la sede.
     variable (Variable): Variable de Tkinter que contiene la unidad seleccionada.
-    entry_valor (Entry): Entrada de texto con el valor unitario del material.
+    entry_valor (Entry): Entrada de texto con el valor unitario.
 
-    Excepciones:
-    ValueError: Se lanza si alguna comprobación falla.
+    Retorna:
+    str: Mensaje de error si alguna comprobación falla, o None si todas las comprobaciones son exitosas.
     """
     nombre = entry_nombre.get()
-    valor_unitario = entry_valor.get()
+    valor_unitario_str = entry_valor.get()
 
     if not (5 <= len(nombre) <= 30):
-        raise ValueError("El nombre debe tener entre 5 y 30 caracteres.")
+        return "El nombre debe tener entre 5 y 30 caracteres."
     if not variable.get():
-        raise ValueError("Debe seleccionar una unidad.")
-    if not valor_unitario.replace('.', '', 1).isdigit():
-        raise ValueError("El valor debe ser un número válido.")
-    valor = float(valor_unitario)
-    if not (0 <= valor <= 100000):
-        raise ValueError("El valor debe estar entre 0 y 100,000.")
+        return "Debe seleccionar una unidad."
+    if not valor_unitario_str.isdigit():
+        return "El valor debe ser un número entero válido."
+
+    # Convertir a entero después de verificar que es un dígito
+    valor_unitario = int(valor_unitario_str)
+    if not (0 <= valor_unitario <= 100000):
+        return "El valor debe estar entre 0 y 100,000."
+
+    return None
 
 
 
@@ -114,34 +118,35 @@ def modificar_materiales(entry_nombre, variable, entry_valor, checkbox_var, text
     Excepciones:
     ValueError: Se lanza si las comprobaciones de datos fallan.
     """
-    try:
-        comprobaciones(entry_nombre, variable, entry_valor)
-        nuevo_material = Material(
-            nombre=entry_nombre.get(),
-            unidad=variable.get(),
-            valor_unitario=entry_valor.get(),
-            estado=checkbox_var.get(),
-            descripcion=text_descripcion.get("1.0", tk.END)
-        )
+    Comprobaciones_resultado = comprobaciones(entry_nombre, variable, entry_valor)
+    if Comprobaciones_resultado:
+        messagebox.showerror("Error de validación", Comprobaciones_resultado)
+        return
 
-        lista_materiales = cargar_materiales("materiales.json")
-        if nuevo_material not in lista_materiales:
-            lista_materiales.append(nuevo_material)
-            guardar_materiales(lista_materiales, "materiales.json")
-            cargar_y_mostrar_materiales_listbox(ventana, listbox_materiales)
+    nuevo_material = Material(
+        nombre=entry_nombre.get(),
+        unidad=variable.get(),
+        valor_unitario=entry_valor.get(),
+        estado=checkbox_var.get(),
+        descripcion=text_descripcion.get("1.0", tk.END)
+    )
 
-            entry_nombre.delete(0, tk.END)
-            variable.set(options[0])
-            entry_valor.delete(0, tk.END)
-            text_descripcion.delete("1.0", tk.END)
-            if not checkbox_var.get():
-                checkbox_var.set(True)
+    lista_materiales = cargar_materiales("materiales.json")
 
-        else:
-            messagebox.showwarning("Duplicado", "El material ya existe en la lista.")
-    except ValueError as e:
-        messagebox.showerror("Error de validación", str(e))
+    if nuevo_material not in lista_materiales:
+        lista_materiales.append(nuevo_material)
+        guardar_materiales(lista_materiales, "materiales.json")
+        cargar_y_mostrar_materiales_listbox(ventana, listbox_materiales)
 
+        entry_nombre.delete(0, tk.END)
+        variable.set(options[0])
+        entry_valor.delete(0, tk.END)
+        text_descripcion.delete("1.0", tk.END)
+        if not checkbox_var.get():
+            checkbox_var.set(True)
+
+    else:
+        messagebox.showwarning("Duplicado", "El material ya existe en la lista.")
     return listbox_materiales
 
 
