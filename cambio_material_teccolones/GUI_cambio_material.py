@@ -12,16 +12,16 @@ etiqueta.pack()
 
 label = tk.Label(ventana, text="seleccione el centro al que pertenece")
 label.place(x=40, y=80)
-options = conseguir_centro()
-variable = tk.StringVar(ventana)
-# Verifica que options no esté vacío
-if options:
-    variable.set(options[0])
+options_centros = conseguir_centro()
+variable_centros = tk.StringVar(ventana)
+if options_centros:
+    variable_centros.set(options_centros[0])
 else:
-    options = ["No hay centros disponibles"]
-    variable.set(options[0])
-dropdown_menu = tk.OptionMenu(ventana, variable, *options)
-dropdown_menu.place(x=40, y=105)
+    options_centros = ["No hay centros disponibles"]
+    variable_centros.set(options_centros[0])
+
+dropdown_menu_centros = tk.OptionMenu(ventana, variable_centros, *options_centros)
+dropdown_menu_centros.place(x=40, y=105)
 
 label1 = tk.Label(ventana, text="ingrese el caarnet del estudiante")
 label1.place(x=40, y=140)
@@ -31,11 +31,21 @@ entry_carnet.place(x=40, y=160)
 
 label2 = tk.Label(ventana, text="seleccione el material traido")
 label2.place(x=40, y=185)
-options = ["Cartago","San Jose", "Puntarenas", "Guanacaste", "Limón","Heredia", "Alajuela"]
-variable = tk.StringVar(ventana)
-variable.set(options[0])
-dropdown_menu = tk.OptionMenu(ventana, variable, *options)
-dropdown_menu.place(x=40, y=210)
+options_materiales = conseguir_materiales()
+print("Los materiales son:")
+print(options_materiales)
+
+variable_materiales = tk.StringVar(ventana)
+
+formatted_options = [f"{nombre} - {unidad} - {valor}" for nombre, unidad, valor in options_materiales]
+if formatted_options:
+    variable_materiales.set(formatted_options[0])
+else:
+    formatted_options = ["No hay materiales disponibles"]
+    variable_materiales.set(formatted_options[0])
+
+dropdown_menu_materiales = tk.OptionMenu(ventana, variable_materiales, *formatted_options)
+dropdown_menu_materiales.place(x=40, y=210)
 
 label3 = tk.Label(ventana, text="ingrese la cantidad traida")
 label3.place(x=40, y=245)
