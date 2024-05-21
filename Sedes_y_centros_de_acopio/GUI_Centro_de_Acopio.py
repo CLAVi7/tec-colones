@@ -1,7 +1,5 @@
-import tkinter as tk
 from tkinter import *
-from tkinter import messagebox
-from json_centro_acopio import *
+from Sedes_y_centros_de_acopio.json_centro_acopio import *
 
 
 ventana = Tk()
