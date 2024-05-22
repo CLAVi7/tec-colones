@@ -75,7 +75,6 @@ def llamar_cambiar_estado():
     cambiar_estdo_listbox(ventana, listbox_sedes)
 
 
-
 boton_anadir = tk.Button(ventana, text="Añadir sede", command=llamar_modificar_sedes)
 boton_anadir.place(x=213, y=280)
 
