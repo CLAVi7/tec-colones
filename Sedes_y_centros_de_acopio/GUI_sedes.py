@@ -2,6 +2,7 @@ import tkinter as tk
 from json_sedes import *
 from clase_sedes import *
 
+
 ventana = tk.Tk()
 ventana.title("sedes")
 ventana.geometry("800x400")
