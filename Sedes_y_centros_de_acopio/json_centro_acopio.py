@@ -141,8 +141,11 @@ def Modificar_centros(entry_nombre, entry_ubicacion, variable, entry_contacto, c
             if not checkbox_var.get():
                 checkbox_var.set(True)
 
+<<<<<<< Updated upstream
         else:
             messagebox.showwarning("Duplicado", "El centro ya existe en la lista.")
+=======
+>>>>>>> Stashed changes
 
     except ValueError as error:
         messagebox.showerror("Error de Comprobación", str(error))
