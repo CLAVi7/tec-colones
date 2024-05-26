@@ -140,18 +140,8 @@ def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, option
             if not checkbox_var.get():
                 checkbox_var.set(True)
 
-<<<<<<< Updated upstream
         else:
             messagebox.showwarning("Duplicado", "la sede ya existe en la lista.")
-=======
-    if nuevo_sede not in lista_sedes:
-        lista_sedes.append(nuevo_sede)
-        guardar_sedes(lista_sedes, "sedes.json")
-        listbox_sedes = cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes)
-
-    else:
-        messagebox.showwarning("Duplicado", "la sede ya existe en la lista.")
->>>>>>> Stashed changes
 
     except ValueError as error:
         messagebox.showerror("Error de Comprobación", str(error))
