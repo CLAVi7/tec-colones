@@ -89,15 +89,3 @@ boton_detalles.place(x=350, y=320)
 boton_detalles = tk.Button(ventana, text="cambiar estado", command=llamar_cambiar_estado)
 boton_detalles.place(x=420, y=320)
 ventana.mainloop()
-ckbox_var.get():
-        checkbox_var.set(True)
-
-boton_anadir = tk.Button(ventana, text="Añadir sede", command=llamar_modificar_sedes)
-boton_anadir.place(x=213, y=280)
-
-boton_detalles = tk.Button(ventana, text="detalles", command=llamar_detalles)
-boton_detalles.place(x=350, y=320)
-
-boton_detalles = tk.Button(ventana, text="cambiar estado", command=llamar_cambiar_estado)
-boton_detalles.place(x=420, y=320)
-ventana.mainloop()
