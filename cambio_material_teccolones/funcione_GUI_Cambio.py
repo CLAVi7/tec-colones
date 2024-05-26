@@ -85,12 +85,18 @@ def cargar_carrito(archivo):
 def comprobaciones(listbox_carrito, entry_cantidad, variable_materiales):
     return None
 
-def modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales):
+def comprobacionesAPI(carnet):
 
-    #Comprobaciones_resultado = comprobaciones(entry_ubicacion, entry_contacto, variable, entry_id)
-    #if Comprobaciones_resultado:
-    #    messagebox.showerror("Error de Comprobación", Comprobaciones_resultado)
-    #    return
+    return None
+
+def modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales, entry_carnet):
+
+    Comprobaciones_resultado = comprobaciones(listbox_carrito, entry_cantidad, variable_materiales)
+    comprobacionAPI = comprobacionesAPI(entry_carnet)
+    if comprobacionAPI or Comprobaciones_resultado:
+
+        messagebox.showerror("Error de Comprobación", comprobacionAPI + Comprobaciones_resultado)
+        return
 
     opciones = variable_materiales.get()
     resultado = opciones.split(" - ")

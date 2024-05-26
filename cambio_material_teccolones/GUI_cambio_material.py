@@ -55,7 +55,7 @@ entry_cantidad.place(x=40, y=265)
 
 def llammar_modificar_carrito():
 
-    modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales)
+    modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales, entry_carnet)
     cambiar_label()
     variable_centros.set(options_centros[0])
     variable_materiales.set(options_materiales[0])
