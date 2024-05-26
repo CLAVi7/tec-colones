@@ -1,5 +1,5 @@
-import tkinter as tk
-from funcione_GUI_Cambio import *
+from cambio_material_teccolones.funcione_GUI_Cambio import *
+import json
 
 ventana = tk.Tk()
 ventana.title("cambio de material")
@@ -32,8 +32,8 @@ entry_carnet.place(x=40, y=160)
 label2 = tk.Label(ventana, text="seleccione el material traido")
 label2.place(x=40, y=185)
 options_materiales = conseguir_materiales()
-print("Los materiales son:")
-print(options_materiales)
+#print("Los materiales son:")
+#print(options_materiales)
 
 variable_materiales = tk.StringVar(ventana)
 
@@ -47,17 +47,74 @@ else:
 dropdown_menu_materiales = tk.OptionMenu(ventana, variable_materiales, *formatted_options)
 dropdown_menu_materiales.place(x=40, y=210)
 
+
 label3 = tk.Label(ventana, text="ingrese la cantidad traida")
 label3.place(x=40, y=245)
 entry_cantidad = tk.Entry(ventana, width=40)
 entry_cantidad.place(x=40, y=265)
 
-boton_añadir = tk.Button(ventana, text="añadir material")
+def llammar_modificar_carrito():
+
+    modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales)
+    cambiar_label()
+    variable_centros.set(options_centros[0])
+    variable_materiales.set(options_materiales[0])
+    entry_cantidad.delete(0, tk.END)
+
+
+boton_añadir = tk.Button(ventana, text="añadir material", command=llammar_modificar_carrito)
 boton_añadir.place(x=40, y=290)
 
 
+listbox_carrito = None
+#nuevo_carrito = None
+
+listbox_carrito = tk.Listbox(ventana, height=12, width=70)
+listbox_carrito.place(x=350, y=105)
 
 
-label3 = tk.Label(ventana, text="sedes creadas")
+label3 = tk.Label(ventana, text="Carrito")
 label3.place(x=350, y=80)
+
+label4 = tk.Label(ventana, text="Llevas 0 tec-colones")
+label4.place(x=350, y=315)
+
+def cambiar_label():
+    tec_colones = suma_tec_colones()
+    label4.config(text = f"Llevas {tec_colones} tec-colones")
+
+
+def vaciar_json_archivo(ruta_archivo):
+    # Crea un JSON vacío
+    contenido_vacio = {}
+
+    # Abre el archivo en modo escritura para sobrescribir su contenido
+    with open(ruta_archivo, 'w') as archivo:
+        # Escribe el JSON vacío en el archivo
+        json.dump(contenido_vacio, archivo, indent=4)
+
+
+ruta_archivo = "carrito.json"
+vaciar_json_archivo(ruta_archivo)
+
+def vaciar_json_diccionario(diccionario_json):
+    # Vacía el diccionario
+    diccionario_json.clear()
+
+
+mi_diccionario_json = {
+    "clave1": "valor1",
+    "clave2": "valor2"
+}
+vaciar_json_diccionario(mi_diccionario_json)
+
+
+
+def llamar_cargar_listbox():
+    
+    cargar_y_mostrar_carrito_listbox(listbox_carrito)
+
+llamar_cargar_listbox()
+
+
 ventana.mainloop()
