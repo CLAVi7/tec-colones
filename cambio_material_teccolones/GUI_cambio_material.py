@@ -1,12 +1,13 @@
 from cambio_material_teccolones.funcione_GUI_Cambio import *
 import json
+from historial.funciones_historial import realizar_transaccion
 
 ventana = tk.Tk()
 ventana.title("cambio de material")
 ventana.geometry("800x400")
 ventana["bg"] = "#C3CDC0"
 
-etiqueta = tk.Label(ventana, text="Cambio de material a tec-colones",  font=("Helvetica", 20), bg="#8DC67E")
+etiqueta = tk.Label(ventana, text="historial a tec-colones",  font=("Helvetica", 20), bg="#8DC67E")
 etiqueta.config(width=50, height=2)
 etiqueta.pack()
 
@@ -37,7 +38,7 @@ options_materiales = conseguir_materiales()
 
 variable_materiales = tk.StringVar(ventana)
 
-formatted_options = [f"{nombre} - {unidad} - {valor}" for nombre, unidad, valor in options_materiales]
+formatted_options = [f"{nombre} - {unidad} - {valor}" for nombre, unidad, valor, estado in options_materiales if estado]
 if formatted_options:
     variable_materiales.set(formatted_options[0])
 else:
@@ -57,7 +58,6 @@ def llammar_modificar_carrito():
 
     modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales, entry_carnet)
     cambiar_label()
-    variable_centros.set(options_centros[0])
     variable_materiales.set(options_materiales[0])
     entry_cantidad.delete(0, tk.END)
 
@@ -94,8 +94,7 @@ def vaciar_json_archivo(ruta_archivo):
         json.dump(contenido_vacio, archivo, indent=4)
 
 
-ruta_archivo = "carrito.json"
-vaciar_json_archivo(ruta_archivo)
+vaciar_json_archivo("carrito.json")
 
 def vaciar_json_diccionario(diccionario_json):
     # Vacía el diccionario
@@ -115,6 +114,19 @@ def llamar_cargar_listbox():
     cargar_y_mostrar_carrito_listbox(listbox_carrito)
 
 llamar_cargar_listbox()
+
+def llamar_transaccion():
+    realizar_transaccion(variable_centros.get(), entry_carnet.get())
+    guardar_carrito([], "carrito.json")
+    entry_carnet.delete(0, tk.END)
+    llamar_cargar_listbox()
+    cambiar_label()
+
+
+boton_transaccion = tk.Button(ventana, text="Realizar transaccion", command=llamar_transaccion)
+boton_transaccion.place(x=350, y=340)
+
+
 
 
 ventana.mainloop()

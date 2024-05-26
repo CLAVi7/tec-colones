@@ -1,10 +1,10 @@
 [
     {
         "id": "M-UWkOmnuH8yn9",
-        "nombre": "Sprint 1",
+        "nombre": "Material 1",
         "unidad": "Litro",
         "valor_unitario": "100",
-        "estado": "Inactivo",
+        "estado": "Activo",
         "fecha_creacion": "2024-04-30 19:51:47",
         "descripcion": "Ejemplo "
     },
@@ -13,31 +13,31 @@
         "nombre": "Material 2",
         "unidad": "Kilogramo",
         "valor_unitario": "1",
-        "estado": "Inactivo",
+        "estado": "Activo",
         "fecha_creacion": "2024-04-30 19:52:50",
         "descripcion": "N/A"
     },
     {
         "id": "M-VxQCcfy9nk3W",
-        "nombre": "gssdgsdgsdg",
+        "nombre": "Material 3",
         "unidad": "Unidad",
         "valor_unitario": "3425",
-        "estado": "Activo",
+        "estado": "Inactivo",
         "fecha_creacion": "2024-05-06 21:20:36",
         "descripcion": "dssg"
     },
     {
         "id": "M-VVWptlrpVFof",
-        "nombre": "weqqew",
+        "nombre": "Material 4",
         "unidad": "Kilogramo",
         "valor_unitario": "2",
-        "estado": "Inactivo",
+        "estado": "Activo",
         "fecha_creacion": "2024-05-08 23:35:50",
         "descripcion": "e"
     },
     {
         "id": "M-0PeyyqUogmBs",
-        "nombre": "eqweqwe",
+        "nombre": "Material 5",
         "unidad": "Unidad",
         "valor_unitario": "7377",
         "estado": "Activo",
@@ -46,7 +46,7 @@
     },
     {
         "id": "M-8TbeQbscR2bk",
-        "nombre": "shasohb",
+        "nombre": "Material 6",
         "unidad": "Unidad",
         "valor_unitario": "33",
         "estado": "Inactivo",
@@ -55,25 +55,25 @@
     },
     {
         "id": "M-YD9PHBKnlX1l",
-        "nombre": "qweqwe",
+        "nombre": "Material 7",
         "unidad": "Kilogramo",
         "valor_unitario": 213.0,
-        "estado": "Activo",
+        "estado": "Inactivo",
         "fecha_creacion": "2024-05-12 08:56:19",
         "descripcion": "\n"
     },
     {
         "id": "M-gqFbrtqOcERw",
-        "nombre": "asdasd",
+        "nombre": "Material 8",
         "unidad": "Kilogramo",
         "valor_unitario": "12",
-        "estado": "Activo",
+        "estado": "Inactivo",
         "fecha_creacion": "2024-05-12 08:57:03",
         "descripcion": "\n"
     },
     {
         "id": "M-9hxkHJ7PEbzP",
-        "nombre": "fsdfhajskdf",
+        "nombre": "Material 9",
         "unidad": "Unidad",
         "valor_unitario": "1264",
         "estado": "Activo",

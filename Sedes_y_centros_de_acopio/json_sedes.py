@@ -136,7 +136,6 @@ def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, option
     else:
         messagebox.showwarning("Duplicado", "la sede ya existe en la lista.")
 
-
     return listbox_sedes
 
 
