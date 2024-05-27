@@ -113,8 +113,4 @@ def main():
     # Ejecutar la ventana principal
     ventana.mainloop()
 main()
-    checkbox.place(x=40, y=pos_y + 7*spacing_y + 90)
 
-    # Ejecutar la ventana principal
-    ventana.mainloop()
-main()

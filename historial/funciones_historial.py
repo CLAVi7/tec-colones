@@ -52,19 +52,19 @@ def cargar_y_mostrar_historial_listbox(ventana, listbox_historial):
     Listbox: Listbox actualizado con el historial.
     """
     if listbox_historial is None:
-        listbox_historial = tk.Listbox(ventana, height=12, width=70)
-        listbox_historial.place(x=350, y=105)
+        listbox_historial = tk.Listbox(ventana, height=12, width=90)
+        listbox_historial.place(x=40, y=130)
     else:
         listbox_historial.delete(0, tk.END)
 
-    lista_historial = cargar_historial("historial.json")
+    lista_historial = cargar_historial("historial_recibos.json")
     if not lista_historial:
         print("No se cargó el historial. Verifique el archivo JSON.")
 
     for historial in lista_historial:
         texto = ( f" - Fecha: {historial.fecha}"
                  f" - Carnet: {historial.carnet}"
-                 f" - Monto: {historial.teccolones}")
+                 f" - Monto: {historial.tec_colones}")
         listbox_historial.insert(tk.END, texto)
 
     return listbox_historial

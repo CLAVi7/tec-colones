@@ -96,18 +96,6 @@ def vaciar_json_archivo(ruta_archivo):
 
 vaciar_json_archivo("carrito.json")
 
-def vaciar_json_diccionario(diccionario_json):
-    # Vacía el diccionario
-    diccionario_json.clear()
-
-
-mi_diccionario_json = {
-    "clave1": "valor1",
-    "clave2": "valor2"
-}
-vaciar_json_diccionario(mi_diccionario_json)
-
-
 
 def llamar_cargar_listbox():
     
