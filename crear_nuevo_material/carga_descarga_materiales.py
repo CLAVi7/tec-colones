@@ -136,13 +136,6 @@ def modificar_materiales(entry_nombre, variable, entry_valor, checkbox_var, text
             guardar_materiales(lista_materiales, "materiales.json")
             cargar_y_mostrar_materiales_listbox(ventana, listbox_materiales)
 
-            entry_nombre.delete(0, tk.END)
-            variable.set(options[0])
-            entry_valor.delete(0, tk.END)
-            text_descripcion.delete("1.0", tk.END)
-            if not checkbox_var.get():
-                checkbox_var.set(True)
-
         else:
             messagebox.showwarning("Duplicado", "El material ya existe en la lista.")
     except ValueError as e:
