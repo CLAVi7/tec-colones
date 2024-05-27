@@ -70,9 +70,13 @@ def main():
         Llama a la función 'modificar_materiales' para actualizar o añadir materiales en la lista, utilizando variables globales y actualizando el 'listbox_materiales'.
         """
         global listbox_materiales
-        listbox_materiales = modificar_materiales(entry_nombre, variable, entry_valor, checkbox_var, text_descripcion, ventana, options,
-                             listbox_materiales)
-
+        listbox_materiales = modificar_materiales(entry_nombre, variable, entry_valor, checkbox_var, text_descripcion, ventana, options, listbox_materiales)
+        entry_nombre.delete(0, tk.END)
+        variable.set(options[0])
+        entry_valor.delete(0, tk.END)
+        text_descripcion.delete("1.0", tk.END)
+        if not checkbox_var.get():
+            checkbox_var.set(True)
 
     def llamar_detalles():
         """
@@ -104,6 +108,11 @@ def main():
     checkbox_var = tk.BooleanVar()
     checkbox_var.set(True)
     checkbox = tk.Checkbutton(ventana, text="Activo", variable=checkbox_var)
+    checkbox.place(x=40, y=pos_y + 7*spacing_y + 90)
+
+    # Ejecutar la ventana principal
+    ventana.mainloop()
+main()
     checkbox.place(x=40, y=pos_y + 7*spacing_y + 90)
 
     # Ejecutar la ventana principal
