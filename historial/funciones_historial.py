@@ -5,9 +5,6 @@ from datetime import datetime
 from cambio_material_teccolones.funcione_GUI_Cambio import cargar_carrito
 import generador_id
 
-
-
-
 def guardar_historial(historial, archivo):
     """
     Guarda una lista de recibos en un archivo JSON.
