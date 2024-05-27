@@ -1,5 +1,7 @@
+import tkinter as tk
 from tkinter import *
-from Sedes_y_centros_de_acopio.json_centro_acopio import *
+from tkinter import messagebox
+from json_centro_acopio import *
 
 
 ventana = Tk()
@@ -10,6 +12,12 @@ ventana["bg"] = "#C3CDC0"
 etiqueta = tk.Label(ventana, text="Configuración Centros de Acopio",  font=("Helvetica", 20), bg="#8DC67E")
 etiqueta.config(width=50, height=2)
 etiqueta.pack()
+
+label = tk.Label(ventana, text="Ingresar Centro de Acopio")
+label.place(x=40, y=80)
+
+entry_nombre = tk.Entry(ventana, width=40)
+entry_nombre.place(x=40, y=105)
 
 label = tk.Label(ventana, text="Ubicación del Centro de Acopio")
 label.place(x=40, y=135)
@@ -35,10 +43,10 @@ entry_contacto = tk.Entry(ventana, width=40)
 entry_contacto.place(x=40, y=280)
 
 label = tk.Label(ventana, text="ID del centro de acopio")
-label.place(x=40, y=80)
+label.place(x=40, y=310)
 
 entry_id = tk.Entry(ventana, width=40)
-entry_id.place(x=40, y=105)
+entry_id.place(x=40, y=280+55)
 
 label4 = tk.Label(ventana, text="Centros de Acopio Creados")
 label4.place(x=350, y=80)
@@ -62,8 +70,14 @@ def llamar_modificar_centros():
     Llama a la función 'Modificar_centros' para actualizar o añadir centros de acopio en la lista, utilizando variables globales y actualizando el 'listbox_centros'.
     """
     global listbox_centros
-    listbox_centros = Modificar_centros(entry_ubicacion, variable, entry_contacto, checkbox_var, ventana, listbox_centros, options, entry_id)
-
+    listbox_centros = Modificar_centros(entry_nombre, entry_ubicacion, variable, entry_contacto, checkbox_var, ventana, listbox_centros, options, entry_id)
+    entry_nombre.delete(0, tk.END)
+    variable.set(options[0])
+    entry_ubicacion.delete(0, tk.END)
+    entry_contacto.delete(0, tk.END)
+    entry_id.delete(0,tk.END)
+    if not checkbox_var.get():
+        checkbox_var.set(True)
 
 def llamar_detalles():
     """
@@ -81,7 +95,7 @@ def llamar_cambiar_estado():
 
 
 boton_anadir = tk.Button(ventana, text="Añadir Centro de Acopio", command=llamar_modificar_centros)
-boton_anadir.place(x=143, y=310)
+boton_anadir.place(x=143, y=365)
 
 boton_mostrar = tk.Button(ventana, text="Detalles", command=llamar_detalles)
 boton_mostrar.place(x=350, y=310)
@@ -92,6 +106,6 @@ cambiar_estado_boton.place(x=415, y=310)
 checkbox_var = tk.BooleanVar()
 checkbox_var.set(True)
 checkbox = tk.Checkbutton(ventana, text="Activo", variable=checkbox_var)
-checkbox.place(x=40, y=310)
+checkbox.place(x=40, y=365)
 
 ventana.mainloop()
