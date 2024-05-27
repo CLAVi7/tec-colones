@@ -71,7 +71,13 @@ def llamar_modificar_centros():
     """
     global listbox_centros
     listbox_centros = Modificar_centros(entry_nombre, entry_ubicacion, variable, entry_contacto, checkbox_var, ventana, listbox_centros, options, entry_id)
-
+    entry_nombre.delete(0, tk.END)
+    variable.set(options[0])
+    entry_ubicacion.delete(0, tk.END)
+    entry_contacto.delete(0, tk.END)
+    entry_id.delete(0,tk.END)
+    if not checkbox_var.get():
+        checkbox_var.set(True)
 
 def llamar_detalles():
     """

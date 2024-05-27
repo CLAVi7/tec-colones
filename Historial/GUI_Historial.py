@@ -2,6 +2,7 @@ import tkinter as tk
 from tkinter import messagebox
 from tkcalendar import DateEntry 
 from json_recibo import *
+from funciones_historial import *
 
 ventana = tk.Tk()
 ventana.title("Historial")
@@ -48,7 +49,16 @@ variable.set(centro[0])
 dropdown_menu = tk.OptionMenu(ventana, variable, *centro)
 dropdown_menu.place(x=400, y=100)
 
-listbox_sedes = None
+listbox_historial = None
+
+def llamar_cargar_listbox():
+    """
+    Carga y muestra la historial en un Listbox. Utiliza la variable global 'listbox_historial' para mantener y actualizar el Listbox.
+    """
+    global listbox_historial
+    listbox_historial = cargar_y_mostrar_historial_listbox(ventana, listbox_historial)
+
+
 
 boton_anadir = tk.Button(ventana, text="Filtrar", font=("Helvetica", 11))
 boton_anadir.place(x=550, y=75)

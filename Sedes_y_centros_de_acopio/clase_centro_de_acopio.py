@@ -6,18 +6,16 @@ class centro_de_acopio:
 
     Atributos:
     id (str): Identificador único del centro de acopio.
-    nombre (str): Nombre del centro de acopio.
     ubicacion (str): Ubicación geográfica del centro.
     sede (str): Sede asociada al centro de acopio.
     numero_de_contacto (str): Número de teléfono de contacto.
     estado (bool): Estado operativo del centro (Activo/Inactivo).
     """
-    def __init__(self, nombre, ubicacion, sede, numero_de_contacto, estado, id):
+    def __init__(self, ubicacion, sede, numero_de_contacto, estado, id):
         """
         Inicializa un nuevo centro de acopio con los detalles proporcionados.
 
         Parámetros:
-        nombre (str): Nombre del centro de acopio.
         ubicacion (str): Ubicación geográfica del centro.
         sede (str): Sede asociada al centro de acopio.
         numero_de_contacto (str): Número de teléfono de contacto.
@@ -26,7 +24,6 @@ class centro_de_acopio:
         """
 
         self.id = id
-        self.nombre = nombre
         self.ubicacion = ubicacion
         self.sede = sede
         self.numero_de_contacto = numero_de_contacto
@@ -48,7 +45,6 @@ class centro_de_acopio:
         str: Cadena que representa al centro de acopio con sus detalles.
         """
         return (f"ID:{self.id}\n"
-                f"Centro_de acopio: {self.nombre}\n"
                 f"Ubicacion: {self.ubicacion}\n"
                 f"Sede: {self.sede}\n" #esto probablemente cambie a causa de no saber que es exactamente sede
                 f"Numero de contacto: {self.numero_de_contacto}\n"
@@ -64,9 +60,11 @@ class centro_de_acopio:
         """
         return {
             "id": self.id,
-            "nombre": self.nombre,
             "ubicacion": self.ubicacion,
             "sede": self.sede,
             "estado": "Activo" if self.estado else "Inactivo",
             "numero_de_contacto": self.numero_de_contacto,
         }
+
+
+
