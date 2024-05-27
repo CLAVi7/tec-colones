@@ -110,17 +110,10 @@ def llamar_transaccion():
     entry_carnet.delete(0, tk.END)
     llamar_cargar_listbox()
     cambiar_label()
-def borrar_listbox():
-    vaciar_json_archivo("carrito.json")
-    llamar_cargar_listbox()
-    entry_carnet.delete(0, tk.END)
-
 
 
 boton_transaccion = tk.Button(ventana, text="Realizar transaccion", command=llamar_transaccion)
 boton_transaccion.place(x=350, y=340)
-boton_transaccion = tk.Button(ventana, text="cancelar transaccion", command=borrar_listbox)
-boton_transaccion.place(x=520, y=340)
 
 
 
