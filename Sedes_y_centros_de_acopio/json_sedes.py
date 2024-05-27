@@ -2,7 +2,6 @@ from clase_sedes import *
 import json
 import tkinter as tk
 from tkinter import messagebox
-from cargar import cargar_json
 
 def guardar_sedes(sedes, archivo):
     """
@@ -26,19 +25,28 @@ def cargar_sedes(archivo):
     Retorna:
     list: Lista de objetos sedes cargados desde el archivo.
     """
-    data = cargar_json(archivo)
     lista_sedes = []
-    for item in data:
-        estado = item['estado']  # Guardar el estado leído del JSON
-        estado = estado == 'Activo'  # Simplificado
-        sede = sedes(
-            nombre=item['nombre'],
-            provincia=item['provincia'],
-            numero_contacto=item['numero_contacto'],
-            estado=estado
-        )
-        sede.id = item['id']
-        lista_sedes.append(sede)
+    try:
+        with open(archivo, 'r') as f:
+            data = json.load(f)
+            for item in data:
+                estado = item['estado']  # Guardar el estado leído del JSON
+                if estado == 'Activo':
+                    estado = True
+                else:
+                    estado = False
+                sede = sedes(
+                    nombre=item['nombre'],
+                    provincia=item['provincia'],
+                    numero_contacto=item['numero_contacto'],
+                    estado=estado
+                )
+                sede.id = item['id']
+                lista_sedes.append(sede)
+    except FileNotFoundError:
+        print("El archivo no fue encontrado.")
+    except json.JSONDecodeError:
+        print("Error al decodificar el archivo JSON.")
     return lista_sedes
 
 
@@ -77,22 +85,24 @@ def comprobaciones(entry_nombre, variable, entry_contacto):
 
     Parámetros:
     entry_nombre (Entry): Entrada de texto con el nombre de la sede.
-    variable (Variable): Variable de Tkinter que contiene la unidad seleccionada.
-    entry_valor (Entry): Entrada de texto con el valor unitario.
+    variable (Variable): Variable de Tkinter que contiene la provincia seleccionada.
+    entry_contacto (Entry): Entrada de texto con el número de contacto.
 
-    Retorna:
-    str: Mensaje de error si alguna comprobación falla, o None si todas las comprobaciones son exitosas.
+    Excepciones:
+    ValueError: Se lanza si alguna comprobación falla.
     """
     if not (5 <= len(entry_nombre.get()) <= 30):
-        return "El nombre debe tener entre 5 y 30 caracteres."
-    elif not (1 <= len(variable.get())):
-        return "Debe seleccionar una provincia para las sedes."
-    elif not entry_contacto.get().isdigit():
-        return "El número de contacto debe ser un número entero."
-    elif len(entry_contacto.get()) != 8:
-        return "El número de contacto debe tener exactamente 8 dígitos."
-    else:
-        return None
+        raise ValueError("El nombre debe tener entre 5 y 30 caracteres.")
+    if not (1 <= len(variable.get())):
+        raise ValueError("Debe seleccionar una provincia para las sedes.")
+    
+    contacto = entry_contacto.get()
+    
+    if not contacto.isdigit():
+        raise ValueError("El número de contacto debe ser un número entero.")
+
+    if len(contacto) != 8:
+        raise ValueError("El número de contacto debe tener exactamente 8 dígitos.")
 
 
 def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, options, ventana, listbox_sedes):
@@ -110,31 +120,33 @@ def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, option
     Excepciones:
     ValueError, TypeError: Se lanzan si las comprobaciones de datos o tipos fallan.
     """
-    Comprobaciones_resultado = comprobaciones(entry_nombre, variable, entry_contacto)
-    if Comprobaciones_resultado:
-        messagebox.showerror("Error de Comprobación", Comprobaciones_resultado)
-        return
+    try:
+        comprobaciones(entry_nombre, variable, entry_contacto)
+        #print("Pasa por aqui")
+        nuevo_sede = sedes(nombre=entry_nombre.get(),
+                                  provincia=variable.get(),
+                                  numero_contacto=entry_contacto.get(),
+                                  estado=checkbox_var.get())
 
-    nuevo_sede = sedes(nombre=entry_nombre.get(),
-                              provincia=variable.get(),
-                              numero_contacto=entry_contacto.get(),
-                              estado=checkbox_var.get())
+        lista_sedes = cargar_sedes("sedes.json")
+        if nuevo_sede not in lista_sedes:
+            lista_sedes.append(nuevo_sede)
+            guardar_sedes(lista_sedes, "sedes.json")
+            listbox_sedes = cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes)
 
-    lista_sedes = cargar_sedes("sedes.json")
+            entry_nombre.delete(0, tk.END)
+            variable.set(options[0])
+            entry_contacto.delete(0, tk.END)
+            if not checkbox_var.get():
+                checkbox_var.set(True)
 
-    if nuevo_sede not in lista_sedes:
-        lista_sedes.append(nuevo_sede)
-        guardar_sedes(lista_sedes, "sedes.json")
-        listbox_sedes = cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes)
+        else:
+            messagebox.showwarning("Duplicado", "la sede ya existe en la lista.")
 
-        entry_nombre.delete(0, tk.END)
-        variable.set(options[0])
-        entry_contacto.delete(0, tk.END)
-        if not checkbox_var.get():
-            checkbox_var.set(True)
-
-    else:
-        messagebox.showwarning("Duplicado", "la sede ya existe en la lista.")
+    except ValueError as error:
+        messagebox.showerror("Error de Comprobación", str(error))
+    except TypeError as error:
+        messagebox.showerror("Error de Tipo", str(error))
 
     return listbox_sedes
 
