@@ -1,0 +1,20 @@
+[
+    {
+        "fecha": "2024-05-26",
+        "centro": "Centro A",
+        "funcionario": "Funcionario B",
+        "carnet": "12345678",
+        "material": "Material C",
+        "cantidad": "10",
+        "tec_colones": "5000"
+    },
+    {
+        "fecha": "2024-05-27",
+        "centro": "Centro B",
+        "funcionario": "Funcionario D",
+        "carnet": "87654321",
+        "material": "Material E",
+        "cantidad": "20",
+        "tec_colones": "10000"
+    }
+]

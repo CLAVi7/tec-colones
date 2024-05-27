@@ -1,5 +1,7 @@
 import tkinter as tk
-from tkcalendar import DateEntry
+from tkinter import messagebox
+from tkcalendar import DateEntry 
+from json_recibo import *
 
 ventana = tk.Tk()
 ventana.title("Historial")
@@ -20,6 +22,23 @@ fecha_final.place(x=220, y=75)
 calendario_final = DateEntry(ventana, width=16, font=("Helvetica", 11), background='#8DC67E', foreground='black', borderwidth=2)
 calendario_final.place(x=220, y=100) 
 
+def validar_fechas(event):
+    fecha_inicial = calendario_inicial.get_date()
+    fecha_final = calendario_final.get_date()
+    if fecha_final < fecha_inicial:
+        messagebox.showerror("Error de fecha", "La fecha final no puede ser menor que la fecha inicial.")
+        calendario_final.set_date(fecha_inicial)  # Restablecer la fecha final a la fecha inicial
+
+
+# Asociar el evento de selección de fecha a la función de validación
+calendario_inicial.bind("<<DateEntrySelected>>", validar_fechas)
+calendario_final.bind("<<DateEntrySelected>>", validar_fechas)
+
+
+listbox = tk.Listbox(ventana, selectmode=tk.SINGLE)
+listbox.place(x=50, y=150, width=700, height=170)
+
+
 label_centro = tk.Label(ventana, text="Centro de Acopio", font=("Helvetica", 12))
 label_centro.place(x=400, y=75)
 
@@ -31,13 +50,12 @@ dropdown_menu.place(x=400, y=100)
 
 listbox_sedes = None
 
-
-
-
 boton_anadir = tk.Button(ventana, text="Filtrar", font=("Helvetica", 11))
 boton_anadir.place(x=550, y=75)
 
 boton_detalles = tk.Button(ventana, text="Detalles", font=("Helvetica", 11))
 boton_detalles.place(x=40, y=340)
+
+cargar_y_mostrar_recibos(listbox, 'Historial/recibos.json')
 
 ventana.mainloop()
