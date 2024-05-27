@@ -32,7 +32,6 @@ def cargar_centros(archivo):
             data = json.load(f)
             for item in data:
                 centro = centro_de_acopio(
-                    nombre=item['nombre'],
                     ubicacion=item['ubicacion'],
                     sede=item['sede'],
                     numero_de_contacto=item['numero_de_contacto'],
@@ -69,9 +68,8 @@ def cargar_y_mostrar_centros_listbox(ventana, listbox_centros):
         print("No se cargaron centros. Verifique el archivo JSON.")
 
     for centro in lista_centros:
-        texto = (f"Nombre: {centro.nombre}"
+        texto = (f"ID: {centro.id}"
                  f" - Sede: {centro.sede}"
-                 f" - numero_de_contacto: {centro.numero_de_contacto}"
                  f" - Estado: {'Activo' if centro.estado else 'Inactivo'}")
         listbox_centros.insert(tk.END, texto)
 
@@ -120,12 +118,12 @@ def Modificar_centros(entry_nombre, entry_ubicacion, variable, entry_contacto, c
     """
     try:
         comprobaciones(entry_nombre, entry_ubicacion, entry_contacto, variable, entry_id)
-        nuevo_centro = centro_de_acopio(nombre=entry_nombre.get(),
+        nuevo_centro = centro_de_acopio(
                                   ubicacion=entry_ubicacion.get(),
                                   sede=variable.get(),
                                   numero_de_contacto=entry_contacto.get(),
                                   estado=checkbox_var.get(),
-                                  id=entry_id.get())
+                                  id="C-" + entry_id.get())
 
         lista_centros = cargar_centros("centros.json")
         if nuevo_centro not in lista_centros:

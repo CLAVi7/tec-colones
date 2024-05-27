@@ -48,7 +48,7 @@ def conseguir_centro():
     lista_centros = cargar_centros(os.path.join(os.path.dirname(__file__), '..', 'Sedes_y_centros_de_acopio', 'centros.json'))
     options = []
     for centro_de_acopio in lista_centros:
-        options.append(centro_de_acopio.sede)
+        options.append(centro_de_acopio.id)
     return options
 
 def guardar_carrito(lista_carrito, archivo):

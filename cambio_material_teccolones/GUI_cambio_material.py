@@ -7,7 +7,7 @@ ventana.title("cambio de material")
 ventana.geometry("800x400")
 ventana["bg"] = "#C3CDC0"
 
-etiqueta = tk.Label(ventana, text="historial a tec-colones",  font=("Helvetica", 20), bg="#8DC67E")
+etiqueta = tk.Label(ventana, text="cambio de material por tec-colones",  font=("Helvetica", 20), bg="#8DC67E")
 etiqueta.config(width=50, height=2)
 etiqueta.pack()
 
@@ -95,17 +95,6 @@ def vaciar_json_archivo(ruta_archivo):
 
 
 vaciar_json_archivo("carrito.json")
-
-def vaciar_json_diccionario(diccionario_json):
-    # Vacía el diccionario
-    diccionario_json.clear()
-
-
-mi_diccionario_json = {
-    "clave1": "valor1",
-    "clave2": "valor2"
-}
-vaciar_json_diccionario(mi_diccionario_json)
 
 
 

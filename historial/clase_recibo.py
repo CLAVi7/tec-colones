@@ -11,7 +11,7 @@ class recibo_centro:
     cantidad (float): Cantidad de material recibido.
     tec_colones (float): Valor en tec colones del material recibido.
     """
-    def __init__(self, fecha, centro, funcionario, carnet, material, tec_colones):
+    def __init__(self, id, fecha, centro, funcionario, carnet, material, tec_colones):
         """
         Inicializa un nuevo recibo de centro de acopio con los detalles proporcionados.
 
@@ -23,6 +23,7 @@ class recibo_centro:
         material (material): Material recibido.
         tec_colones (float): Valor en tec colones del material recibido.
         """
+        self.id = id
         self.fecha = fecha
         self.centro = centro
         self.funcionario = funcionario
@@ -38,6 +39,7 @@ class recibo_centro:
         dict: Un diccionario que contiene todos los atributos del recibo.
         """
         return {
+            "id": self.id,
             "fecha": self.fecha,
             "centro": self.centro,
             "funcionario": self.funcionario,
