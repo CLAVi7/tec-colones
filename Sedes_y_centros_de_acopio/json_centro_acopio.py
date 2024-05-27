@@ -133,14 +133,6 @@ def Modificar_centros(entry_nombre, entry_ubicacion, variable, entry_contacto, c
             guardar_centros(lista_centros, "centros.json")
             cargar_y_mostrar_centros_listbox(ventana, listbox_centros)
 
-            entry_nombre.delete(0, tk.END)
-            variable.set(options[0])
-            entry_ubicacion.delete(0, tk.END)
-            entry_contacto.delete(0, tk.END)
-            entry_id.delete(0,tk.END)
-            if not checkbox_var.get():
-                checkbox_var.set(True)
-
         else:
             messagebox.showwarning("Duplicado", "El centro ya existe en la lista.")
 
