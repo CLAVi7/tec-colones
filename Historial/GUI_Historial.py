@@ -33,7 +33,6 @@ listbox_sedes = None
 
 
 
-
 boton_anadir = tk.Button(ventana, text="Filtrar", font=("Helvetica", 11))
 boton_anadir.place(x=550, y=75)
 
