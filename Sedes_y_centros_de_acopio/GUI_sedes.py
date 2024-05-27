@@ -59,6 +59,12 @@ def llamar_modificar_sedes():
     """
     global listbox_sedes
     listbox_sedes = Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, options, ventana, listbox_sedes)
+    variable.set(options[0])
+    entry_ubicacion.delete(0, tk.END)
+    entry_contacto.delete(0, tk.END)
+    entry_id.delete(0,tk.END)
+    if not checkbox_var.get():
+        checkbox_var.set(True)
 
 
 def llamar_detalles():
@@ -73,13 +79,7 @@ def llamar_cambiar_estado():
     Cambia el estado de la sede seleccionada en el Listbox 'listbox_sedes', y actualiza el Listbox para reflejar los cambios.
     """
     cambiar_estdo_listbox(ventana, listbox_sedes)
-    variable.set(options[0])
-    entry_ubicacion.delete(0, tk.END)
-    entry_contacto.delete(0, tk.END)
-    entry_id.delete(0,tk.END)
-    if not checkbox_var.get():
-        checkbox_var.set(True)
-
+    
 boton_anadir = tk.Button(ventana, text="Añadir sede", command=llamar_modificar_sedes)
 boton_anadir.place(x=213, y=280)
 
