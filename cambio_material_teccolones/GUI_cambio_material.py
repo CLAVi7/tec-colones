@@ -1,13 +1,13 @@
 from cambio_material_teccolones.funcione_GUI_Cambio import *
 import json
-from historial.funciones_historial import realizar_transaccion
+from funciones_historial import realizar_transaccion
 
 ventana = tk.Tk()
 ventana.title("cambio de material")
 ventana.geometry("800x400")
 ventana["bg"] = "#C3CDC0"
 
-etiqueta = tk.Label(ventana, text="historial a tec-colones",  font=("Helvetica", 20), bg="#8DC67E")
+etiqueta = tk.Label(ventana, text="cambio de material por tec-colones",  font=("Helvetica", 20), bg="#8DC67E")
 etiqueta.config(width=50, height=2)
 etiqueta.pack()
 

@@ -1,6 +1,8 @@
+from Materiales import *
+import json
 import tkinter as tk
 from tkinter import messagebox
-from carga_descarga_materiales import *
+
 
 listbox_materiales = None
 
@@ -113,4 +115,5 @@ def main():
     # Ejecutar la ventana principal
     ventana.mainloop()
 main()
+
 

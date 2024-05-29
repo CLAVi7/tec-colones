@@ -85,10 +85,38 @@ def cargar_carrito(archivo):
 
 
 def comprobaciones(listbox_carrito, entry_cantidad, variable_materiales):
+    
+    """
+    Realiza comprobaciones de validación para los datos de entrada de cambio de materiales.
+
+    Parámetros:
+    entry_cantidad (Entry): Entrada de texto con cantidad.
+    listbox_carrito (Listbox): Listbox donde se mostrará el historial.
+    variable_materiales (Variable): Variable de Tkinter que contiene los materiales seleccionados.
+
+    Retorna:
+    str: Mensaje de error si alguna comprobación falla, o None si todas las comprobaciones son exitosas.
+    """
+    if not (entry_cantidad.get().isdigit()):
+        raise ValueError("La cantidad debe ser un número entero.")
+    if (int(entry_cantidad.get()) <= 0):
+        raise ValueError("La cantidad debe ser un número positivo.")
+    if not (listbox_carrito.get(0, 'end')):
+        raise ValueError("El carrito está vacío. Agregue al menos un material.")
+    if not (variable_materiales.get()):
+        raise ValueError("Debe seleccionar un material.")
+
     return None
 
 def comprobacionesAPI(carnet):
+    def validar_carnet(carnet):
+        #Verificar si el carnet es numérico
+        if not carnet.isdigit():
+            return False
+        return True
 
+    # Llamar al método local y obtener el resultado
+    return validar_carnet(carnet)
     return None
 
 
@@ -119,7 +147,6 @@ def modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales, entr
 
     return listbox_carrito
 
-
 def cargar_y_mostrar_carrito_listbox(listbox_carrito):
     # Vaciar el listbox antes de insertar nuevos elementos
     listbox_carrito.delete(0, tk.END)
@@ -133,7 +160,6 @@ def cargar_y_mostrar_carrito_listbox(listbox_carrito):
         listbox_carrito.insert(tk.END, texto)
 
     return listbox_carrito
-
 
 def suma_tec_colones():
     tec_colones_total = 0
