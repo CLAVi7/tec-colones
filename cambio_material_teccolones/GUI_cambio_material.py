@@ -1,6 +1,7 @@
 from cambio_material_teccolones.funcione_GUI_Cambio import *
 import json
 from funciones_historial import realizar_transaccion
+from tkinter import messagebox
 
 ventana = tk.Tk()
 ventana.title("cambio de material")
@@ -66,9 +67,6 @@ boton_añadir = tk.Button(ventana, text="añadir material", command=llammar_modi
 boton_añadir.place(x=40, y=290)
 
 
-listbox_carrito = None
-#nuevo_carrito = None
-
 listbox_carrito = tk.Listbox(ventana, height=12, width=70)
 listbox_carrito.place(x=350, y=105)
 
@@ -84,48 +82,41 @@ def cambiar_label():
     label4.config(text = f"Llevas {tec_colones} tec-colones")
 
 
+def llamar_cargar_listbox():
+    cargar_y_mostrar_carrito_listbox(listbox_carrito)
+
+
+llamar_cargar_listbox()
+
+
 def vaciar_json_y_listbox():
-    # Vaciar el contenido del JSON
-    ruta_archivo = "carrito.json"
-    contenido_vacio = {}
-
-    # Abre el archivo en modo escritura para sobrescribir su contenido
-    with open(ruta_archivo, 'w') as archivo:
-        json.dump(contenido_vacio, archivo, indent=4)
-
-    # Vaciar el Listbox
-    listbox_carrito.delete(0, tk.END)
-
-    # Actualizar la etiqueta de tec-colones
+    guardar_carrito([], "carrito.json")
+    llamar_cargar_listbox()
+    entry_carnet.delete(0, tk.END)
     cambiar_label()
 
 
 vaciar_json_y_listbox()
 
 
-def llamar_cargar_listbox():
-    
-    cargar_y_mostrar_carrito_listbox(listbox_carrito)
-
-llamar_cargar_listbox()
-
 def llamar_transaccion():
+    if not entry_carnet.get():
+        messagebox.showerror("Error", "No se ingresó carnet")
+        return
+    if cargar_carrito("carrito.json") == []:
+        messagebox.showerror("Error", "No se ingresó ningun material ")
+        return
     realizar_transaccion(variable_centros.get(), entry_carnet.get())
     guardar_carrito([], "carrito.json")
     entry_carnet.delete(0, tk.END)
-    vaciar_json_archivo("carrito.json")
     llamar_cargar_listbox()
     cambiar_label()
-
-
 
 
 boton_transaccion = tk.Button(ventana, text="Realizar transaccion", command=llamar_transaccion)
 boton_transaccion.place(x=350, y=340)
 boton_transaccion = tk.Button(ventana, text="cancelar transaccion", command=vaciar_json_y_listbox)
 boton_transaccion.place(x=500, y=340)
-
-
 
 
 ventana.mainloop()

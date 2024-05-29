@@ -31,6 +31,21 @@ class recibo_centro:
         self.material = material
         self.tec_colones = tec_colones
 
+    def __str__(self):
+        """
+        Devuelve una representación en forma de cadena de la información del recibo de centro de acopio.
+
+        Retorna:
+        str: Cadena que representa al recibo de centro de acopio con sus detalles.
+        """
+        return (f"ID: {self.id}\n"
+                f"Fecha: {self.fecha}\n"
+                f"Centro de Acopio: {self.centro}\n"
+                f"Funcionario: {self.funcionario}\n"
+                f"Carnet: {self.carnet}\n"
+                f"Material: {self.material}\n"
+                f"Tec Colones: {self.tec_colones}\n")
+
     def to_dict(self):
         """
         Convierte la instancia de recibo_centro en un diccionario.

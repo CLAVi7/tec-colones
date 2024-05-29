@@ -4,7 +4,7 @@ from cargar import cargar_json
 from datetime import datetime
 from cambio_material_teccolones.funcione_GUI_Cambio import *
 import generador_id
-
+import random
 
 
 
@@ -56,7 +56,7 @@ def cargar_y_mostrar_historial_listbox(ventana, listbox_historial):
     Listbox: Listbox actualizado con el historial.
     """
     if listbox_historial is None:
-        listbox_historial = tk.Listbox(ventana, height=12, width=90)
+        listbox_historial = tk.Listbox(ventana, height=12, width=120)
         listbox_historial.place(x=40, y=130)
     else:
         listbox_historial.delete(0, tk.END)
@@ -66,8 +66,11 @@ def cargar_y_mostrar_historial_listbox(ventana, listbox_historial):
         print("No se cargó el historial. Verifique el archivo JSON.")
 
     for historial in lista_historial:
-        texto = ( f" - Fecha: {historial.fecha}"
+        texto = (
+                 f"Fecha: {historial.fecha}"
+                 f" - Id: {historial.id}"
                  f" - Carnet: {historial.carnet}"
+                 f" - Materiales: {historial.material}"
                  f" - Monto: {historial.tec_colones}")
         listbox_historial.insert(tk.END, texto)
 
@@ -83,9 +86,25 @@ def realizar_transaccion(variable_centros, carnet):
 
     total = suma_tec_colones()
 
-    id = generador_id("R-")
+    caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    id_aleatorio = ''.join(random.choice(caracteres) for _ in range(12))
+    id = "R-" + id_aleatorio
 
     nuevo_recibo = recibo_centro(id, fecha, variable_centros, None, carnet, text, total)
     historial = cargar_historial(os.path.join(os.path.dirname(__file__), "..", "historial", "historial_recibos.json"))
     historial.append(nuevo_recibo)
     guardar_historial(historial, os.path.join(os.path.dirname(__file__), "..", "historial", "historial_recibos.json"))
+
+
+def mostrar_dato_listbox(listbox_historial):
+
+    seleccion = listbox_historial.curselection()
+    if len(seleccion) == 0:
+        messagebox.showinfo("Error", "Por favor, seleccione un elemento de la lista.")
+        return
+
+    indice = seleccion[0]
+    lista_historial = cargar_historial("historial_recibos.json")
+    recibo = lista_historial[indice]
+    mensaje = f"{recibo.__str__()}"
+    messagebox.showinfo("Recibo", mensaje)

@@ -1,17 +1,16 @@
 import sys
 import os
 import tkinter as tk
+from tkinter import messagebox
 from cargar import cargar_json
 import json
 from tkcalendar import DateEntry
 import generador_id
 
-
 # Añadir el directorio 'Sedes_y_centros_de_acopio' al PATH
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'Sedes_y_centros_de_acopio')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'crear_nuevo_material')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'historial')))
-
 
 """from json_centro_acopio import cargar_centros
 from carga_descarga_materiales import cargar_materiales
@@ -19,13 +18,12 @@ from cambio_material_teccolones.clase_carrito import *
 from clase_recibo import recibo_centro
 from funciones_historial import *"""
 
-
 from json_centro_acopio import cargar_centros
 from carga_descarga_materiales import cargar_materiales
-
 from Sedes_y_centros_de_acopio.json_centro_acopio import *
 from crear_nuevo_material.carga_descarga_materiales import *
-from clase_carrito import *
+from cambio_material_teccolones.clase_carrito import *
+
 
 def conseguir_materiales():
     """
@@ -50,7 +48,7 @@ def conseguir_centro():
     lista_centros = cargar_centros(os.path.join(os.path.dirname(__file__), '..', 'Sedes_y_centros_de_acopio', 'centros.json'))
     options = []
     for centro_de_acopio in lista_centros:
-        options.append(centro_de_acopio.sede)
+        options.append(centro_de_acopio.id)
     return options
 
 def guardar_carrito(lista_carrito, archivo):
@@ -99,12 +97,12 @@ def comprobaciones( entry_cantidad, variable_materiales):
     Retorna:
     str: Mensaje de error si alguna comprobación falla, o None si todas las comprobaciones son exitosas.
     """
-    if not (entry_cantidad.get().isdigit()):
-        raise ValueError("La cantidad debe ser un número entero.")
-    if (int(entry_cantidad.get()) <= 0):
-        raise ValueError("La cantidad debe ser un número positivo.")
+    if not (entry_cantidad.get()):
+        return "La cantidad debe ser un número entero."
+    if (float(entry_cantidad.get()) <= 0):
+        return "La cantidad debe ser un número positivo."
     if not (variable_materiales.get()):
-        raise ValueError("Debe seleccionar un material.")
+        return "Debe seleccionar un material."
 
     return None
 

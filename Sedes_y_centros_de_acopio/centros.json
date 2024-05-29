@@ -1,30 +1,23 @@
 [
     {
-        "id": "9854JHg87asP",
+        "id": "C-9854JHg87asP",
         "ubicacion": "si",
         "sede": "Sede Central",
         "estado": "Activo",
         "numero_de_contacto": "88888888"
     },
     {
-        "id": "58skdP8AdD8p",
+        "id": "C-58skdP8AdD8p",
         "ubicacion": "si",
         "sede": "San Carlos",
         "estado": "Activo",
         "numero_de_contacto": "88888888"
     },
     {
-        "id": "8sKJD89dDazc",
+        "id": "C-8sKJD89dDazc",
         "ubicacion": "si",
         "sede": "San Jose",
         "estado": "Activo",
         "numero_de_contacto": "88888888"
-    },
-    {
-        "id": "C-123456789123",
-        "ubicacion": "bhvjbhjvbjh",
-        "sede": "Sede Central",
-        "estado": "Activo",
-        "numero_de_contacto": "12345678"
     }
 ]
