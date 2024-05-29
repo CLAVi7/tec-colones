@@ -44,6 +44,36 @@ def cargar_historial(archivo):
         historial.append(recibo)
     return historial
 
+def cargar_y_mostrar_historial_listbox(ventana, listbox_historial):
+    """
+    Carga historial desde un archivo y los muestra en un Listbox.
+
+    Parámetros:
+    ventana (Tk): Ventana de la aplicación.
+    listbox_historial (Listbox): Listbox donde se mostrarán el historial.
+
+    Retorna:
+    Listbox: Listbox actualizado con el historial.
+    """
+    if listbox_historial is None:
+        listbox_historial = tk.Listbox(ventana, height=12, width=90)
+        listbox_historial.place(x=40, y=130)
+    else:
+        listbox_historial.delete(0, tk.END)
+
+    lista_historial = cargar_historial("historial_recibos.json")
+    if not lista_historial:
+        print("No se cargó el historial. Verifique el archivo JSON.")
+
+    for historial in lista_historial:
+        texto = ( f" - Fecha: {historial.fecha}"
+                 f" - Carnet: {historial.carnet}"
+                 f" - Monto: {historial.tec_colones}")
+        listbox_historial.insert(tk.END, texto)
+
+    return listbox_historial
+
+
 def realizar_transaccion(variable_centros, carnet):
     fecha = datetime.today().date().isoformat()
     lista_carrito = cargar_carrito("carrito.json")

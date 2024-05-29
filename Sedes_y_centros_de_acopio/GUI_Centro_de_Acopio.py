@@ -74,8 +74,8 @@ def llamar_modificar_centros():
     entry_nombre.delete(0, tk.END)
     variable.set(options[0])
     entry_ubicacion.delete(0, tk.END)
-    entry_id.decion.delete(0, tk.END)
-    entry_contacto(0,tk.END)
+    entry_contacto.delete(0, tk.END)
+    entry_id.delete(0,tk.END)
     if not checkbox_var.get():
         checkbox_var.set(True)
 

@@ -97,7 +97,6 @@ def vaciar_json_archivo(ruta_archivo):
 vaciar_json_archivo("carrito.json")
 
 
-
 def llamar_cargar_listbox():
     
     cargar_y_mostrar_carrito_listbox(listbox_carrito)

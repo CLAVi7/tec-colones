@@ -14,10 +14,10 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'h
 
 from json_centro_acopio import cargar_centros
 from carga_descarga_materiales import cargar_materiales
-from clase_carrito import *
+from cambio_material_teccolones.clase_carrito import *
 from clase_recibo import recibo_centro
-from funciones_historial import guardar_historial
-from funciones_historial import cargar_historial
+from funciones_historial import *
+
 
 #from json_centro_acopio import cargar_centros
 #from carga_descarga_materiales import cargar_materiales
