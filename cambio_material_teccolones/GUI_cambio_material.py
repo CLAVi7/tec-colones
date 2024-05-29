@@ -56,7 +56,7 @@ entry_cantidad.place(x=40, y=265)
 
 def llammar_modificar_carrito():
 
-    modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales, entry_carnet)
+    modificar_carrito( listbox_carrito, entry_cantidad, variable_materiales)# entry_carnet listbox_carrito
     cambiar_label()
     variable_materiales.set(options_materiales[0])
     entry_cantidad.delete(0, tk.END)
@@ -84,17 +84,23 @@ def cambiar_label():
     label4.config(text = f"Llevas {tec_colones} tec-colones")
 
 
-def vaciar_json_archivo(ruta_archivo):
-    # Crea un JSON vacío
+def vaciar_json_y_listbox():
+    # Vaciar el contenido del JSON
+    ruta_archivo = "carrito.json"
     contenido_vacio = {}
 
     # Abre el archivo en modo escritura para sobrescribir su contenido
     with open(ruta_archivo, 'w') as archivo:
-        # Escribe el JSON vacío en el archivo
         json.dump(contenido_vacio, archivo, indent=4)
 
+    # Vaciar el Listbox
+    listbox_carrito.delete(0, tk.END)
 
-vaciar_json_archivo("carrito.json")
+    # Actualizar la etiqueta de tec-colones
+    cambiar_label()
+
+
+vaciar_json_y_listbox()
 
 
 def llamar_cargar_listbox():
@@ -107,12 +113,17 @@ def llamar_transaccion():
     realizar_transaccion(variable_centros.get(), entry_carnet.get())
     guardar_carrito([], "carrito.json")
     entry_carnet.delete(0, tk.END)
+    vaciar_json_archivo("carrito.json")
     llamar_cargar_listbox()
     cambiar_label()
 
 
+
+
 boton_transaccion = tk.Button(ventana, text="Realizar transaccion", command=llamar_transaccion)
 boton_transaccion.place(x=350, y=340)
+boton_transaccion = tk.Button(ventana, text="cancelar transaccion", command=vaciar_json_y_listbox)
+boton_transaccion.place(x=500, y=340)
 
 
 

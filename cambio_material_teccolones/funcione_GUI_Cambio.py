@@ -4,6 +4,7 @@ import tkinter as tk
 from cargar import cargar_json
 import json
 from tkcalendar import DateEntry
+import generador_id
 
 
 # Añadir el directorio 'Sedes_y_centros_de_acopio' al PATH
@@ -12,18 +13,19 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'c
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'historial')))
 
 
-from json_centro_acopio import cargar_centros
+"""from json_centro_acopio import cargar_centros
 from carga_descarga_materiales import cargar_materiales
 from cambio_material_teccolones.clase_carrito import *
 from clase_recibo import recibo_centro
-from funciones_historial import *
+from funciones_historial import *"""
 
 
-#from json_centro_acopio import cargar_centros
-#from carga_descarga_materiales import cargar_materiales
+from json_centro_acopio import cargar_centros
+from carga_descarga_materiales import cargar_materiales
 
-#from Sedes_y_centros_de_acopio.json_centro_acopio import *
-#from crear_nuevo_material.carga_descarga_materiales import *
+from Sedes_y_centros_de_acopio.json_centro_acopio import *
+from crear_nuevo_material.carga_descarga_materiales import *
+from clase_carrito import *
 
 def conseguir_materiales():
     """
@@ -84,7 +86,7 @@ def cargar_carrito(archivo):
     return lista_carrito
 
 
-def comprobaciones(listbox_carrito, entry_cantidad, variable_materiales):
+def comprobaciones( entry_cantidad, variable_materiales):
     
     """
     Realiza comprobaciones de validación para los datos de entrada de cambio de materiales.
@@ -101,14 +103,12 @@ def comprobaciones(listbox_carrito, entry_cantidad, variable_materiales):
         raise ValueError("La cantidad debe ser un número entero.")
     if (int(entry_cantidad.get()) <= 0):
         raise ValueError("La cantidad debe ser un número positivo.")
-    if not (listbox_carrito.get(0, 'end')):
-        raise ValueError("El carrito está vacío. Agregue al menos un material.")
     if not (variable_materiales.get()):
         raise ValueError("Debe seleccionar un material.")
 
     return None
 
-def comprobacionesAPI(carnet):
+"""def comprobacionesAPI(carnet):
     def validar_carnet(carnet):
         #Verificar si el carnet es numérico
         if not carnet.isdigit():
@@ -117,15 +117,15 @@ def comprobacionesAPI(carnet):
 
     # Llamar al método local y obtener el resultado
     return validar_carnet(carnet)
-    return None
+    return None"""
 
 
-def modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales, entry_carnet):
-    Comprobaciones_resultado = comprobaciones(listbox_carrito, entry_cantidad, variable_materiales)
-    comprobacionAPI = comprobacionesAPI(entry_carnet)
-    if comprobacionAPI or Comprobaciones_resultado:
+def modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales):
+    Comprobaciones_resultado = comprobaciones( entry_cantidad, variable_materiales)
+    #comprobacionAPI = comprobacionesAPI(entry_carnet)
+    if Comprobaciones_resultado:
 
-        messagebox.showerror("Error de Comprobación", comprobacionAPI + Comprobaciones_resultado)
+        messagebox.showerror("Error de Comprobación",Comprobaciones_resultado)
         return
 
     opciones = variable_materiales.get()
@@ -169,10 +169,6 @@ def suma_tec_colones():
         tec_colones_total += carrito.tec_colones
 
     return tec_colones_total
-
-
-
-
 
 
 

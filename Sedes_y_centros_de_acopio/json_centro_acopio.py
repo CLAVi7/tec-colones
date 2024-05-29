@@ -76,7 +76,7 @@ def cargar_y_mostrar_centros_listbox(ventana, listbox_centros):
     return listbox_centros
 
 
-def comprobaciones(entry_nombre, entry_ubicacion, entry_contacto, variable, entry_id):
+def comprobaciones( entry_ubicacion, entry_contacto, variable, entry_id):
     """
      Realiza comprobaciones de validación para los datos de entrada de un centro de acopio.
 
@@ -88,8 +88,7 @@ def comprobaciones(entry_nombre, entry_ubicacion, entry_contacto, variable, entr
      Excepciones:
      ValueError: Se lanza si alguna comprobación falla.
      """
-    if not (5 <= len(entry_nombre.get()) <= 30):
-        raise ValueError("El nombre debe tener entre 5 y 30 caracteres.")
+
     if not (1 <= len(entry_ubicacion.get()) <= 100):
         raise ValueError("El ubicacion debe tener máximo 100 caracteres.")
     if not (len(entry_contacto.get()) == 8):
@@ -101,7 +100,7 @@ def comprobaciones(entry_nombre, entry_ubicacion, entry_contacto, variable, entr
 
 
 
-def Modificar_centros(entry_nombre, entry_ubicacion, variable, entry_contacto, checkbox_var, ventana, listbox_centros, options, entry_id):
+def Modificar_centros(entry_ubicacion, variable, entry_contacto, checkbox_var, ventana, listbox_centros, entry_id):
     """
     Modifica la lista de centros de acopio o agrega un nuevo centro si no existe en la lista.
 
@@ -117,7 +116,7 @@ def Modificar_centros(entry_nombre, entry_ubicacion, variable, entry_contacto, c
     ValueError, TypeError: Se lanza si las comprobaciones de datos o tipos fallan.
     """
     try:
-        comprobaciones(entry_nombre, entry_ubicacion, entry_contacto, variable, entry_id)
+        comprobaciones( entry_ubicacion, entry_contacto, variable, entry_id)
         nuevo_centro = centro_de_acopio(
                                   ubicacion=entry_ubicacion.get(),
                                   sede=variable.get(),

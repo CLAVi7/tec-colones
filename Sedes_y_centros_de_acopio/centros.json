@@ -19,5 +19,12 @@
         "sede": "San Jose",
         "estado": "Activo",
         "numero_de_contacto": "88888888"
+    },
+    {
+        "id": "C-123456789123",
+        "ubicacion": "bhvjbhjvbjh",
+        "sede": "Sede Central",
+        "estado": "Activo",
+        "numero_de_contacto": "12345678"
     }
 ]

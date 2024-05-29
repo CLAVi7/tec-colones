@@ -2,7 +2,7 @@ from clase_recibo import *
 import json
 from cargar import cargar_json
 from datetime import datetime
-from cambio_material_teccolones.funcione_GUI_Cambio import cargar_carrito
+from cambio_material_teccolones.funcione_GUI_Cambio import *
 import generador_id
 
 
