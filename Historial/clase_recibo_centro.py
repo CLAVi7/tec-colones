@@ -44,7 +44,7 @@ def cargar_json_desde_archivo(ruta_archivo):
     return json_a_lista(json_str)
 
 # Ruta del archivo JSON
-ruta_archivo_json = 'Historial/recibos.json'
+ruta_archivo_json = 'recibos.json'
 
 # Cargar JSON y convertirlo a lista de objetos recibo_centro
 lista_recibos = cargar_json_desde_archivo(ruta_archivo_json)

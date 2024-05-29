@@ -59,13 +59,18 @@ def llamar_cargar_listbox():
     listbox_historial = cargar_y_mostrar_historial_listbox(ventana, listbox_historial)
 
 
+llamar_cargar_listbox()
+
+
+def mostrar_detalle_recibo():
+    mostrar_dato_listbox(listbox_historial)
 
 boton_anadir = tk.Button(ventana, text="Filtrar", font=("Helvetica", 11))
 boton_anadir.place(x=550, y=75)
 
-boton_detalles = tk.Button(ventana, text="Detalles", font=("Helvetica", 11))
+boton_detalles = tk.Button(ventana, text="Detalles", font=("Helvetica", 11), command=mostrar_detalle_recibo)
 boton_detalles.place(x=40, y=340)
 
-cargar_y_mostrar_recibos(listbox, 'Historial/recibos.json')
 
 ventana.mainloop()
+

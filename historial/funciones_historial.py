@@ -77,6 +77,20 @@ def cargar_y_mostrar_historial_listbox(ventana, listbox_historial):
     return listbox_historial
 
 
+def cargar_historial_por_carnet(ruta):
+    if os.path.exists(ruta):
+        try:
+            with open(ruta, 'r') as file:
+                return json.load(file)
+        except json.JSONDecodeError:
+            return {}
+    return {}
+
+def guardar_historial_por_carnet(historial_por_carnet, ruta):
+    with open(ruta, 'w') as file:
+        json.dump(historial_por_carnet, file, indent=4)
+
+
 def realizar_transaccion(variable_centros, carnet):
     fecha = datetime.today().date().isoformat()
     lista_carrito = cargar_carrito("carrito.json")
@@ -94,6 +108,17 @@ def realizar_transaccion(variable_centros, carnet):
     historial = cargar_historial(os.path.join(os.path.dirname(__file__), "..", "historial", "historial_recibos.json"))
     historial.append(nuevo_recibo)
     guardar_historial(historial, os.path.join(os.path.dirname(__file__), "..", "historial", "historial_recibos.json"))
+
+    # Guardar en el historial por carnet
+    ruta_historial_por_carnet = os.path.join(os.path.dirname(__file__), "..", "historial", "historial_por_carnet.json")
+    historial_por_carnet = cargar_historial_por_carnet(ruta_historial_por_carnet)
+
+    if carnet in historial_por_carnet:
+        historial_por_carnet[carnet].append(nuevo_recibo.to_dict())
+    else:
+        historial_por_carnet[carnet] = [nuevo_recibo.to_dict()]
+
+    guardar_historial_por_carnet(historial_por_carnet, ruta_historial_por_carnet)
 
 
 def mostrar_dato_listbox(listbox_historial):
