@@ -92,17 +92,17 @@ def comprobaciones(entry_nombre, variable, entry_contacto):
     ValueError: Se lanza si alguna comprobación falla.
     """
     if not (5 <= len(entry_nombre.get()) <= 30):
-        raise ValueError("El nombre debe tener entre 5 y 30 caracteres.")
+        return "El nombre debe tener entre 5 y 30 caracteres."
     if not (1 <= len(variable.get())):
-        raise ValueError("Debe seleccionar una provincia para las sedes.")
+        return "Debe seleccionar una provincia para las sedes."
     
     contacto = entry_contacto.get()
     
     if not contacto.isdigit():
-        raise ValueError("El número de contacto debe ser un número entero.")
+        return "El número de contacto debe ser un número entero."
 
     if len(contacto) != 8:
-        raise ValueError("El número de contacto debe tener exactamente 8 dígitos.")
+        return "El número de contacto debe tener exactamente 8 dígitos."
 
 
 def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, options, ventana, listbox_sedes):
@@ -120,33 +120,32 @@ def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, option
     Excepciones:
     ValueError, TypeError: Se lanzan si las comprobaciones de datos o tipos fallan.
     """
-    try:
-        comprobaciones(entry_nombre, variable, entry_contacto)
-        #print("Pasa por aqui")
-        nuevo_sede = sedes(nombre=entry_nombre.get(),
-                                  provincia=variable.get(),
-                                  numero_contacto=entry_contacto.get(),
-                                  estado=checkbox_var.get())
 
-        lista_sedes = cargar_sedes("sedes.json")
-        if nuevo_sede not in lista_sedes:
-            lista_sedes.append(nuevo_sede)
-            guardar_sedes(lista_sedes, "sedes.json")
-            listbox_sedes = cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes)
+    Comprobaciones = comprobaciones(entry_nombre, variable, entry_contacto)
+    if Comprobaciones:
+        messagebox.showerror("Error", Comprobaciones)
+        return
 
-            entry_nombre.delete(0, tk.END)
-            variable.set(options[0])
-            entry_contacto.delete(0, tk.END)
-            if not checkbox_var.get():
-                checkbox_var.set(True)
+    #print("Pasa por aqui")
+    nuevo_sede = sedes(nombre=entry_nombre.get(),
+                              provincia=variable.get(),
+                              numero_contacto=entry_contacto.get(),
+                              estado=checkbox_var.get())
 
-        else:
-            messagebox.showwarning("Duplicado", "la sede ya existe en la lista.")
+    lista_sedes = cargar_sedes("sedes.json")
+    if nuevo_sede not in lista_sedes:
+        lista_sedes.append(nuevo_sede)
+        guardar_sedes(lista_sedes, "sedes.json")
+        listbox_sedes = cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes)
 
-    except ValueError as error:
-        messagebox.showerror("Error de Comprobación", str(error))
-    except TypeError as error:
-        messagebox.showerror("Error de Tipo", str(error))
+        entry_nombre.delete(0, tk.END)
+        variable.set(options[0])
+        entry_contacto.delete(0, tk.END)
+        if not checkbox_var.get():
+            checkbox_var.set(True)
+
+    else:
+        messagebox.showwarning("Duplicado", "la sede ya existe en la lista.")
 
     return listbox_sedes
 

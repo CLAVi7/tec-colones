@@ -11,6 +11,7 @@ class centro_de_acopio:
     numero_de_contacto (str): Número de teléfono de contacto.
     estado (bool): Estado operativo del centro (Activo/Inactivo).
     """
+
     def __init__(self, ubicacion, sede, numero_de_contacto, estado, id):
         """
         Inicializa un nuevo centro de acopio con los detalles proporcionados.

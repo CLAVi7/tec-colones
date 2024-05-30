@@ -1,12 +1,7 @@
-import tkinter as tk
-from clase_recibo import *
-import json
-from cargar import cargar_json
-from datetime import datetime
+from historial.clase_recibo import *
 from cambio_material_teccolones.funcione_GUI_Cambio import *
-import generador_id
 import random
-
+import generador_id
 
 
 def guardar_historial(historial, archivo):
@@ -101,9 +96,10 @@ def realizar_transaccion(variable_centros, carnet):
 
     total = suma_tec_colones()
 
-    caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
+    """caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
     id_aleatorio = ''.join(random.choice(caracteres) for _ in range(12))
-    id = "R-" + id_aleatorio
+    id = "R-" + id_aleatorio"""
+    id = generar_id_unico("R")
 
     nuevo_recibo = recibo_centro(id, fecha, variable_centros, None, carnet, text, total)
     historial = cargar_historial(os.path.join(os.path.dirname(__file__), "..", "historial", "historial_recibos.json"))

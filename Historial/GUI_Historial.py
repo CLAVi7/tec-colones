@@ -1,21 +1,4 @@
-import tkinter as tk
-from tkinter import messagebox
-from tkcalendar import DateEntry
-from datetime import datetime
-import json
-from cambio_material_teccolones.funcione_GUI_Cambio import conseguir_centro
-from funciones_historial import *
-
-# Función para cargar los datos del JSON desde un archivo
-def cargar_recibos_desde_archivo(ruta):
-    with open(ruta, 'r') as archivo:
-        return json.load(archivo)
-
-# Ruta del archivo JSON
-ruta_json = 'historial_recibos.json'
-
-# Cargar los datos de los recibos desde el archivo
-recibos = cargar_recibos_desde_archivo(ruta_json)
+from historial.funciones_historial import *
 
 ventana = tk.Tk()
 ventana.title("Historial")
@@ -80,22 +63,33 @@ def mostrar_detalle_recibo():
         recibo = listbox_historial[index]
         detalles = f"ID: {recibo['id']}\nFecha: {recibo['fecha']}\nCentro: {recibo['centro']}\nCarnet: {recibo['carnet']}\nMaterial: {recibo['material']}\nTec Colones: {recibo['tec_colones']}"
         messagebox.showinfo("Detalle del Recibo", detalles)
-
+"""
 def filtrar_recibos():
     global listbox_historial
     # Obtener las fechas seleccionadas
-    fecha_inicio = calendario_inicial.get_date()
-    fecha_fin = calendario_final.get_date()
+    fecha_inicio = calendario_inicial.get_date().isoformat()
+    fecha_fin = calendario_final.get_date().isoformat()
     
     # Limpiar el listbox antes de agregar los elementos filtrados
     listbox_historial = None
+    lista_historial = cargar_historial("historial_recibos.json")
+    nueva_lista = []
     
     # Filtrar los recibos según las fechas seleccionadas
-    for recibo in recibos:
-        fecha_recibo = datetime.strptime(recibo['fecha'], "%Y-%m-%d").date()
-        if fecha_inicio <= fecha_recibo <= fecha_fin:
-            listbox_historial.insert(tk.END, f"{recibo['fecha']} - {recibo['centro']} - {recibo['material']}")
+    for recibo in lista_historial:
+        if fecha_inicio <= recibo.fecha <= fecha_fin:
+            nueva_lista.append(recibo)
 
+    for historial in nueva_lista:
+        texto = (
+                 f"Fecha: {historial.fecha}"
+                 f" - Id: {historial.id}"
+                 f" - Carnet: {historial.carnet}"
+                 f" - Materiales: {historial.material}"
+                 f" - Monto: {historial.tec_colones}")
+        listbox_historial.insert(tk.END, texto)
+
+"""
 
 def llamar_cargar_listbox():
     """
@@ -110,7 +104,7 @@ llamar_cargar_listbox()
 def mostrar_detalle_recibo():
     mostrar_dato_listbox(listbox_historial)
 
-boton_anadir = tk.Button(ventana, text="Filtrar", font=("Helvetica", 11), command=filtrar_recibos)
+boton_anadir = tk.Button(ventana, text="Filtrar", font=("Helvetica", 11))
 boton_anadir.place(x=550, y=75)
 
 boton_detalles = tk.Button(ventana, text="Detalles", font=("Helvetica", 11), command=mostrar_dato_listbox)

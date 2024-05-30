@@ -1,14 +1,5 @@
 [
     {
-        "id": "234",
-        "fecha": "2024-05-26",
-        "centro": "Sede Central",
-        "funcionario": null,
-        "carnet": "2",
-        "material": "1 Litro de Material 1, ",
-        "tec_colones": 100.0
-    },
-    {
         "id": "R-KEnnmXEUNlAK",
         "fecha": "2024-05-29",
         "centro": "Sede Central",
@@ -97,5 +88,41 @@
         "carnet": "555",
         "material": "55.5 Litro de Material 1, ",
         "tec_colones": 5550.0
+    },
+    {
+        "id": "R-9HNtmNVCkcJV",
+        "fecha": "2024-05-29",
+        "centro": "C-CE1105000000",
+        "funcionario": null,
+        "carnet": "4589",
+        "material": "100 Kilogramo de Material 4, 4 Litro de Material 1, ",
+        "tec_colones": 600.0
+    },
+    {
+        "id": "R-vXbQh4QlW5QV",
+        "fecha": "2024-05-29",
+        "centro": "C-CE1105000000",
+        "funcionario": null,
+        "carnet": "654",
+        "material": "4 Kilogramo de Material 4, 10 Kilogramo de Material 4, ",
+        "tec_colones": 28.0
+    },
+    {
+        "id": "R-hmvvtSWVZA65",
+        "fecha": "2024-05-29",
+        "centro": "C-CE1105000000",
+        "funcionario": null,
+        "carnet": "654",
+        "material": "10.5 Litro de Material 1, 0.5 Kilogramo de Material 2, ",
+        "tec_colones": 1050.5
+    },
+    {
+        "id": "R-rSJjqjh6KkYA",
+        "fecha": "2024-05-29",
+        "centro": "C-9854JHg87asP",
+        "funcionario": null,
+        "carnet": "5",
+        "material": "1 Kilogramo de Material 2, ",
+        "tec_colones": 1.0
     }
 ]

@@ -90,13 +90,13 @@ def comprobaciones( entry_ubicacion, entry_contacto, variable, entry_id):
      """
 
     if not (1 <= len(entry_ubicacion.get()) <= 100):
-        raise ValueError("El ubicacion debe tener máximo 100 caracteres.")
+        return"El ubicacion debe tener máximo 100 caracteres."
     if not (len(entry_contacto.get()) == 8):
-        raise ValueError("El numero debe ser de 8 caracteres.")
+        return"El numero debe ser de 8 caracteres."
     if not (1 <= len(variable.get())):
-        raise ValueError("Debe ingresar un valor para las sedes.")
+        return"Debe ingresar un valor para las sedes."
     if not (len(entry_id.get()) == 12):
-        raise ValueError("El id es un codigo alfanumerico de 12 caracteres")
+        return "El id es un codigo alfanumerico de 12 caracteres"
 
 
 
@@ -115,29 +115,26 @@ def Modificar_centros(entry_ubicacion, variable, entry_contacto, checkbox_var, v
     Excepciones:
     ValueError, TypeError: Se lanza si las comprobaciones de datos o tipos fallan.
     """
-    try:
-        comprobaciones( entry_ubicacion, entry_contacto, variable, entry_id)
-        nuevo_centro = centro_de_acopio(
-                                  ubicacion=entry_ubicacion.get(),
-                                  sede=variable.get(),
-                                  numero_de_contacto=entry_contacto.get(),
-                                  estado=checkbox_var.get(),
-                                  id="C-" + entry_id.get())
+    Comprobaciones = comprobaciones( entry_ubicacion, entry_contacto, variable, entry_id)
+    if Comprobaciones:
+        messagebox.showinfo("Error", Comprobaciones)
+        return
 
-        lista_centros = cargar_centros("centros.json")
-        if nuevo_centro not in lista_centros:
-            lista_centros.append(nuevo_centro)
-            guardar_centros(lista_centros, "centros.json")
-            cargar_y_mostrar_centros_listbox(ventana, listbox_centros)
+    nuevo_centro = centro_de_acopio(
+                              ubicacion=entry_ubicacion.get(),
+                              sede=variable.get(),
+                              numero_de_contacto=entry_contacto.get(),
+                              estado=checkbox_var.get(),
+                              id="C-" + entry_id.get())
 
-        else:
-            messagebox.showwarning("Duplicado", "El centro ya existe en la lista.")
+    lista_centros = cargar_centros("centros.json")
+    if not any(centro.id == nuevo_centro.id for centro in lista_centros):
+        lista_centros.append(nuevo_centro)
+        guardar_centros(lista_centros, "centros.json")
+        cargar_y_mostrar_centros_listbox(ventana, listbox_centros)
 
-    except ValueError as error:
-        messagebox.showerror("Error de Comprobación", str(error))
-    except TypeError as error:
-        messagebox.showerror("Error de Tipo", str(error))
-
+    else:
+        messagebox.showwarning("Duplicado", "El centro ya existe en la lista.")
 
 def mostrar_datos_seleccionados(listbox_centros):
     """
