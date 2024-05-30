@@ -1,4 +1,4 @@
-from historial.clase_recibo import *
+from clase_recibo import *
 from cambio_material_teccolones.funcione_GUI_Cambio import *
 import random
 import generador_id

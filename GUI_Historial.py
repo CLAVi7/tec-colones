@@ -1,4 +1,4 @@
-from historial.funciones_historial import *
+from funciones_historial import *
 
 ventana = tk.Tk()
 ventana.title("Historial")
@@ -44,26 +44,7 @@ dropdown_menu = tk.OptionMenu(ventana, variable, *centro)
 dropdown_menu.place(x=400, y=100)
 
 listbox_historial = None
-#listbox_historial = []
 
-# def cargar_y_mostrar_historial_listbox():
-#     """
-#     Carga los recibos desde el JSON y los muestra en el Listbox.
-#     """
-#     global listbox_historial
-#     listbox_historial = recibos
-#     for recibo in recibos:
-#         listbox.insert(tk.END, f"{recibo['fecha']} - {recibo['centro']} - {recibo['material']}")
-
-def mostrar_detalle_recibo():
-    global listbox_historial
-    seleccion = listbox.curselection()
-    if seleccion:
-        index = seleccion[0]
-        recibo = listbox_historial[index]
-        detalles = f"ID: {recibo['id']}\nFecha: {recibo['fecha']}\nCentro: {recibo['centro']}\nCarnet: {recibo['carnet']}\nMaterial: {recibo['material']}\nTec Colones: {recibo['tec_colones']}"
-        messagebox.showinfo("Detalle del Recibo", detalles)
-"""
 def filtrar_recibos():
     global listbox_historial
     # Obtener las fechas seleccionadas
@@ -71,7 +52,7 @@ def filtrar_recibos():
     fecha_fin = calendario_final.get_date().isoformat()
     
     # Limpiar el listbox antes de agregar los elementos filtrados
-    listbox_historial = None
+    listbox_historial.delete(0, tk.END)
     lista_historial = cargar_historial("historial_recibos.json")
     nueva_lista = []
     
@@ -89,7 +70,7 @@ def filtrar_recibos():
                  f" - Monto: {historial.tec_colones}")
         listbox_historial.insert(tk.END, texto)
 
-"""
+
 
 def llamar_cargar_listbox():
     """
@@ -104,7 +85,7 @@ llamar_cargar_listbox()
 def mostrar_detalle_recibo():
     mostrar_dato_listbox(listbox_historial)
 
-boton_anadir = tk.Button(ventana, text="Filtrar", font=("Helvetica", 11))
+boton_anadir = tk.Button(ventana, text="Filtrar", font=("Helvetica", 11), command=filtrar_recibos)
 boton_anadir.place(x=550, y=75)
 
 boton_detalles = tk.Button(ventana, text="Detalles", font=("Helvetica", 11), command=mostrar_dato_listbox)
