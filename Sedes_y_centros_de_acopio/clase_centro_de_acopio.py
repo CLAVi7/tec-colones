@@ -65,3 +65,6 @@ class centro_de_acopio:
             "estado": "Activo" if self.estado else "Inactivo",
             "numero_de_contacto": self.numero_de_contacto,
         }
+
+
+

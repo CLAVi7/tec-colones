@@ -3,8 +3,6 @@ import json
 import tkinter as tk
 from tkinter import messagebox
 from json_sedes import cargar_sedes
-from cargar import cargar_json
-
 
 def guardar_centros(centros, archivo):
     """
@@ -28,17 +26,23 @@ def cargar_centros(archivo):
     Retorna:
     list: Lista de objetos CentroDeAcopio cargados.
     """
-    data = cargar_json(archivo)
     lista_centros = []
-    for item in data:
-        centro = centro_de_acopio(
-            ubicacion=item['ubicacion'],
-            sede=item['sede'],
-            numero_de_contacto=item['numero_de_contacto'],
-            estado=item['estado'] == 'Activo',
-            id=item['id']
-        )
-        lista_centros.append(centro)
+    try:
+        with open(archivo, 'r') as f:
+            data = json.load(f)
+            for item in data:
+                centro = centro_de_acopio(
+                    ubicacion=item['ubicacion'],
+                    sede=item['sede'],
+                    numero_de_contacto=item['numero_de_contacto'],
+                    estado=item['estado'] == 'Activo',
+                    id=item["id"]
+                )
+                lista_centros.append(centro)
+    except FileNotFoundError:
+        return lista_centros
+    except json.JSONDecodeError:
+        return lista_centros
     return lista_centros
 
 
@@ -64,51 +68,44 @@ def cargar_y_mostrar_centros_listbox(ventana, listbox_centros):
         print("No se cargaron centros. Verifique el archivo JSON.")
 
     for centro in lista_centros:
-        texto = ( f" - Sede: {centro.sede}"
-                 f" - numero_de_contacto: {centro.numero_de_contacto}"
+        texto = (f"ID: {centro.id}"
+                 f" - Sede: {centro.sede}"
                  f" - Estado: {'Activo' if centro.estado else 'Inactivo'}")
         listbox_centros.insert(tk.END, texto)
 
     return listbox_centros
 
 
-def comprobaciones(entry_ubicacion, entry_contacto, variable, entry_id):
+def comprobaciones( entry_ubicacion, entry_contacto, variable, entry_id):
     """
-    Realiza comprobaciones de validación para los datos de entrada de un centro de acopio.
+     Realiza comprobaciones de validación para los datos de entrada de un centro de acopio.
 
-    Parámetros:
-    entry_ubicacion (Entry): Entrada de texto con la ubicación del centro.
-    entry_contacto (Entry): Entrada de texto con el número de contacto.
-    variable (Variable): Variable de Tkinter que contiene la sede seleccionada.
-    entry_id (Entry): Entrada de texto con el ID del centro.
+     Parámetros:
+     entry_nombre, entry_ubicacion, entry_contacto (Entry): Entradas de texto con los datos del centro.
+     variable (Variable): Variable de Tkinter que contiene la sede seleccionada.
+     entry_id (Entry): Entrada de texto con el ID del centro.
 
-    Retorna:
-    str: Mensaje de error si alguna comprobación falla, o None si todas las comprobaciones son exitosas.
-    """
-    if len(entry_id.get()) != 12:
-        return "El ID debe ser un código alfanumérico de 12 caracteres."
-    if not (1 <= len(entry_ubicacion.get())):
-        return "La ubicación debe existir."
-    if not (len(entry_ubicacion.get()) <= 100):
-        return "La ubicación debe tener máximo 100 caracteres."
-    if not entry_contacto.get().isdigit():
-        return "El número de contacto debe ser un número entero."
-    if len(entry_contacto.get()) != 8:
-        return "El número de contacto debe ser de 8 caracteres."
-    if not variable.get():
-        return "Debe ingresar un valor para las sedes."
+     Excepciones:
+     ValueError: Se lanza si alguna comprobación falla.
+     """
 
-
-    return None
+    if not (1 <= len(entry_ubicacion.get()) <= 100):
+        raise ValueError("El ubicacion debe tener máximo 100 caracteres.")
+    if not (len(entry_contacto.get()) == 8):
+        raise ValueError("El numero debe ser de 8 caracteres.")
+    if not (1 <= len(variable.get())):
+        raise ValueError("Debe ingresar un valor para las sedes.")
+    if not (len(entry_id.get()) == 12):
+        raise ValueError("El id es un codigo alfanumerico de 12 caracteres")
 
 
 
-def Modificar_centros(entry_ubicacion, variable, entry_contacto, checkbox_var, ventana, listbox_centros, options, entry_id):
+def Modificar_centros(entry_ubicacion, variable, entry_contacto, checkbox_var, ventana, listbox_centros, entry_id):
     """
     Modifica la lista de centros de acopio o agrega un nuevo centro si no existe en la lista.
 
     Parámetros:
-    entry_ubicacion, entry_contacto, entry_id (Entry): Entradas de texto con los datos del centro.
+    entry_nombre, entry_ubicacion, entry_contacto, entry_id (Entry): Entradas de texto con los datos del centro.
     variable (Variable): Variable de Tkinter que contiene la sede seleccionada.
     checkbox_var (BooleanVar): Variable de Tkinter que indica el estado del centro.
     ventana (Tk): Ventana de la aplicación.
@@ -118,32 +115,28 @@ def Modificar_centros(entry_ubicacion, variable, entry_contacto, checkbox_var, v
     Excepciones:
     ValueError, TypeError: Se lanza si las comprobaciones de datos o tipos fallan.
     """
-    Comprobaciones_resultado = comprobaciones(entry_ubicacion, entry_contacto, variable, entry_id)
-    if Comprobaciones_resultado:
-        messagebox.showerror("Error de Comprobación", Comprobaciones_resultado)
-        return
+    try:
+        comprobaciones( entry_ubicacion, entry_contacto, variable, entry_id)
+        nuevo_centro = centro_de_acopio(
+                                  ubicacion=entry_ubicacion.get(),
+                                  sede=variable.get(),
+                                  numero_de_contacto=entry_contacto.get(),
+                                  estado=checkbox_var.get(),
+                                  id="C-" + entry_id.get())
 
-    nuevo_centro = centro_de_acopio(ubicacion=entry_ubicacion.get(),
-                              sede=variable.get(),
-                              numero_de_contacto=entry_contacto.get(),
-                              estado=checkbox_var.get(),
-                              id=entry_id.get())
+        lista_centros = cargar_centros("centros.json")
+        if nuevo_centro not in lista_centros:
+            lista_centros.append(nuevo_centro)
+            guardar_centros(lista_centros, "centros.json")
+            cargar_y_mostrar_centros_listbox(ventana, listbox_centros)
 
-    lista_centros = cargar_centros("centros.json")
-    if not any(centro.id == nuevo_centro.id for centro in lista_centros):
-        lista_centros.append(nuevo_centro)
-        guardar_centros(lista_centros, "centros.json")
-        cargar_y_mostrar_centros_listbox(ventana, listbox_centros)
+        else:
+            messagebox.showwarning("Duplicado", "El centro ya existe en la lista.")
 
-        variable.set(options[0])
-        entry_ubicacion.delete(0, tk.END)
-        entry_contacto.delete(0, tk.END)
-        entry_id.delete(0,tk.END)
-        if not checkbox_var.get():
-            checkbox_var.set(True)
-
-    else:
-        messagebox.showwarning("Duplicado", "El centro ya existe en la lista.")
+    except ValueError as error:
+        messagebox.showerror("Error de Comprobación", str(error))
+    except TypeError as error:
+        messagebox.showerror("Error de Tipo", str(error))
 
 
 def mostrar_datos_seleccionados(listbox_centros):
