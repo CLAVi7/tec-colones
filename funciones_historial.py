@@ -1,3 +1,4 @@
+import tkinter as tk
 from clase_recibo import *
 import json
 from cargar import cargar_json
@@ -59,7 +60,7 @@ def cargar_y_mostrar_historial_listbox(ventana, listbox_historial):
         listbox_historial = tk.Listbox(ventana, height=12, width=120)
         listbox_historial.place(x=40, y=130)
     else:
-        listbox_historial.delete(0, tk.END)
+        listbox_historial = []
 
     lista_historial = cargar_historial("historial_recibos.json")
     if not lista_historial:
