@@ -52,7 +52,7 @@ def filtrar_recibos():
     fecha_fin = calendario_final.get_date().isoformat()
     
     # Limpiar el listbox antes de agregar los elementos filtrados
-    listbox_historial.delete(0, tk.END)
+    listbox_historial.delete(0, tk.END) #Borra los datos desde el primero (0) hasta el ultimo
     lista_historial = cargar_historial("historial_recibos.json")
     nueva_lista = []
     
@@ -71,7 +71,6 @@ def filtrar_recibos():
         listbox_historial.insert(tk.END, texto)
 
 
-
 def llamar_cargar_listbox():
     """
     Carga y muestra la historial en un Listbox. Utiliza la variable global 'listbox_historial' para mantener y actualizar el Listbox.
@@ -88,7 +87,7 @@ def mostrar_detalle_recibo():
 boton_anadir = tk.Button(ventana, text="Filtrar", font=("Helvetica", 11), command=filtrar_recibos)
 boton_anadir.place(x=550, y=75)
 
-boton_detalles = tk.Button(ventana, text="Detalles", font=("Helvetica", 11), command=mostrar_dato_listbox)
+boton_detalles = tk.Button(ventana, text="Detalles", font=("Helvetica", 11), command=mostrar_detalle_recibo)
 boton_detalles.place(x=40, y=340)
 
 ventana.mainloop()

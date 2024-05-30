@@ -119,7 +119,7 @@ def realizar_transaccion(variable_centros, carnet):
 
 
 def mostrar_dato_listbox(listbox_historial):
-
+    
     seleccion = listbox_historial.curselection()
     if len(seleccion) == 0:
         messagebox.showinfo("Error", "Por favor, seleccione un elemento de la lista.")
