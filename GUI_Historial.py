@@ -58,7 +58,7 @@ def filtrar_recibos():
     
     # Filtrar los recibos según las fechas seleccionadas
     for recibo in lista_historial:
-        if fecha_inicio <= recibo.fecha <= fecha_fin:
+        if fecha_inicio <= recibo.fecha <= fecha_fin and recibo.centro == variable.get():
             nueva_lista.append(recibo)
 
     for historial in nueva_lista:
