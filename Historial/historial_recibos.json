@@ -124,5 +124,14 @@
         "carnet": "5",
         "material": "1 Kilogramo de Material 2, ",
         "tec_colones": 1.0
+    },
+    {
+        "id": "R-wfTMLbADZjqM",
+        "fecha": "2024-06-05",
+        "centro": "C-CE1105000000",
+        "funcionario": null,
+        "carnet": "88",
+        "material": "6 Kilogramo de Material 2, ",
+        "tec_colones": 6.0
     }
 ]

@@ -1,4 +1,4 @@
-from funciones_historial import *
+from historial.funciones_historial import *
 
 ventana = tk.Tk()
 ventana.title("Historial")
