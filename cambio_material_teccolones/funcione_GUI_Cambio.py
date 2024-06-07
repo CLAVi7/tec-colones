@@ -24,7 +24,6 @@ from Sedes_y_centros_de_acopio.json_centro_acopio import *
 from crear_nuevo_material.carga_descarga_materiales import *
 from cambio_material_teccolones.clase_carrito import *
 
-
 def conseguir_materiales():
     """
     Carga los materiales desde un archivo JSON y los retorna como una lista de tuplas con nombres de materiales, su unidad y valor.
