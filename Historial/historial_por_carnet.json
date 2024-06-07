@@ -51,5 +51,27 @@
             "material": "1 Kilogramo de Material 2, ",
             "tec_colones": 1.0
         }
+    ],
+    "154": [
+        {
+            "id": "R-jOWdiFQVgXXU",
+            "fecha": "2024-06-05",
+            "centro": "C-9854JHg87asP",
+            "funcionario": null,
+            "carnet": "154",
+            "material": "2 Litro de Material 1, ",
+            "tec_colones": 200.0
+        }
+    ],
+    "1": [
+        {
+            "id": "R-JV9lkB9yHZTu",
+            "fecha": "2024-06-05",
+            "centro": "C-9854JHg87asP",
+            "funcionario": null,
+            "carnet": "1",
+            "material": "2 Litro de Material 1, ",
+            "tec_colones": 200.0
+        }
     ]
 }

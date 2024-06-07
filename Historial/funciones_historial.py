@@ -102,12 +102,12 @@ def realizar_transaccion(variable_centros, carnet):
     id = generar_id_unico("R")
 
     nuevo_recibo = recibo_centro(id, fecha, variable_centros, None, carnet, text, total)
-    historial = cargar_historial(os.path.join(os.path.dirname(__file__), "..", "historial", "historial_recibos.json"))
+    historial = cargar_historial("../Historial/historial_recibos.json")
     historial.append(nuevo_recibo)
-    guardar_historial(historial, os.path.join(os.path.dirname(__file__), "..", "historial", "historial_recibos.json"))
+    guardar_historial(historial,  "../Historial/historial_recibos.json")
 
     # Guardar en el historial por carnet
-    ruta_historial_por_carnet = os.path.join(os.path.dirname(__file__), "..", "historial", "historial_por_carnet.json")
+    ruta_historial_por_carnet = "../Historial/historial_por_carnet.json"
     historial_por_carnet = cargar_historial_por_carnet(ruta_historial_por_carnet)
 
     if carnet in historial_por_carnet:

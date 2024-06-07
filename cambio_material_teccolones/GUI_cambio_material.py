@@ -1,5 +1,5 @@
 from cambio_material_teccolones.funcione_GUI_Cambio import *
-from historial.funciones_historial import realizar_transaccion
+from Historial.funciones_historial import realizar_transaccion
 from tkinter import messagebox
 
 ventana = tk.Tk()
