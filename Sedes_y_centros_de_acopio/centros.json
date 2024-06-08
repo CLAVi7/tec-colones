@@ -1,26 +1,30 @@
 [
     {
-        "id": "132",
-        "nombre": "12312",
-        "ubicacion": "12312",
-        "sede": "Seleccionar1",
+        "id": "C-9854JHg87asP",
+        "ubicacion": "si",
+        "sede": "Sede Central",
         "estado": "Activo",
-        "numero_de_contacto": "123"
+        "numero_de_contacto": "88888888"
     },
     {
-        "id": "123456789101",
-        "nombre": "holas",
-        "ubicacion": "por ahi",
-        "sede": "Seleccionar1",
-        "estado": "Inactivo",
-        "numero_de_contacto": "12345678"
+        "id": "C-58skdP8AdD8p",
+        "ubicacion": "si",
+        "sede": "San Carlos",
+        "estado": "Activo",
+        "numero_de_contacto": "88888888"
     },
     {
-        "id": "012345678910",
-        "nombre": "gfdgfddh",
-        "ubicacion": "jkjvkv",
-        "sede": "Alajuela",
+        "id": "C-8sKJD89dDazc",
+        "ubicacion": "si",
+        "sede": "San Jose",
         "estado": "Activo",
-        "numero_de_contacto": "12345678"
+        "numero_de_contacto": "88888888"
+    },
+    {
+        "id": "C-CE1105000000",
+        "ubicacion": "edificio f",
+        "sede": "Sede Central",
+        "estado": "Activo",
+        "numero_de_contacto": "88888888"
     }
 ]

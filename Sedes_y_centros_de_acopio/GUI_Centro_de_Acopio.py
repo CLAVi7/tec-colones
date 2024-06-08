@@ -13,11 +13,6 @@ etiqueta = tk.Label(ventana, text="Configuración Centros de Acopio",  font=("He
 etiqueta.config(width=50, height=2)
 etiqueta.pack()
 
-label = tk.Label(ventana, text="Ingresar Centro de Acopio")
-label.place(x=40, y=80)
-
-entry_nombre = tk.Entry(ventana, width=40)
-entry_nombre.place(x=40, y=105)
 
 label = tk.Label(ventana, text="Ubicación del Centro de Acopio")
 label.place(x=40, y=135)
@@ -70,8 +65,8 @@ def llamar_modificar_centros():
     Llama a la función 'Modificar_centros' para actualizar o añadir centros de acopio en la lista, utilizando variables globales y actualizando el 'listbox_centros'.
     """
     global listbox_centros
-    listbox_centros = Modificar_centros(entry_nombre, entry_ubicacion, variable, entry_contacto, checkbox_var, ventana, listbox_centros, options, entry_id)
-    entry_nombre.delete(0, tk.END)
+    listbox_centros = Modificar_centros(entry_ubicacion, variable, entry_contacto, checkbox_var, ventana, listbox_centros, entry_id)
+
     variable.set(options[0])
     entry_ubicacion.delete(0, tk.END)
     entry_contacto.delete(0, tk.END)
