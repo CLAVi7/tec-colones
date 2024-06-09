@@ -1,8 +1,7 @@
 from funciones.funciones_cambio_material import *
 from funciones.funciones_historial import realizar_transaccion
 from tkinter import messagebox
-
-ruta_carrito = "../base_de_datos/carrito.json"
+from funciones.rutas import *
 
 ventana = tk.Tk()
 ventana.title("cambio de material")

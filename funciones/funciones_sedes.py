@@ -2,13 +2,7 @@ from funciones.clase_sede import *
 import json
 import tkinter as tk
 from tkinter import messagebox
-
-ruta_carrito = "../base_de_datos/carrito.json"
-ruta_centros = "../base_de_datos/centros.json"
-ruta_historial_por_carnet = "../base_de_datos/historial_por_carnet.json"
-ruta_historial_recibos = "../base_de_datos/historial_recibos.json"
-ruta_materiales = "../base_de_datos/materiales.json"
-ruta_sedes = "../base_de_datos/sedes.json"
+from funciones.rutas import *
 
 
 def guardar_sedes(sede, archivo):

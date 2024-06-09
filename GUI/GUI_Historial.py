@@ -1,4 +1,5 @@
 from funciones.funciones_historial import *
+from funciones.rutas import *
 
 ventana = tk.Tk()
 ventana.title("Historial")
@@ -53,7 +54,7 @@ def filtrar_recibos():
     
     # Limpiar el listbox antes de agregar los elementos filtrados
     listbox_historial.delete(0, tk.END) #Borra los datos desde el primero (0) hasta el ultimo
-    lista_historial = cargar_historial("historial_recibos.json")
+    lista_historial = cargar_historial(ruta_historial_recibos)
     nueva_lista = []
     
     # Filtrar los recibos según las fechas seleccionadas
