@@ -6,10 +6,10 @@ from funciones.cargar import cargar_json
 import json
 from tkcalendar import DateEntry
 import funciones.generador_id
-from funciones.json_centro_acopio import cargar_centros
-from funciones.carga_descarga_materiales import cargar_materiales
-from funciones.json_centro_acopio import *
-from funciones.carga_descarga_materiales import *
+from funciones.funciones_centro_acopio import cargar_centros
+from funciones.funciones_crear_material import cargar_materiales
+from funciones.funciones_centro_acopio import *
+from funciones.funciones_crear_material import *
 from funciones.clase_carrito import *
 
 ruta_carrito = "../base_de_datos/carrito.json"

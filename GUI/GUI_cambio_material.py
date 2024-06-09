@@ -1,4 +1,4 @@
-from funciones.funcione_GUI_Cambio import *
+from funciones.funciones_cambio_material import *
 from funciones.funciones_historial import realizar_transaccion
 from tkinter import messagebox
 
@@ -112,6 +112,8 @@ def llamar_transaccion():
     entry_carnet.delete(0, tk.END)
     llamar_cargar_listbox()
     cambiar_label()
+    messagebox.showinfo("Transacción Completa", "La transacción fue completada con éxito.")
+
 
 
 boton_transaccion = tk.Button(ventana, text="Realizar transaccion", command=llamar_transaccion)

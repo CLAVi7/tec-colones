@@ -1,4 +1,4 @@
-from funciones.clase_sedes import *
+from funciones.clase_sede import *
 import json
 import tkinter as tk
 from tkinter import messagebox

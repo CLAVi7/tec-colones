@@ -26,5 +26,12 @@
         "sede": "Sede Central",
         "estado": "Activo",
         "numero_de_contacto": "88888888"
+    },
+    {
+        "id": "C-hp6666666666",
+        "ubicacion": "edificio de prueba",
+        "sede": "Sede de prueba ",
+        "estado": "Activo",
+        "numero_de_contacto": "66666666"
     }
 ]

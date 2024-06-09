@@ -84,5 +84,27 @@
             "material": "20 Litro de Material 1, ",
             "tec_colones": 2000.0
         }
+    ],
+    "66": [
+        {
+            "id": "T-WbO86y05A3Tp",
+            "fecha": "2024-06-08",
+            "centro": "C-hp6666666666",
+            "funcionario": null,
+            "carnet": "66",
+            "material": "66 Unidad de Material 10, 22 Kilogramo de Material 4, ",
+            "tec_colones": 110.0
+        }
+    ],
+    "99": [
+        {
+            "id": "T-GkKujCkUe1g7",
+            "fecha": "2024-06-08",
+            "centro": "C-hp6666666666",
+            "funcionario": null,
+            "carnet": "99",
+            "material": "99 Unidad de Material 10, ",
+            "tec_colones": 99.0
+        }
     ]
 }

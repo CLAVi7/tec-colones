@@ -2,7 +2,7 @@ from funciones.clase_centro_de_acopio import *
 import json
 import tkinter as tk
 from tkinter import messagebox
-from funciones.json_sedes import cargar_sedes
+from funciones.funciones_sedes import cargar_sedes
 
 ruta_carrito = "../base_de_datos/carrito.json"
 ruta_centros = "../base_de_datos/centros.json"

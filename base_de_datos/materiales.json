@@ -79,5 +79,14 @@
         "estado": "Inactivo",
         "fecha_creacion": "2024-05-17 18:04:45",
         "descripcion": "\n"
+    },
+    {
+        "id": "M-qXT71pBU0gVz",
+        "nombre": "Material 10",
+        "unidad": "Unidad",
+        "valor_unitario": "1",
+        "estado": "Activo",
+        "fecha_creacion": "2024-06-08 21:58:45",
+        "descripcion": "material de prueba despues del ultimo refactoring\n"
     }
 ]

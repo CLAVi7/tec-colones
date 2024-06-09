@@ -26,5 +26,12 @@
         "provincia": "Cartago",
         "numero_contacto": "88888888",
         "estado": "Activo"
+    },
+    {
+        "id": "S-hpbZITzaeV6r",
+        "nombre": "Sede de prueba ",
+        "provincia": "Guanacaste",
+        "numero_contacto": "66666666",
+        "estado": "Activo"
     }
 ]

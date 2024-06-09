@@ -1,4 +1,4 @@
-from funciones.Materiales import *
+from funciones.clase_material import *
 import json
 import tkinter as tk
 from tkinter import messagebox

@@ -1,5 +1,5 @@
 from funciones.clase_recibo import *
-from funciones.funcione_GUI_Cambio import *
+from funciones.funciones_cambio_material import *
 import random
 import funciones.generador_id
 
@@ -103,11 +103,9 @@ def realizar_transaccion(variable_centros, carnet):
 
     total = suma_tec_colones()
 
-    """caracteres = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'
-    id_aleatorio = ''.join(random.choice(caracteres) for _ in range(12))
-    id = "R-" + id_aleatorio"""
-    id = generar_id_unico("R")
+    # Guardar en el historial
 
+    id = generar_id_unico("R")
     nuevo_recibo = recibo_centro(id, fecha, variable_centros, None, carnet, text, total)
     historial = cargar_historial(ruta_historial_recibos)
     historial.append(nuevo_recibo)
@@ -115,6 +113,8 @@ def realizar_transaccion(variable_centros, carnet):
 
     # Guardar en el historial por carnet
 
+    id = generar_id_unico("T")
+    nuevo_recibo = recibo_centro(id, fecha, variable_centros, None, carnet, text, total)
     historial_por_carnet = cargar_historial_por_carnet(ruta_historial_por_carnet)
 
     if carnet in historial_por_carnet:

@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import *
 from tkinter import messagebox
-from funciones.json_centro_acopio import *
+from funciones.funciones_centro_acopio import *
 
 
 ventana = Tk()
@@ -86,6 +86,7 @@ def llamar_cambiar_estado():
     """
     Cambia el estado del centro de acopio seleccionado en el Listbox 'listbox_centros', y actualiza el Listbox para reflejar los cambios.
     """
+    global listbox_centros
     cambiar_estdo_listbox(ventana, listbox_centros)
 
 

@@ -1,8 +1,8 @@
-from funciones.Materiales import *
+from funciones.clase_material import *
 import json
 import tkinter as tk
 from tkinter import messagebox
-from funciones.carga_descarga_materiales import *
+from funciones.funciones_crear_material import *
 
 
 listbox_materiales = None
