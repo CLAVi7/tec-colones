@@ -1,6 +1,6 @@
 import tkinter as tk
-from json_sedes import *
-from clase_sedes import *
+from funciones.json_sedes import *
+from funciones.clase_sedes import *
 
 ventana = tk.Tk()
 ventana.title("sedes")

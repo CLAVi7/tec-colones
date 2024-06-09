@@ -1,7 +1,14 @@
-from Materiales import *
+from funciones.Materiales import *
 import json
 import tkinter as tk
 from tkinter import messagebox
+
+ruta_carrito = "../base_de_datos/carrito.json"
+ruta_centros = "../base_de_datos/centros.json"
+ruta_historial_por_carnet = "../base_de_datos/historial_por_carnet.json"
+ruta_historial_recibos = "../base_de_datos/historial_recibos.json"
+ruta_materiales = "../base_de_datos/materiales.json"
+ruta_sedes = "../base_de_datos/sedes.json"
 
 
 #Función que guarda una lista de objetos de material en un archivo JSON.
@@ -68,7 +75,7 @@ def cargar_y_mostrar_materiales_listbox(ventana, listbox_materiales):
     else:
         listbox_materiales.delete(0, tk.END)
 
-    lista_materiales = cargar_materiales("materiales.json")
+    lista_materiales = cargar_materiales(ruta_materiales)
     for material in lista_materiales:
         texto = f"Nombre: {material.nombre} - Unidad: {material.unidad} - Valor: {material.valor_unitario} - Estado: {'Activo' if material.estado else 'Inactivo'}"
         listbox_materiales.insert(tk.END, texto)
@@ -130,10 +137,10 @@ def modificar_materiales(entry_nombre, variable, entry_valor, checkbox_var, text
             descripcion=text_descripcion.get("1.0", tk.END)
         )
 
-        lista_materiales = cargar_materiales("materiales.json")
+        lista_materiales = cargar_materiales(ruta_materiales)
         if nuevo_material not in lista_materiales:
             lista_materiales.append(nuevo_material)
-            guardar_materiales(lista_materiales, "materiales.json")
+            guardar_materiales(lista_materiales, ruta_materiales)
             cargar_y_mostrar_materiales_listbox(ventana, listbox_materiales)
 
         else:
@@ -159,7 +166,7 @@ def mostrar_datos_seleccionados(listbox_materiales):
         return
 
     indice = seleccion[0]
-    lista_materiales = cargar_materiales('materiales.json')
+    lista_materiales = cargar_materiales(ruta_materiales)
     Material = lista_materiales[indice]
     mensaje = f"{Material.__str__()}"
     messagebox.showinfo("Material", mensaje)
@@ -179,7 +186,7 @@ def cambiar_estado_listbox(ventana, listbox_materiales):
         return
 
     indice = seleccion[0]
-    lista_materiales = cargar_materiales("materiales.json")
+    lista_materiales = cargar_materiales(ruta_materiales)
     lista_materiales[indice].estado = not lista_materiales[indice].estado  # Cambiar el estado
-    guardar_materiales(lista_materiales, "materiales.json")  # Guardar cambios
+    guardar_materiales(lista_materiales, ruta_materiales)  # Guardar cambios
     cargar_y_mostrar_materiales_listbox(ventana, listbox_materiales)  # Actualizar la lista

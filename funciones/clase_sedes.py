@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 import json
-from generador_id import generar_id_unico
+from funciones.generador_id import generar_id_unico
 
 class sedes:
     """

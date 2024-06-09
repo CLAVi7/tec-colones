@@ -1,9 +1,17 @@
-from clase_sedes import *
+from funciones.clase_sedes import *
 import json
 import tkinter as tk
 from tkinter import messagebox
 
-def guardar_sedes(sedes, archivo):
+ruta_carrito = "../base_de_datos/carrito.json"
+ruta_centros = "../base_de_datos/centros.json"
+ruta_historial_por_carnet = "../base_de_datos/historial_por_carnet.json"
+ruta_historial_recibos = "../base_de_datos/historial_recibos.json"
+ruta_materiales = "../base_de_datos/materiales.json"
+ruta_sedes = "../base_de_datos/sedes.json"
+
+
+def guardar_sedes(sede, archivo):
     """
     Guarda una lista de sedes en un archivo JSON.
 
@@ -12,7 +20,7 @@ def guardar_sedes(sedes, archivo):
     archivo (str): Ruta del archivo donde se guardarán los datos.
     """
     with open(archivo, 'w') as f:
-        json.dump([sedes.to_dict() for sedes in sedes], f, ensure_ascii=False, indent=4)
+        json.dump([sedes.to_dict() for sedes in sede], f, ensure_ascii=False, indent=4)
 
 
 def cargar_sedes(archivo):
@@ -67,7 +75,7 @@ def cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes):
     else:
         listbox_sedes.delete(0, tk.END)
 
-    lista_sede = cargar_sedes("sedes.json")
+    lista_sede = cargar_sedes(ruta_sedes)
     #print("La lista es: ", lista_sede[0])
 
     for sede in lista_sede:
@@ -132,10 +140,10 @@ def Modificar_sedes(entry_nombre, variable, entry_contacto, checkbox_var, option
                               numero_contacto=entry_contacto.get(),
                               estado=checkbox_var.get())
 
-    lista_sedes = cargar_sedes("sedes.json")
+    lista_sedes = cargar_sedes(ruta_sedes)
     if nuevo_sede not in lista_sedes:
         lista_sedes.append(nuevo_sede)
-        guardar_sedes(lista_sedes, "sedes.json")
+        guardar_sedes(lista_sedes, ruta_sedes)
         listbox_sedes = cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes)
 
         entry_nombre.delete(0, tk.END)
@@ -164,7 +172,7 @@ def mostrar_datos_seleccionados(listbox_sedes):
         return
 
     indice = seleccion[0]
-    lista_sedes = cargar_sedes("sedes.json")
+    lista_sedes = cargar_sedes(ruta_sedes)
     #print("lista_sedes:", lista_sedes[indice])
     sedes = lista_sedes[indice]
     #print("sedes: ", sedes)
@@ -186,7 +194,7 @@ def cambiar_estdo_listbox(ventana, listbox_sedes):
         return
 
     indice = seleccion[0]
-    lista_sedes = cargar_sedes("sedes.json")
+    lista_sedes = cargar_sedes(ruta_sedes)
     lista_sedes[indice].estado = not lista_sedes[indice].estado
-    guardar_sedes(lista_sedes, "sedes.json")
+    guardar_sedes(lista_sedes, ruta_sedes)
     cargar_y_mostrar_sedes_listbox(ventana, listbox_sedes)

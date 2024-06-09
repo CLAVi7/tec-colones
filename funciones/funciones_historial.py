@@ -1,7 +1,14 @@
-from clase_recibo import *
-from cambio_material_teccolones.funcione_GUI_Cambio import *
+from funciones.clase_recibo import *
+from funciones.funcione_GUI_Cambio import *
 import random
-import generador_id
+import funciones.generador_id
+
+ruta_carrito = "../base_de_datos/carrito.json"
+ruta_centros = "../base_de_datos/centros.json"
+ruta_historial_por_carnet = "../base_de_datos/historial_por_carnet.json"
+ruta_historial_recibos = "../base_de_datos/historial_recibos.json"
+ruta_materiales = "../base_de_datos/materiales.json"
+ruta_sedes = "../base_de_datos/sedes.json"
 
 
 def guardar_historial(historial, archivo):
@@ -57,7 +64,7 @@ def cargar_y_mostrar_historial_listbox(ventana, listbox_historial):
     else:
         listbox_historial = []
 
-    lista_historial = cargar_historial("historial_recibos.json")
+    lista_historial = cargar_historial(ruta_historial_recibos)
     if not lista_historial:
         print("No se cargó el historial. Verifique el archivo JSON.")
 
@@ -89,7 +96,7 @@ def guardar_historial_por_carnet(historial_por_carnet, ruta):
 
 def realizar_transaccion(variable_centros, carnet):
     fecha = datetime.today().date().isoformat()
-    lista_carrito = cargar_carrito("carrito.json")
+    lista_carrito = cargar_carrito(ruta_carrito)
     text = ""
     for item in lista_carrito:
         text = text + item.cantidad + " de " + item.nombre + ", "
@@ -102,12 +109,12 @@ def realizar_transaccion(variable_centros, carnet):
     id = generar_id_unico("R")
 
     nuevo_recibo = recibo_centro(id, fecha, variable_centros, None, carnet, text, total)
-    historial = cargar_historial("../Historial/historial_recibos.json")
+    historial = cargar_historial(ruta_historial_recibos)
     historial.append(nuevo_recibo)
-    guardar_historial(historial,  "../Historial/historial_recibos.json")
+    guardar_historial(historial, ruta_historial_recibos)
 
     # Guardar en el historial por carnet
-    ruta_historial_por_carnet = "../Historial/historial_por_carnet.json"
+
     historial_por_carnet = cargar_historial_por_carnet(ruta_historial_por_carnet)
 
     if carnet in historial_por_carnet:
@@ -126,7 +133,7 @@ def mostrar_dato_listbox(listbox_historial):
         return
 
     indice = seleccion[0]
-    lista_historial = cargar_historial("historial_recibos.json")
+    lista_historial = cargar_historial(ruta_historial_recibos)
     recibo = lista_historial[indice]
     mensaje = f"{recibo.__str__()}"
     messagebox.showinfo("Recibo", mensaje)

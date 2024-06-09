@@ -2,27 +2,23 @@ import sys
 import os
 import tkinter as tk
 from tkinter import messagebox
-from cargar import cargar_json
+from funciones.cargar import cargar_json
 import json
 from tkcalendar import DateEntry
-import generador_id
+import funciones.generador_id
+from funciones.json_centro_acopio import cargar_centros
+from funciones.carga_descarga_materiales import cargar_materiales
+from funciones.json_centro_acopio import *
+from funciones.carga_descarga_materiales import *
+from funciones.clase_carrito import *
 
-# Añadir el directorio 'Sedes_y_centros_de_acopio' al PATH
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'Sedes_y_centros_de_acopio')))
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'crear_nuevo_material')))
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'historial')))
+ruta_carrito = "../base_de_datos/carrito.json"
+ruta_centros = "../base_de_datos/centros.json"
+ruta_historial_por_carnet = "../base_de_datos/historial_por_carnet.json"
+ruta_historial_recibos = "../base_de_datos/historial_recibos.json"
+ruta_materiales = "../base_de_datos/materiales.json"
+ruta_sedes = "../base_de_datos/sedes.json"
 
-"""from json_centro_acopio import cargar_centros
-from carga_descarga_materiales import cargar_materiales
-from cambio_material_teccolones.clase_carrito import *
-from clase_recibo import recibo_centro
-from funciones_historial import *"""
-
-from json_centro_acopio import cargar_centros
-from carga_descarga_materiales import cargar_materiales
-from Sedes_y_centros_de_acopio.json_centro_acopio import *
-from crear_nuevo_material.carga_descarga_materiales import *
-from cambio_material_teccolones.clase_carrito import *
 
 def conseguir_materiales():
     """
@@ -31,7 +27,7 @@ def conseguir_materiales():
     Retorna:
     list: Lista de tuplas con nombres de materiales, su unidad y valor.
     """
-    lista_materiales = cargar_materiales(os.path.join(os.path.dirname(__file__), '..', 'crear_nuevo_material', 'materiales.json'))
+    lista_materiales = cargar_materiales(ruta_materiales)
     options = []
     for material in lista_materiales:
         options.append((material.nombre, material.unidad, material.valor_unitario, material.estado))
@@ -44,7 +40,7 @@ def conseguir_centro():
     Retorna:
     list: Lista de nombres de las sedes disponibles.
     """
-    lista_centros = cargar_centros(os.path.join(os.path.dirname(__file__), '..', 'Sedes_y_centros_de_acopio', 'centros.json'))
+    lista_centros = cargar_centros(ruta_centros)
     options = []
     for centro_de_acopio in lista_centros:
         options.append(centro_de_acopio.id)
@@ -135,11 +131,11 @@ def modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales):
                               cantidad=entry_cantidad.get() + " " + unidad,
                               tec_colones=(float(valor)*float(entry_cantidad.get())))
 
-    lista_carrito = cargar_carrito("carrito.json")
+    lista_carrito = cargar_carrito(ruta_carrito)
 
     if nuevo_carrito not in lista_carrito:
         lista_carrito.append(nuevo_carrito)
-        guardar_carrito(lista_carrito, "carrito.json")
+        guardar_carrito(lista_carrito, ruta_carrito)
         listbox_carrito = cargar_y_mostrar_carrito_listbox(listbox_carrito)
 
     return listbox_carrito
@@ -148,7 +144,7 @@ def cargar_y_mostrar_carrito_listbox(listbox_carrito):
     # Vaciar el listbox antes de insertar nuevos elementos
     listbox_carrito.delete(0, tk.END)
 
-    lista_carrito = cargar_carrito("carrito.json")
+    lista_carrito = cargar_carrito(ruta_carrito)
 
     for carrito in lista_carrito:
         texto = (f"Nombre: {carrito.nombre}"
@@ -160,7 +156,7 @@ def cargar_y_mostrar_carrito_listbox(listbox_carrito):
 
 def suma_tec_colones():
     tec_colones_total = 0
-    lista_carrito = cargar_carrito("carrito.json")
+    lista_carrito = cargar_carrito(ruta_carrito)
 
     for carrito in lista_carrito:
         tec_colones_total += carrito.tec_colones

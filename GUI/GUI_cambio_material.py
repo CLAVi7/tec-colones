@@ -1,6 +1,8 @@
-from cambio_material_teccolones.funcione_GUI_Cambio import *
-from Historial.funciones_historial import realizar_transaccion
+from funciones.funcione_GUI_Cambio import *
+from funciones.funciones_historial import realizar_transaccion
 from tkinter import messagebox
+
+ruta_carrito = "../base_de_datos/carrito.json"
 
 ventana = tk.Tk()
 ventana.title("cambio de material")
@@ -89,7 +91,7 @@ llamar_cargar_listbox()
 
 
 def vaciar_json_y_listbox():
-    guardar_carrito([], "carrito.json")
+    guardar_carrito([], ruta_carrito)
     llamar_cargar_listbox()
     entry_carnet.delete(0, tk.END)
     cambiar_label()
@@ -102,11 +104,11 @@ def llamar_transaccion():
     if not entry_carnet.get():
         messagebox.showerror("Error", "No se ingresó carnet")
         return
-    if cargar_carrito("carrito.json") == []:
+    if cargar_carrito(ruta_carrito) == []:
         messagebox.showerror("Error", "No se ingresó ningun material ")
         return
     realizar_transaccion(variable_centros.get(), entry_carnet.get())
-    guardar_carrito([], "carrito.json")
+    guardar_carrito([], ruta_carrito)
     entry_carnet.delete(0, tk.END)
     llamar_cargar_listbox()
     cambiar_label()

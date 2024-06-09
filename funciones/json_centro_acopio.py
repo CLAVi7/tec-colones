@@ -1,8 +1,16 @@
-from clase_centro_de_acopio import *
+from funciones.clase_centro_de_acopio import *
 import json
 import tkinter as tk
 from tkinter import messagebox
-from json_sedes import cargar_sedes
+from funciones.json_sedes import cargar_sedes
+
+ruta_carrito = "../base_de_datos/carrito.json"
+ruta_centros = "../base_de_datos/centros.json"
+ruta_historial_por_carnet = "../base_de_datos/historial_por_carnet.json"
+ruta_historial_recibos = "../base_de_datos/historial_recibos.json"
+ruta_materiales = "../base_de_datos/materiales.json"
+ruta_sedes = "../base_de_datos/sedes.json"
+
 
 def guardar_centros(centros, archivo):
     """
@@ -63,7 +71,7 @@ def cargar_y_mostrar_centros_listbox(ventana, listbox_centros):
     else:
         listbox_centros.delete(0, tk.END)
 
-    lista_centros = cargar_centros("centros.json")
+    lista_centros = cargar_centros(ruta_centros)
     if not lista_centros:
         print("No se cargaron centros. Verifique el archivo JSON.")
 
@@ -127,14 +135,15 @@ def Modificar_centros(entry_ubicacion, variable, entry_contacto, checkbox_var, v
                               estado=checkbox_var.get(),
                               id="C-" + entry_id.get())
 
-    lista_centros = cargar_centros("centros.json")
+    lista_centros = cargar_centros(ruta_centros)
     if not any(centro.id == nuevo_centro.id for centro in lista_centros):
         lista_centros.append(nuevo_centro)
-        guardar_centros(lista_centros, "centros.json")
+        guardar_centros(lista_centros, ruta_centros)
         cargar_y_mostrar_centros_listbox(ventana, listbox_centros)
 
     else:
         messagebox.showwarning("Duplicado", "El centro ya existe en la lista.")
+
 
 def mostrar_datos_seleccionados(listbox_centros):
     """
@@ -150,7 +159,7 @@ def mostrar_datos_seleccionados(listbox_centros):
         return
 
     indice = seleccion[0]
-    lista_centros = cargar_centros("centros.json")
+    lista_centros = cargar_centros(ruta_centros)
     centro = lista_centros[indice]
     mensaje = f"{centro.__str__()}"
     messagebox.showinfo("Centro", mensaje)
@@ -171,9 +180,9 @@ def cambiar_estdo_listbox(ventana, listbox_centros):
         return
 
     indice = seleccion[0]
-    lista_centros = cargar_centros("centros.json")
+    lista_centros = cargar_centros(ruta_centros)
     lista_centros[indice].estado = not lista_centros[indice].estado
-    guardar_centros(lista_centros, "centros.json")
+    guardar_centros(lista_centros, ruta_centros)
     cargar_y_mostrar_centros_listbox(ventana, listbox_centros)
 
 
@@ -184,7 +193,7 @@ def conseguir_sedes():
     Retorna:
     list: Lista de nombres de las sedes disponibles.
     """
-    lista_sedes = cargar_sedes("sedes.json")
+    lista_sedes = cargar_sedes(ruta_sedes)
     options = []
     for sede in lista_sedes:
         options.append(sede.nombre)
