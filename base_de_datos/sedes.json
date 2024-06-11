@@ -33,5 +33,12 @@
         "provincia": "Guanacaste",
         "numero_contacto": "66666666",
         "estado": "Activo"
+    },
+    {
+        "id": "S-t8HcJO1lJ9Lg",
+        "nombre": "asd222",
+        "provincia": "Cartago",
+        "numero_contacto": "12345678",
+        "estado": "Activo"
     }
 ]

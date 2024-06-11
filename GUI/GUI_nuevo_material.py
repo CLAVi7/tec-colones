@@ -115,6 +115,6 @@ def main():
 
     # Ejecutar la ventana principal
     ventana.mainloop()
-main()
+
 
 

@@ -33,5 +33,12 @@
         "sede": "Sede de prueba ",
         "estado": "Activo",
         "numero_de_contacto": "66666666"
+    },
+    {
+        "id": "C-123456789123",
+        "ubicacion": "sfdfsafd",
+        "sede": "Sede de prueba ",
+        "estado": "Inactivo",
+        "numero_de_contacto": "12345678"
     }
 ]
