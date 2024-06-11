@@ -88,6 +88,8 @@ def comprobaciones( entry_cantidad, variable_materiales):
     """
     if not (entry_cantidad.get()):
         return "La cantidad debe ser un número entero."
+    if not cantidad.isdigit():
+        return "La cantidad debe ser un número entero sin letras ni símbolos."
     if (float(entry_cantidad.get()) <= 0):
         return "La cantidad debe ser un número positivo."
     if not (variable_materiales.get()):
