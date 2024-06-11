@@ -1,6 +1,5 @@
 from funciones.clase_recibo import *
 from funciones.funciones_cambio_material import *
-import random
 import funciones.generador_id
 from funciones.rutas import *
 
