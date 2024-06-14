@@ -105,6 +105,15 @@
             "carnet": "99",
             "material": "99 Unidad de Material 10, ",
             "tec_colones": 99.0
+        },
+        {
+            "id": "D-rSA9n2FeGo8O",
+            "fecha": "2024-06-13",
+            "centro": "C-hp6666666666",
+            "funcionario": null,
+            "carnet": "99",
+            "material": "99 Unidad de Material 10, ",
+            "tec_colones": -99.0
         }
     ],
     "2545": [

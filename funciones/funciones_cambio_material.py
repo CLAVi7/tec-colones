@@ -136,6 +136,7 @@ def modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales):
 
     return listbox_carrito
 
+
 def cargar_y_mostrar_carrito_listbox(listbox_carrito):
     # Vaciar el listbox antes de insertar nuevos elementos
     listbox_carrito.delete(0, tk.END)
@@ -149,6 +150,7 @@ def cargar_y_mostrar_carrito_listbox(listbox_carrito):
         listbox_carrito.insert(tk.END, texto)
 
     return listbox_carrito
+
 
 def suma_tec_colones():
     tec_colones_total = 0

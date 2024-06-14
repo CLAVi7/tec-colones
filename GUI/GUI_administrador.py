@@ -2,6 +2,8 @@ import tkinter as tk
 from GUI_nuevo_material import main
 from GUI_sedes import configuracion_sedes
 from GUI_Centro_de_Acopio import configuracion_centros
+from GUI_historial_general import historial_general
+
 
 
 def admin():
@@ -20,7 +22,7 @@ def admin():
     boton_sedes.place(x=345, y=150)
     boton_centros = tk.Button(ventana, text="configuracion de centros de acopio", command=configuracion_centros)
     boton_centros.place(x=345, y=200)
-    boton_historial_general = tk.Button(ventana, text="ver historial general")
+    boton_historial_general = tk.Button(ventana, text="ver historial general", command=historial_general)
     boton_historial_general.place(x=345, y=250)
 
     ventana.mainloop()

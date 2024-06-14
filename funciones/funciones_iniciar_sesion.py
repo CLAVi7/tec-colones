@@ -5,6 +5,7 @@ from GUI.GUI_administrador import admin
 from GUI.GUI_estudiante import estudiante
 from GUI.GUI_funcionario import funcionario
 
+
 ruta_usuarios = "../base_de_datos/cuentas_usuarios.json"
 
 
