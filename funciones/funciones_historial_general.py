@@ -43,7 +43,7 @@ def mostrar_dato_listbox(listbox_historial):
         return
 
     indice = seleccion[0]
-    lista_historial = cargar_historial(ruta_historial_recibos)
+    lista_historial = cargar_historial(ruta_historial_recibos,ruta_historial_por_carnet)
     recibo = lista_historial[indice]
     mensaje = f"{recibo.__str__()}"
     messagebox.showinfo("Recibo", mensaje)
