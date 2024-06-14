@@ -1,4 +1,5 @@
 from funciones.funciones_historial import *
+from funciones.funciones_historial_general import *
 from funciones.rutas import *
 
 
@@ -9,7 +10,7 @@ def historial_general():
     ventana.geometry("800x400")
     ventana["bg"] = "#C3CDC0"
 
-    etiqueta = tk.Label(ventana, text="Ver Historial de Centro de Acopio", font=("Helvetica", 20), bg="#8DC67E")
+    etiqueta = tk.Label(ventana, text="Ver Historial", font=("Helvetica", 20), bg="#8DC67E")
     etiqueta.config(width=50, height=2)
     etiqueta.pack()
 
@@ -39,16 +40,6 @@ def historial_general():
     listbox = tk.Listbox(ventana, selectmode=tk.SINGLE)
     listbox.place(x=50, y=150, width=700, height=170)
 
-    label_centro = tk.Label(ventana, text="Centro de Acopio", font=("Helvetica", 12))
-    label_centro.place(x=400, y=75)
-
-    centro = conseguir_centro()
-    variable = tk.StringVar(ventana)
-    variable.set(centro[0])
-    dropdown_menu = tk.OptionMenu(ventana, variable, *centro)
-    dropdown_menu.place(x=400, y=100)
-
-
 
     def filtrar_recibos():
         global listbox_historial
@@ -63,7 +54,7 @@ def historial_general():
 
         # Filtrar los recibos según las fechas seleccionadas
         for recibo in lista_historial:
-            if fecha_inicio <= recibo.fecha <= fecha_fin and recibo.centro == variable.get():
+            if fecha_inicio <= recibo.fecha <= fecha_fin:
                 nueva_lista.append(recibo)
 
         for historial in nueva_lista:
@@ -85,7 +76,7 @@ def historial_general():
     llamar_cargar_listbox()
 
     def mostrar_detalle_recibo():
-        mostrar_dato_listbox(listbox_historial)
+        mostrar_dato_listbox_A(listbox_historial, ventana)
 
     boton_anadir = tk.Button(ventana, text="Filtrar", font=("Helvetica", 11), command=filtrar_recibos)
     boton_anadir.place(x=550, y=75)
@@ -94,3 +85,4 @@ def historial_general():
     boton_detalles.place(x=40, y=340)
 
     ventana.mainloop()
+historial_general()
