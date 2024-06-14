@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import messagebox
 from funciones.funciones_iniciar_sesion import *
 
+
 def configuracion_iniciar_sesion():
     ventana = Tk()
     ventana.title("Iniciar Sesión")
@@ -31,10 +32,12 @@ def configuracion_iniciar_sesion():
         Carga y muestra la historial en un Listbox. Utiliza la variable global 'listbox_historial' para mantener y actualizar el Listbox.
         """
         comprobaciones(entry_correo, entry_contrasena)
-   
+
+
     boton_iniciar_sesion = tk.Button(ventana, text="Iniciar Sesión", command=llamar_comprobar_usuario)
     boton_iniciar_sesion.place(x=362, y=265)
 
     
     ventana.mainloop()
+
 configuracion_iniciar_sesion()
