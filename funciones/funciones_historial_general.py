@@ -21,7 +21,7 @@ def realizar_devolucion(id_recibo_original, ventana):
     carnet = recibo_original.carnet
 
     # Guardar en el historial
-    id = generar_id_unico("D")
+    id = generar_id_unico("A")
     nuevo_recibo = recibo_centro(id, fecha, recibo_original.centro, None, carnet, recibo_original.material, total)
     historial.append(nuevo_recibo)
     guardar_historial(historial, ruta_historial_recibos)
