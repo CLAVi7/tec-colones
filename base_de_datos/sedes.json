@@ -1,0 +1,44 @@
+[
+    {
+        "id": "S-d1lQ8TmTjpZ0",
+        "nombre": "Sede Central",
+        "provincia": "Cartago",
+        "numero_contacto": "88888888",
+        "estado": "Activo"
+    },
+    {
+        "id": "S-gml3tsht4Dc2",
+        "nombre": "San Carlos",
+        "provincia": "Alajuela",
+        "numero_contacto": "88888888",
+        "estado": "Activo"
+    },
+    {
+        "id": "S-R7AILskBjqvA",
+        "nombre": "Limon",
+        "provincia": "Cartago",
+        "numero_contacto": "88888888",
+        "estado": "Activo"
+    },
+    {
+        "id": "S-tuGBwV3M4emC",
+        "nombre": "San Jose",
+        "provincia": "Cartago",
+        "numero_contacto": "88888888",
+        "estado": "Activo"
+    },
+    {
+        "id": "S-hpbZITzaeV6r",
+        "nombre": "Sede de prueba ",
+        "provincia": "Guanacaste",
+        "numero_contacto": "66666666",
+        "estado": "Activo"
+    },
+    {
+        "id": "S-t8HcJO1lJ9Lg",
+        "nombre": "asd222",
+        "provincia": "Cartago",
+        "numero_contacto": "12345678",
+        "estado": "Activo"
+    }
+]

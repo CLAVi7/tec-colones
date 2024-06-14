@@ -1,0 +1,121 @@
+{
+    "555": [
+        {
+            "id": "R-ZmYIZvXpxbbM",
+            "fecha": "2024-05-29",
+            "centro": "C-9854JHg87asP",
+            "funcionario": null,
+            "carnet": "555",
+            "material": "55.5 Litro de Material 1, ",
+            "tec_colones": 5550.0
+        }
+    ],
+    "4589": [
+        {
+            "id": "R-9HNtmNVCkcJV",
+            "fecha": "2024-05-29",
+            "centro": "C-CE1105000000",
+            "funcionario": null,
+            "carnet": "4589",
+            "material": "100 Kilogramo de Material 4, 4 Litro de Material 1, ",
+            "tec_colones": 600.0
+        }
+    ],
+    "654": [
+        {
+            "id": "R-vXbQh4QlW5QV",
+            "fecha": "2024-05-29",
+            "centro": "C-CE1105000000",
+            "funcionario": null,
+            "carnet": "654",
+            "material": "4 Kilogramo de Material 4, 10 Kilogramo de Material 4, ",
+            "tec_colones": 28.0
+        },
+        {
+            "id": "R-hmvvtSWVZA65",
+            "fecha": "2024-05-29",
+            "centro": "C-CE1105000000",
+            "funcionario": null,
+            "carnet": "654",
+            "material": "10.5 Litro de Material 1, 0.5 Kilogramo de Material 2, ",
+            "tec_colones": 1050.5
+        }
+    ],
+    "5": [
+        {
+            "id": "R-rSJjqjh6KkYA",
+            "fecha": "2024-05-29",
+            "centro": "C-9854JHg87asP",
+            "funcionario": null,
+            "carnet": "5",
+            "material": "1 Kilogramo de Material 2, ",
+            "tec_colones": 1.0
+        }
+    ],
+    "154": [
+        {
+            "id": "R-jOWdiFQVgXXU",
+            "fecha": "2024-06-05",
+            "centro": "C-9854JHg87asP",
+            "funcionario": null,
+            "carnet": "154",
+            "material": "2 Litro de Material 1, ",
+            "tec_colones": 200.0
+        }
+    ],
+    "1": [
+        {
+            "id": "R-JV9lkB9yHZTu",
+            "fecha": "2024-06-05",
+            "centro": "C-9854JHg87asP",
+            "funcionario": null,
+            "carnet": "1",
+            "material": "2 Litro de Material 1, ",
+            "tec_colones": 200.0
+        }
+    ],
+    "458": [
+        {
+            "id": "R-j6EFRWl8HYW8",
+            "fecha": "2024-06-07",
+            "centro": "C-9854JHg87asP",
+            "funcionario": null,
+            "carnet": "458",
+            "material": "20 Litro de Material 1, ",
+            "tec_colones": 2000.0
+        }
+    ],
+    "66": [
+        {
+            "id": "T-WbO86y05A3Tp",
+            "fecha": "2024-06-08",
+            "centro": "C-hp6666666666",
+            "funcionario": null,
+            "carnet": "66",
+            "material": "66 Unidad de Material 10, 22 Kilogramo de Material 4, ",
+            "tec_colones": 110.0
+        }
+    ],
+    "99": [
+        {
+            "id": "T-GkKujCkUe1g7",
+            "fecha": "2024-06-08",
+            "centro": "C-hp6666666666",
+            "funcionario": null,
+            "carnet": "99",
+            "material": "99 Unidad de Material 10, ",
+            "tec_colones": 99.0
+        }
+    ],
+    "2545": [
+        {
+            "id": "T-gT7ewX6AthtR",
+            "fecha": "2024-06-11",
+            "centro": "C-9854JHg87asP",
+            "funcionario": null,
+            "carnet": "2545",
+            "material": "1 Litro de Material 1, ",
+            "tec_colones": 100.0
+        }
+    ]
+}
