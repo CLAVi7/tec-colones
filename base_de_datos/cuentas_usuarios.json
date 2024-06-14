@@ -1,0 +1,14 @@
+[
+    {
+        "correo": "admin@tec.ac.cr",
+        "contrasena": "1234abcd"
+    },
+    {
+        "correo": "estudiante@tec.ac.cr",
+        "contrasena": "56789abcd"
+    },
+    {
+        "correo": "centro@tec.ac.cr",
+        "contrasena": "9900abcd"
+    }
+]
