@@ -56,8 +56,7 @@ def cambio_material():
     entry_cantidad.place(x=40, y=265)
 
     def llammar_modificar_carrito():
-
-        modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales)  # entry_carnet listbox_carrito
+        modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales, entry_carnet.get())  # entry_carnet listbox_carrito
         cambiar_label()
         variable_materiales.set(options_materiales[0])
         entry_cantidad.delete(0, tk.END)
@@ -112,3 +111,4 @@ def cambio_material():
 
     ventana.mainloop()
 
+cambio_material()

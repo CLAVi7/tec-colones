@@ -126,5 +126,16 @@
             "material": "1 Litro de Material 1, ",
             "tec_colones": 100.0
         }
+    ],
+    "2020026367": [
+        {
+            "id": "T-RBZrEWxNCFwW",
+            "fecha": "2024-06-14",
+            "centro": "C-9854JHg87asP",
+            "funcionario": null,
+            "carnet": "2020026367",
+            "material": "1 Unidad de Material 6, ",
+            "tec_colones": 33.0
+        }
     ]
 }
