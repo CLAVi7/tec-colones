@@ -15,6 +15,7 @@ def guardar_historial(historial, archivo):
     with open(archivo, 'w') as f:
         json.dump([recibo.to_dict() for recibo in historial], f, ensure_ascii=False, indent=4)
 
+
 def cargar_historial(archivo):
     """
     Carga el historial desde un archivo JSON.
@@ -40,6 +41,7 @@ def cargar_historial(archivo):
         historial.append(recibo)
     return historial
 
+
 def cargar_y_mostrar_historial_listbox(ventana, listbox_historial):
     """
     Carga historial desde un archivo y los muestra en un Listbox.
@@ -55,20 +57,21 @@ def cargar_y_mostrar_historial_listbox(ventana, listbox_historial):
         listbox_historial = tk.Listbox(ventana, height=12, width=120)
         listbox_historial.place(x=40, y=130)
     else:
-        listbox_historial = []
+        listbox_historial.delete(0, tk.END)  # Limpiar el listbox antes de agregar los elementos filtrados
 
     lista_historial = cargar_historial(ruta_historial_recibos)
     if not lista_historial:
         print("No se cargó el historial. Verifique el archivo JSON.")
 
     for historial in lista_historial:
-        texto = (
-                 f"Fecha: {historial.fecha}"
-                 f" - Id: {historial.id}"
-                 f" - Carnet: {historial.carnet}"
-                 f" - Materiales: {historial.material}"
-                 f" - Monto: {historial.tec_colones}")
-        listbox_historial.insert(tk.END, texto)
+        if historial.id.startswith("R-"):
+            texto = (
+                f"Fecha: {historial.fecha}"
+                f" - Id: {historial.id}"
+                f" - Carnet: {historial.carnet}"
+                f" - Materiales: {historial.material}"
+                f" - Monto: {historial.tec_colones}")
+            listbox_historial.insert(tk.END, texto)
 
     return listbox_historial
 

@@ -16,7 +16,7 @@ def admin():
     etiqueta.config(width=50, height=2)
     etiqueta.pack()
 
-    boton_nuevo_material = tk.Button(ventana, text="nuevo material", command=main )
+    boton_nuevo_material = tk.Button(ventana, text="nuevo material", command=main)
     boton_nuevo_material.place(x=345, y=100)
     boton_sedes = tk.Button(ventana, text="configuracion de sedes", command=configuracion_sedes)
     boton_sedes.place(x=345, y=150)

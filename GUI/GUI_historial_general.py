@@ -2,7 +2,6 @@ from funciones.funciones_historial import *
 from funciones.funciones_historial_general import *
 from funciones.rutas import *
 
-
 listbox_historial = None
 
 
@@ -73,9 +72,10 @@ def historial_general():
         Carga y muestra la historial en un Listbox. Utiliza la variable global 'listbox_historial' para mantener y actualizar el Listbox.
         """
         global listbox_historial
-        listbox_historial = cargar_y_mostrar_historial_listbox(ventana, listbox_historial)
+        listbox_historial = cargar_y_mostrar_historial_listbox_general(ventana, listbox_historial)
 
     llamar_cargar_listbox()
+
 
     def mostrar_detalle_recibo():
         mostrar_dato_listbox_A(listbox_historial, ventana)
@@ -86,4 +86,8 @@ def historial_general():
     boton_detalles = tk.Button(ventana, text="Detalles", font=("Helvetica", 11), command=mostrar_detalle_recibo)
     boton_detalles.place(x=40, y=340)
 
+    boton_refrescar = tk.Button(ventana, text="Refrescar lista", font=("Helvetica", 11), command=llamar_cargar_listbox)
+    boton_refrescar.place(x=140, y=340)
+
     ventana.mainloop()
+

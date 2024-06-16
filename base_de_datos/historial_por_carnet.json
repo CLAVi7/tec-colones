@@ -105,26 +105,6 @@
             "carnet": "99",
             "material": "99 Unidad de Material 10, ",
             "tec_colones": 99.0
-        },
-        {
-            "id": "D-rSA9n2FeGo8O",
-            "fecha": "2024-06-13",
-            "centro": "C-hp6666666666",
-            "funcionario": null,
-            "carnet": "99",
-            "material": "99 Unidad de Material 10, ",
-            "tec_colones": -99.0
-        }
-    ],
-    "2545": [
-        {
-            "id": "T-gT7ewX6AthtR",
-            "fecha": "2024-06-11",
-            "centro": "C-9854JHg87asP",
-            "funcionario": null,
-            "carnet": "2545",
-            "material": "1 Litro de Material 1, ",
-            "tec_colones": 100.0
         }
     ]
 }
