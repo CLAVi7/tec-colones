@@ -12,6 +12,7 @@ from funciones.funciones_centro_acopio import *
 from funciones.funciones_crear_material import *
 from funciones.clase_carrito import *
 from funciones.rutas import *
+from funciones.validarCarnet import *
 
 
 def conseguir_materiales():
@@ -86,6 +87,8 @@ def comprobaciones( entry_cantidad, variable_materiales):
     Retorna:
     str: Mensaje de error si alguna comprobación falla, o None si todas las comprobaciones son exitosas.
     """
+
+    cantidad = entry_cantidad.get()
     if not (entry_cantidad.get()):
         return "La cantidad debe ser un número entero."
     if not cantidad.isdigit():
@@ -109,13 +112,34 @@ def comprobaciones( entry_cantidad, variable_materiales):
     return None"""
 
 
-def modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales):
+def modificar_carrito(listbox_carrito, entry_cantidad, variable_materiales, entry_carnet):
     Comprobaciones_resultado = comprobaciones( entry_cantidad, variable_materiales)
     #comprobacionAPI = comprobacionesAPI(entry_carnet)
-    if Comprobaciones_resultado:
+    comprobacionAPI = obtenerRespuesta(entry_carnet)
 
+    if Comprobaciones_resultado:
+        #obtenerRespuesta(entry_carnet)
         messagebox.showerror("Error de Comprobación",Comprobaciones_resultado)
         return
+
+    # Verificamos el código de respuesta y mostramos el resultado correspondiente
+    if comprobacionAPI[0] == 200:
+        # Código de respuesta 200: OK, el carnet es válido
+        # print("Código de respuesta:", response_code)
+        # print("Mensaje:", message)
+        # print("respuestas: ", respuestas)
+        # print(respuestas[0])
+        # print(respuestas[1])
+        messagebox.showinfo(f"Código de respuesta: {str(comprobacionAPI[0])}", comprobacionAPI[1])
+    if comprobacionAPI[0] == 400:
+        # Código de respuesta 400: Bad Request, la solicitud es inválida
+        return messagebox.showwarning(f"Código de respuesta: {str(comprobacionAPI[0])}", comprobacionAPI[1])
+    if comprobacionAPI[0] == 404:
+        # Código de respuesta 404: Not Found, el recurso no existe
+        return messagebox.showwarning(f"Código de respuesta: {str(comprobacionAPI[0])}", comprobacionAPI[1])
+    if comprobacionAPI[0] == 500:
+        # Código de respuesta 500: Internal Server Error, error interno del servidor
+        return messagebox.showerror(f"Código de respuesta: {str(comprobacionAPI[0])}", comprobacionAPI[1])
 
     opciones = variable_materiales.get()
     resultado = opciones.split(" - ")
