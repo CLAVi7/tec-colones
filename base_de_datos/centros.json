@@ -1,0 +1,44 @@
+[
+    {
+        "id": "C-9854JHg87asP",
+        "ubicacion": "si",
+        "sede": "Sede Central",
+        "estado": "Activo",
+        "numero_de_contacto": "88888888"
+    },
+    {
+        "id": "C-58skdP8AdD8p",
+        "ubicacion": "si",
+        "sede": "San Carlos",
+        "estado": "Activo",
+        "numero_de_contacto": "88888888"
+    },
+    {
+        "id": "C-8sKJD89dDazc",
+        "ubicacion": "si",
+        "sede": "San Jose",
+        "estado": "Activo",
+        "numero_de_contacto": "88888888"
+    },
+    {
+        "id": "C-CE1105000000",
+        "ubicacion": "edificio f",
+        "sede": "Sede Central",
+        "estado": "Activo",
+        "numero_de_contacto": "88888888"
+    },
+    {
+        "id": "C-hp6666666666",
+        "ubicacion": "edificio de prueba",
+        "sede": "Sede de prueba ",
+        "estado": "Activo",
+        "numero_de_contacto": "66666666"
+    },
+    {
+        "id": "C-123456789123",
+        "ubicacion": "sfdfsafd",
+        "sede": "Sede de prueba ",
+        "estado": "Inactivo",
+        "numero_de_contacto": "12345678"
+    }
+]

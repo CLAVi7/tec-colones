@@ -1,0 +1,29 @@
+[
+    {
+        "id": "R-j6EFRWl8HYW8",
+        "fecha": "2024-06-07",
+        "centro": "C-9854JHg87asP",
+        "funcionario": null,
+        "carnet": "458",
+        "material": "20 Litro de Material 1, ",
+        "tec_colones": 2000.0
+    },
+    {
+        "id": "R-bacmpttFlS6y",
+        "fecha": "2024-06-08",
+        "centro": "C-hp6666666666",
+        "funcionario": null,
+        "carnet": "66",
+        "material": "66 Unidad de Material 10, 22 Kilogramo de Material 4, ",
+        "tec_colones": 110.0
+    },
+    {
+        "id": "R-5YBlg9NSzJR7",
+        "fecha": "2024-06-08",
+        "centro": "C-hp6666666666",
+        "funcionario": null,
+        "carnet": "99",
+        "material": "99 Unidad de Material 10, ",
+        "tec_colones": 99.0
+    }
+]
